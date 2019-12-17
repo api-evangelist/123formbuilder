@@ -18,16 +18,16 @@
     "apis": [],
     "x-common": [
         {
-            "type": "API.json - Authoritative",
-            "url": "http:\/\/apis.io\/apisdef\/legacy\/123contactform.json"
-        },
-        {
             "type": "Website",
             "url": "http:\/\/www.123formbuilder.com"
         },
         {
+            "type": "Affiliates",
+            "url": "https:\/\/www.123formbuilder.com\/affiliate-program\/"
+        },
+        {
             "type": "Blog",
-            "url": "http:\/\/www.123formbuilder.com"
+            "url": "https:\/\/www.123formbuilder.com\/blog\/"
         },
         {
             "type": "Blog",
@@ -38,12 +38,44 @@
             "url": "http:\/\/feeds.feedburner.com\/123contactformBlog"
         },
         {
+            "type": "Branding",
+            "url": "https:\/\/www.123formbuilder.com\/brand-guidelines\/"
+        },
+        {
+            "type": "Contact Form",
+            "url": "https:\/\/www.123formbuilder.com\/contact-form-generator\/"
+        },
+        {
             "type": "Crunchbase",
             "url": "https:\/\/crunchbase.com\/organization\/123contactform"
         },
         {
             "type": "Github",
             "url": "https:\/\/github.com\/123contactform"
+        },
+        {
+            "type": "Integrations",
+            "url": "https:\/\/www.123formbuilder.com\/web-form-apps\/"
+        },
+        {
+            "type": "Pricing",
+            "url": "https:\/\/www.123formbuilder.com\/signup.html"
+        },
+        {
+            "type": "Privacy",
+            "url": "https:\/\/www.123formbuilder.com\/privacy.html"
+        },
+        {
+            "type": "Security",
+            "url": "https:\/\/www.123formbuilder.com\/how-do-we-handle-service-security\/"
+        },
+        {
+            "type": "Status",
+            "url": "https:\/\/status.123formbuilder.com\/"
+        },
+        {
+            "type": "Terms of Service",
+            "url": "https:\/\/www.123formbuilder.com\/terms-of-service-2019\/"
         },
         {
             "type": "Tutorials",
@@ -56,10 +88,6 @@
         {
             "type": "Webhooks",
             "url": "https:\/\/www.123formbuilder.com\/docs\/webhooks\/"
-        },
-        {
-            "type": "Website",
-            "url": "https:\/\/www.123formbuilder.com\/"
         }
     ]
 }
