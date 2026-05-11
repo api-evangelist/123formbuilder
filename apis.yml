@@ -1,0 +1,57 @@
+aid: 123formbuilder
+name: 123FormBuilder
+description: >-
+  123FormBuilder is an online form, survey, and workflow builder used to
+  collect, route, and integrate submission data across websites, customer
+  portals, and back-office systems with no-code design and HIPAA-ready
+  configurations. The 123FormBuilder REST API v2 enables programmatic
+  access to forms, submissions, fields, and users for export and integration
+  scenarios. Authentication uses an API key, with OAuth 2.0 authorization code
+  flow available for multi-user apps.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Online Forms
+  - Form Builder
+  - Surveys
+  - Workflow
+  - Data Collection
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
+apis:
+  - aid: 123formbuilder:rest-api-v2
+    name: 123FormBuilder REST API v2
+    description: >-
+      REST API for managing forms, retrieving submissions, listing fields, and
+      administering users in 123FormBuilder. Requests use an API key or an
+      OAuth 2.0 access token, with separate US and EU regional endpoints.
+    humanURL: https://www.123formbuilder.com/developer/api-v2/
+    baseURL: https://api.123formbuilder.com/v2
+    tags:
+      - Online Forms
+      - Form Builder
+      - Submissions
+      - API Key
+      - OAuth 2.0
+    properties:
+      - type: Documentation
+        url: https://www.123formbuilder.com/developer/api-v2/
+      - type: Knowledge Base
+        url: https://www.123formbuilder.com/docs/apidocumentation/
+      - type: How To Retrieve Data
+        url: https://www.123formbuilder.com/docs/how-to-retrieve-data-through-api/
+common:
+  - type: Website
+    url: https://www.123formbuilder.com
+  - type: Documentation
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: Pricing
+    url: https://www.123formbuilder.com/pricing/
+  - type: Sign Up
+    url: https://www.123formbuilder.com/sign-up/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
