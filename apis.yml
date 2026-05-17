@@ -50,7 +50,7 @@ common:
     url: https://www.123formbuilder.com/developer/api-v2/
   - type: Pricing
     url: https://www.123formbuilder.com/pricing/
-  - type: Sign Up
+  - type: SignUp
     url: https://www.123formbuilder.com/sign-up/
 maintainers:
   - FN: Kin Lane
