@@ -44,6 +44,10 @@ apis:
       - type: How To Retrieve Data
         url: https://www.123formbuilder.com/docs/how-to-retrieve-data-through-api/
 common:
+  - type: GitHubOrganization
+    url: https://github.com/123formbuilder
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/123formbuilder
   - type: Website
     url: https://www.123formbuilder.com
   - type: Documentation
