@@ -1,0 +1,8 @@
+{
+  "user_id": 200001,
+  "email": "newaccount@example.com",
+  "name": "Maria Chen",
+  "company_name": "Acme Corp",
+  "plan": "Gold",
+  "created_at": "2026-05-28T00:00:00Z"
+}

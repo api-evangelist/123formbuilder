@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-schema/123formbuilder-rest-api-v2-submission-schema.json",
+  "title": "Submission",
+  "description": "A single response submitted against a 123FormBuilder form, including field values and routing metadata.",
+  "type": "object",
+  "properties": {
+    "submission_id": {
+      "type": "integer",
+      "description": "Unique submission identifier issued by the platform."
+    },
+    "form_id": {
+      "type": "integer",
+      "description": "Identifier of the form this submission belongs to."
+    },
+    "submission_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp the submission was received."
+    },
+    "ip": {
+      "type": "string",
+      "description": "IP address of the respondent when supported by the form configuration."
+    },
+    "approved": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "Approval state when manual review is enabled. 1 = approved, 0 = pending."
+    },
+    "payed": {
+      "type": "string",
+      "description": "Payment status flag for payment-enabled forms. Common values include yes, no, pending."
+    },
+    "fields": {
+      "type": "object",
+      "description": "Map of field id to the captured value plus the original field label.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "label": {"type": "string"},
+          "value": {"type": ["string", "number", "boolean", "array", "object", "null"]}
+        },
+        "required": ["label", "value"]
+      }
+    },
+    "recipients": {
+      "type": "array",
+      "description": "Optional list of notification recipients when include_recipients=1 is requested.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string", "format": "email"},
+          "status": {"type": "string", "description": "Send status such as sent, queued, failed."}
+        }
+      }
+    }
+  },
+  "required": ["submission_id", "form_id", "submission_date", "fields"]
+}

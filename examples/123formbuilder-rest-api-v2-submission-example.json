@@ -1,0 +1,18 @@
+{
+  "submission_id": 9001234,
+  "form_id": 5837291,
+  "submission_date": "2026-05-27T18:42:11Z",
+  "ip": "203.0.113.42",
+  "approved": 1,
+  "payed": "yes",
+  "fields": {
+    "100": {"label": "Full Name", "value": "Ada Lovelace"},
+    "101": {"label": "Email", "value": "ada@example.com"},
+    "102": {"label": "Rating (1-5)", "value": "5"},
+    "103": {"label": "Comments", "value": "Loved the quick turnaround on my support ticket."}
+  },
+  "recipients": [
+    {"email": "support@example.com", "status": "sent"},
+    {"email": "respondent@example.com", "status": "sent"}
+  ]
+}

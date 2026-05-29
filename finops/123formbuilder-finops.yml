@@ -1,0 +1,147 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: 123FormBuilder
+providerId: 123formbuilder
+publisherName: 123FormBuilder
+serviceCategory: SaaS / Online Forms
+created: '2026-05-28'
+modified: '2026-05-28'
+tags:
+  - Online Forms
+  - Form Builder
+  - Surveys
+  - Workflow
+  - Submissions
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: |
+  FinOps definition for 123FormBuilder consumption — both the SaaS subscription surface
+  (per-user monthly Gold/Platinum/Diamond plans) and the REST API v2 surface. Provides a
+  FOCUS-aligned mapping for cost allocation, usage measurement, and unit economics across
+  teams building integrations against 123FormBuilder.
+principles:
+  - name: Visibility
+    description: Surface per-team API call volume, per-form submission counts, and SaaS seat consumption to engineering,
+      product, and finance in near real-time.
+  - name: Allocation
+    description: Tag every chargeable seat and integration with the consuming team, environment, and use case so cost
+      can be allocated and chargedback.
+  - name: Optimization
+    description: Continuously evaluate seat utilization, paging strategy, batching, and webhook usage to reduce cost
+      per useful submission processed.
+  - name: Accountability
+    description: Establish budget owners per business unit consuming 123FormBuilder; track plan tier vs. actual
+      consumption monthly.
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - Data Ingestion
+      - Allocation
+      - Reporting and Analytics
+      - Anomaly Management
+  - name: Quantify Business Value
+    capabilities:
+      - Planning and Estimating
+      - Forecasting
+      - Budgeting
+      - Benchmarking
+      - Unit Economics
+  - name: Optimize Usage and Cost
+    capabilities:
+      - Workload Optimization
+      - Rate Optimization
+      - Licensing and SaaS
+  - name: Manage the FinOps Practice
+    capabilities:
+      - Education and Enablement
+      - Policy and Governance
+billingSurface:
+  monetizationModels:
+    - per-user-monthly-subscription
+    - tiered-feature-gates
+    - annual-enterprise-contract
+  meters:
+    - name: SeatsPurchased
+      description: Count of paid subscriber seats per billing period
+      unit: seats
+      cadence: monthly
+    - name: ActiveForms
+      description: Number of forms in active state under the account
+      unit: forms
+      cadence: monthly
+    - name: SubmissionsReceived
+      description: Number of submissions ingested across all forms
+      unit: submissions
+      cadence: monthly
+    - name: APIRequests
+      description: Number of REST API v2 requests issued against the account's JWT
+      unit: requests
+      cadence: daily
+focusMapping:
+  - focusColumn: BilledCost
+    description: Per-invoice cost from 123FormBuilder for seats and add-ons.
+    source: invoice
+  - focusColumn: ServiceCategory
+    description: SaaS
+    source: static
+  - focusColumn: SubAccountId
+    description: Master user_id from POST /accounts; used to allocate cost across child accounts.
+    source: api
+    apiHint: GET /v2/users (admin = 1 entry)
+  - focusColumn: ChargeCategory
+    description: Usage (per-seat subscription) or Purchase (annual enterprise contract).
+    source: invoice
+  - focusColumn: PricingQuantity
+    description: Number of seats invoiced this period.
+    source: invoice
+  - focusColumn: ConsumedQuantity
+    description: For chargeback to teams, divide SeatsPurchased and SubmissionsReceived by team tag.
+    source: tagging
+  - focusColumn: Tags
+    description: Custom k/v pairs propagated through subuser company_name field for chargeback.
+    source: api
+    apiHint: GET /v2/users -> company_name
+unitEconomics:
+  - name: CostPerSubmission
+    formula: BilledCost / SubmissionsReceived
+    description: Dollarized cost of every submission ingested by an account. Use to compare plan tiers and seat sizing.
+  - name: CostPerActiveForm
+    formula: BilledCost / ActiveForms
+    description: Dollarized cost per active form; high values flag stale forms eligible for archive.
+  - name: CostPerAPIRequest
+    formula: BilledCost / APIRequests
+    description: Dollarized cost per programmatic API request; informs whether self-serve seats are paying for unused
+      automation headroom.
+optimizationLevers:
+  - name: Right-Size Seats
+    description: Reconcile GET /v2/users response (active subusers) with billed seats to identify unused licenses.
+  - name: Tier Selection
+    description: Compare APIRequests against the Basic plan's 100/day quota; downgrade or upgrade as warranted.
+  - name: Webhook Consolidation
+    description: Collapse multiple webhooks per form to stay under the 10/form ceiling and reduce duplicate downstream
+      processing cost.
+  - name: Region Alignment
+    description: Route US workloads to api.123formbuilder.com and EU workloads to eu-api.123formbuilder.com to minimize
+      egress and meet residency obligations.
+governance:
+  contacts:
+    - role: Finance Owner
+      description: Finance lead responsible for renewing the 123FormBuilder contract.
+    - role: Platform Owner
+      description: Engineering lead operating integrations against the REST API v2.
+  controls:
+    - name: Seat Add Approval
+      description: Subuser creation via POST /v2/users routed through a change ticket to control seat growth.
+    - name: Plan Tier Review
+      description: Quarterly review of plan tier vs. consumption, using SubmissionsReceived and APIRequests.
+sources:
+  - https://www.123formbuilder.com/pricing/
+  - https://www.123formbuilder.com/docs/apidocumentation/
+  - https://www.123formbuilder.com/developer/api-v2/

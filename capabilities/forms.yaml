@@ -1,0 +1,188 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 123FormBuilder REST API v2 — Forms
+  description: |
+    123FormBuilder REST API v2 — Forms business surface. Covers CRUD over forms, bulk delete,
+    field listing, and the full submissions lifecycle (list, get, update, delete).
+  tags:
+    - 123FormBuilder
+    - Forms
+    - Submissions
+  created: '2026-05-28'
+  modified: '2026-05-28'
+binds:
+  - namespace: env
+    keys:
+      ONE_TWO_THREE_FORMBUILDER_JWT: ONE_TWO_THREE_FORMBUILDER_JWT
+capability:
+  consumes:
+    - type: http
+      namespace: 123formbuilder-forms
+      baseUri: https://api.123formbuilder.com
+      description: 123FormBuilder REST API v2 — Forms business capability. Self-contained, no shared references.
+      resources:
+        - name: v2-forms
+          path: /v2/forms
+          operations:
+            - name: listforms
+              method: GET
+              description: List Forms
+              outputRawFormat: json
+              inputParameters:
+                - {name: JWT, in: query, type: string, required: true}
+                - {name: per_page, in: query, type: integer, required: false}
+                - {name: page, in: query, type: integer, required: false}
+                - {name: search, in: query, type: string, required: false}
+            - name: createform
+              method: POST
+              description: Create a New Form
+              outputRawFormat: json
+              inputParameters:
+                - {name: body, in: body, type: object, required: true, description: "form-urlencoded body with JWT, name, optional group_id/active/active_date_from/active_date_to/active_days"}
+        - name: v2-forms-bulk
+          path: /v2/forms/bulk
+          operations:
+            - name: bulkdeleteforms
+              method: DELETE
+              description: Delete Multiple Forms
+              outputRawFormat: json
+              inputParameters:
+                - {name: body, in: body, type: object, required: true, description: "form-urlencoded body with JWT and comma-separated form_ids"}
+        - name: v2-forms-id
+          path: /v2/forms/{form_id}
+          operations:
+            - name: getform
+              method: GET
+              description: Get Form Details
+              outputRawFormat: json
+              inputParameters:
+                - {name: JWT, in: query, type: string, required: true}
+                - {name: form_id, in: path, type: integer, required: true}
+            - name: updateform
+              method: PUT
+              description: Update Form Details
+              outputRawFormat: json
+              inputParameters:
+                - {name: JWT, in: query, type: string, required: true}
+                - {name: form_id, in: path, type: integer, required: true}
+                - {name: body, in: body, type: object, required: true}
+            - name: deleteform
+              method: DELETE
+              description: Delete a Form
+              outputRawFormat: json
+              inputParameters:
+                - {name: JWT, in: query, type: string, required: true}
+                - {name: form_id, in: path, type: integer, required: true}
+        - name: v2-forms-id-fields
+          path: /v2/forms/{form_id}/fields
+          operations:
+            - name: getformfields
+              method: GET
+              description: Get Form Fields
+              outputRawFormat: json
+              inputParameters:
+                - {name: JWT, in: query, type: string, required: true}
+                - {name: form_id, in: path, type: integer, required: true}
+        - name: v2-forms-id-submissions
+          path: /v2/forms/{form_id}/submissions
+          operations:
+            - name: listsubmissions
+              method: GET
+              description: Get Submissions
+              outputRawFormat: json
+              inputParameters:
+                - {name: JWT, in: query, type: string, required: true}
+                - {name: form_id, in: path, type: integer, required: true}
+                - {name: start_date, in: query, type: string, required: false}
+                - {name: start_submission_id, in: query, type: integer, required: false}
+                - {name: per_page, in: query, type: integer, required: false}
+                - {name: page, in: query, type: integer, required: false}
+                - {name: include_recipients, in: query, type: integer, required: false}
+        - name: v2-forms-id-submissions-id
+          path: /v2/forms/{form_id}/submissions/{submission_id}
+          operations:
+            - name: getsubmission
+              method: GET
+              description: Get Submission Details
+              outputRawFormat: json
+              inputParameters:
+                - {name: JWT, in: query, type: string, required: true}
+                - {name: form_id, in: path, type: integer, required: true}
+                - {name: submission_id, in: path, type: integer, required: true}
+                - {name: include_recipients, in: query, type: integer, required: false}
+            - name: updatesubmission
+              method: PUT
+              description: Update Submission
+              outputRawFormat: json
+              inputParameters:
+                - {name: JWT, in: query, type: string, required: true}
+                - {name: form_id, in: path, type: integer, required: true}
+                - {name: submission_id, in: path, type: integer, required: true}
+                - {name: payed, in: query, type: string, required: false}
+                - {name: approved, in: query, type: integer, required: false}
+            - name: deletesubmission
+              method: DELETE
+              description: Delete One Form Submission
+              outputRawFormat: json
+              inputParameters:
+                - {name: JWT, in: query, type: string, required: true}
+                - {name: form_id, in: path, type: integer, required: true}
+                - {name: submission_id, in: path, type: integer, required: true}
+      authentication:
+        type: apiKey
+        in: query
+        name: JWT
+        value: '{{env.ONE_TWO_THREE_FORMBUILDER_JWT}}'
+  exposes:
+    - type: rest
+      namespace: 123formbuilder-forms-rest
+      port: 8080
+      description: REST adapter for 123FormBuilder Forms. One Spectral-compliant resource per consumed operation.
+      resources:
+        - path: /v2/forms
+          name: v2-forms
+          description: REST surface for v2-forms.
+          operations:
+            - {method: GET,  name: listforms, description: List Forms, call: 123formbuilder-forms.listforms}
+            - {method: POST, name: createform, description: Create a New Form, call: 123formbuilder-forms.createform}
+        - path: /v2/forms/bulk
+          name: v2-forms-bulk
+          operations:
+            - {method: DELETE, name: bulkdeleteforms, description: Delete Multiple Forms, call: 123formbuilder-forms.bulkdeleteforms}
+        - path: /v2/forms/{form_id}
+          name: v2-forms-id
+          operations:
+            - {method: GET,    name: getform, description: Get Form Details, call: 123formbuilder-forms.getform}
+            - {method: PUT,    name: updateform, description: Update Form Details, call: 123formbuilder-forms.updateform}
+            - {method: DELETE, name: deleteform, description: Delete a Form, call: 123formbuilder-forms.deleteform}
+        - path: /v2/forms/{form_id}/fields
+          name: v2-forms-id-fields
+          operations:
+            - {method: GET, name: getformfields, description: Get Form Fields, call: 123formbuilder-forms.getformfields}
+        - path: /v2/forms/{form_id}/submissions
+          name: v2-forms-id-submissions
+          operations:
+            - {method: GET, name: listsubmissions, description: Get Submissions, call: 123formbuilder-forms.listsubmissions}
+        - path: /v2/forms/{form_id}/submissions/{submission_id}
+          name: v2-forms-id-submissions-id
+          operations:
+            - {method: GET,    name: getsubmission, description: Get Submission Details, call: 123formbuilder-forms.getsubmission}
+            - {method: PUT,    name: updatesubmission, description: Update Submission, call: 123formbuilder-forms.updatesubmission}
+            - {method: DELETE, name: deletesubmission, description: Delete One Form Submission, call: 123formbuilder-forms.deletesubmission}
+    - type: mcp
+      namespace: 123formbuilder-forms-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for 123FormBuilder Forms. One tool per consumed operation.
+      tools:
+        - {name: 123formbuilder-list-forms,          description: List Forms,                 hints: {readOnly: true,  destructive: false, idempotent: true},  call: 123formbuilder-forms.listforms}
+        - {name: 123formbuilder-create-form,         description: Create a New Form,          hints: {readOnly: false, destructive: false, idempotent: false}, call: 123formbuilder-forms.createform}
+        - {name: 123formbuilder-bulk-delete-forms,   description: Delete Multiple Forms,      hints: {readOnly: false, destructive: true,  idempotent: false}, call: 123formbuilder-forms.bulkdeleteforms}
+        - {name: 123formbuilder-get-form,            description: Get Form Details,           hints: {readOnly: true,  destructive: false, idempotent: true},  call: 123formbuilder-forms.getform}
+        - {name: 123formbuilder-update-form,         description: Update Form Details,        hints: {readOnly: false, destructive: false, idempotent: true},  call: 123formbuilder-forms.updateform}
+        - {name: 123formbuilder-delete-form,         description: Delete a Form,              hints: {readOnly: false, destructive: true,  idempotent: true},  call: 123formbuilder-forms.deleteform}
+        - {name: 123formbuilder-get-form-fields,     description: Get Form Fields,            hints: {readOnly: true,  destructive: false, idempotent: true},  call: 123formbuilder-forms.getformfields}
+        - {name: 123formbuilder-list-submissions,    description: Get Submissions,            hints: {readOnly: true,  destructive: false, idempotent: true},  call: 123formbuilder-forms.listsubmissions}
+        - {name: 123formbuilder-get-submission,      description: Get Submission Details,     hints: {readOnly: true,  destructive: false, idempotent: true},  call: 123formbuilder-forms.getsubmission}
+        - {name: 123formbuilder-update-submission,   description: Update Submission,          hints: {readOnly: false, destructive: false, idempotent: true},  call: 123formbuilder-forms.updatesubmission}
+        - {name: 123formbuilder-delete-submission,   description: Delete One Form Submission, hints: {readOnly: false, destructive: true,  idempotent: true},  call: 123formbuilder-forms.deletesubmission}

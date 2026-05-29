@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-structure/123formbuilder-rest-api-v2-field-structure.json",
+  "name": "Field",
+  "description": "Structural definition of a 123FormBuilder form field.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "int32"},
+    "form_id": {"type": "int32"},
+    "label": {"type": "string"},
+    "type": {"type": "string"},
+    "required": {"type": "boolean"},
+    "default_value": {"type": "string"},
+    "options": {"type": "array", "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,267 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 123FormBuilder REST API v2 — Users & Accounts
+  description: |
+    Combined administrative surface for managing subusers (with fine-grained permission flags)
+    and provisioning/updating billable 123FormBuilder accounts. Also includes the Login flow
+    (token, refresh, invalidate) that issues the JWT used by every other capability.
+  tags:
+    - 123FormBuilder
+    - Users
+    - Accounts
+    - Login
+  created: '2026-05-28'
+  modified: '2026-05-28'
+binds:
+  - namespace: env
+    keys:
+      ONE_TWO_THREE_FORMBUILDER_JWT: ONE_TWO_THREE_FORMBUILDER_JWT
+      ONE_TWO_THREE_FORMBUILDER_USERNAME: ONE_TWO_THREE_FORMBUILDER_USERNAME
+      ONE_TWO_THREE_FORMBUILDER_PASSWORD: ONE_TWO_THREE_FORMBUILDER_PASSWORD
+capability:
+  consumes:
+    - type: http
+      namespace: 123formbuilder-admin
+      baseUri: https://api.123formbuilder.com
+      description: 123FormBuilder Users, Accounts, and Login operations.
+      resources:
+        - name: v2-token
+          path: /v2/token
+          operations:
+            - name: login
+              method: POST
+              description: User Login
+              outputRawFormat: json
+              inputParameters:
+                - name: username
+                  in: query
+                  type: string
+                  required: false
+                - name: email
+                  in: query
+                  type: string
+                  required: false
+                - name: password
+                  in: query
+                  type: string
+                  required: false
+                - name: passhash
+                  in: query
+                  type: string
+                  required: false
+        - name: v2-token-refresh
+          path: /v2/token/refresh
+          operations:
+            - name: refreshtoken
+              method: POST
+              description: Refresh Token
+              outputRawFormat: json
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: v2-token-invalidate
+          path: /v2/token/invalidate
+          operations:
+            - name: invalidatetoken
+              method: POST
+              description: Invalidate Token
+              outputRawFormat: json
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: v2-users
+          path: /v2/users
+          operations:
+            - name: listusers
+              method: GET
+              description: Get Info About Master User and Subusers
+              outputRawFormat: json
+              inputParameters:
+                - name: JWT
+                  in: query
+                  type: string
+                  required: true
+                - name: per_page
+                  in: query
+                  type: integer
+                  required: false
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+            - name: createuser
+              method: POST
+              description: Create a New Subuser
+              outputRawFormat: json
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: v2-users-identifier
+          path: /v2/users/{identifier}
+          operations:
+            - name: updateuser
+              method: PUT
+              description: Update User
+              outputRawFormat: json
+              inputParameters:
+                - name: identifier
+                  in: path
+                  type: string
+                  required: true
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: v2-accounts
+          path: /v2/accounts
+          operations:
+            - name: createaccount
+              method: POST
+              description: Create New Account
+              outputRawFormat: json
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: v2-accounts-id
+          path: /v2/accounts/{user_id}
+          operations:
+            - name: updateaccount
+              method: PUT
+              description: Update Account
+              outputRawFormat: json
+              inputParameters:
+                - name: user_id
+                  in: path
+                  type: integer
+                  required: true
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+  exposes:
+    - type: rest
+      namespace: 123formbuilder-admin-rest
+      port: 8080
+      resources:
+        - name: v2-token
+          path: /v2/token
+          operations:
+            - method: POST
+              name: login
+              description: User Login
+              call: 123formbuilder-admin.login
+        - name: v2-token-refresh
+          path: /v2/token/refresh
+          operations:
+            - method: POST
+              name: refreshtoken
+              description: Refresh Token
+              call: 123formbuilder-admin.refreshtoken
+        - name: v2-token-invalidate
+          path: /v2/token/invalidate
+          operations:
+            - method: POST
+              name: invalidatetoken
+              description: Invalidate Token
+              call: 123formbuilder-admin.invalidatetoken
+        - name: v2-users
+          path: /v2/users
+          operations:
+            - method: GET
+              name: listusers
+              description: Get Info About Master User and Subusers
+              call: 123formbuilder-admin.listusers
+            - method: POST
+              name: createuser
+              description: Create a New Subuser
+              call: 123formbuilder-admin.createuser
+        - name: v2-users-identifier
+          path: /v2/users/{identifier}
+          operations:
+            - method: PUT
+              name: updateuser
+              description: Update User
+              call: 123formbuilder-admin.updateuser
+        - name: v2-accounts
+          path: /v2/accounts
+          operations:
+            - method: POST
+              name: createaccount
+              description: Create New Account
+              call: 123formbuilder-admin.createaccount
+        - name: v2-accounts-id
+          path: /v2/accounts/{user_id}
+          operations:
+            - method: PUT
+              name: updateaccount
+              description: Update Account
+              call: 123formbuilder-admin.updateaccount
+    - type: mcp
+      namespace: 123formbuilder-admin-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: 123formbuilder-login
+          description: User Login
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: 123formbuilder-admin.login
+        - name: 123formbuilder-refresh-token
+          description: Refresh Token
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: 123formbuilder-admin.refreshtoken
+        - name: 123formbuilder-invalidate-token
+          description: Invalidate Token
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: 123formbuilder-admin.invalidatetoken
+        - name: 123formbuilder-list-users
+          description: Get Info About Master User and Subusers
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: 123formbuilder-admin.listusers
+        - name: 123formbuilder-create-user
+          description: Create a New Subuser
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: 123formbuilder-admin.createuser
+        - name: 123formbuilder-update-user
+          description: Update User
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: 123formbuilder-admin.updateuser
+        - name: 123formbuilder-create-account
+          description: Create New Account
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: 123formbuilder-admin.createaccount
+        - name: 123formbuilder-update-account
+          description: Update Account
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: 123formbuilder-admin.updateaccount

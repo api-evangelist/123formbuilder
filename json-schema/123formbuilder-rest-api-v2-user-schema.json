@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-schema/123formbuilder-rest-api-v2-user-schema.json",
+  "title": "User",
+  "description": "A master user or subuser on a 123FormBuilder account, including granular permission flags.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "integer", "description": "Unique user identifier."},
+    "email": {"type": "string", "format": "email", "description": "Login email address."},
+    "name": {"type": "string", "description": "Display name for the user."},
+    "admin": {"type": "integer", "enum": [0, 1], "description": "1 if the user has administrative privileges, 0 otherwise."},
+    "company_name": {"type": "string", "description": "Optional company name associated with the user."},
+    "allow_create_form": {"type": "integer", "enum": [0, 1]},
+    "allow_duplicate_form": {"type": "integer", "enum": [0, 1]},
+    "allow_delete_form": {"type": "integer", "enum": [0, 1]},
+    "can_manage_groups": {"type": "integer", "enum": [0, 1]},
+    "can_manage_users": {"type": "integer", "enum": [0, 1]}
+  },
+  "required": ["id", "email"]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-structure/123formbuilder-rest-api-v2-form-structure.json",
+  "name": "Form",
+  "description": "Structural definition of a 123FormBuilder form.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "int32"},
+    "name": {"type": "string"},
+    "active": {"type": "int32"},
+    "active_date_from": {"type": "datetime"},
+    "active_date_to": {"type": "datetime"},
+    "active_days": {"type": "string"},
+    "group_id": {"type": "int32"},
+    "submissions_count": {"type": "int32"},
+    "url": {"type": "uri"},
+    "created_at": {"type": "datetime"},
+    "modified_at": {"type": "datetime"}
+  }
+}

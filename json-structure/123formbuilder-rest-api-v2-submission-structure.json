@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-structure/123formbuilder-rest-api-v2-submission-structure.json",
+  "name": "Submission",
+  "description": "Structural definition of a 123FormBuilder form submission.",
+  "type": "object",
+  "properties": {
+    "submission_id": {"type": "int32"},
+    "form_id": {"type": "int32"},
+    "submission_date": {"type": "datetime"},
+    "ip": {"type": "string"},
+    "approved": {"type": "int32"},
+    "payed": {"type": "string"},
+    "fields": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "label": {"type": "string"},
+          "value": {"type": "string"}
+        }
+      }
+    },
+    "recipients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,250 @@
+rules:
+  # INFO / METADATA
+  info-title-required:
+    description: Info object must have a title
+    given: $.info
+    severity: error
+    then:
+      field: title
+      function: truthy
+
+  info-title-prefix:
+    description: Info title should start with 123FormBuilder
+    given: $.info.title
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^123FormBuilder"
+
+  info-description-required:
+    description: Info object must have a non-empty description
+    given: $.info
+    severity: error
+    then:
+      field: description
+      function: truthy
+
+  info-version-required:
+    description: Info object must include a semantic version
+    given: $.info
+    severity: error
+    then:
+      field: version
+      function: pattern
+      functionOptions:
+        match: "^[0-9]+\\.[0-9]+\\.[0-9]+"
+
+  info-contact-required:
+    description: Info should include contact information
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+
+  # OPENAPI VERSION
+  openapi-version:
+    description: OpenAPI version must be 3.0.x
+    given: $
+    severity: error
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: "^3\\.0"
+
+  # SERVERS
+  servers-defined:
+    description: Servers array must be defined and non-empty
+    given: $
+    severity: error
+    then:
+      field: servers
+      function: truthy
+
+  servers-include-us-region:
+    description: Servers should include the US regional endpoint
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "(api\\.123formbuilder\\.com|eu-api\\.123formbuilder\\.com)"
+
+  servers-use-v2-base-path:
+    description: Server URLs must include the /v2 base path
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "/v2$"
+
+  # TAGS
+  tags-defined:
+    description: Top-level tags array must be defined
+    given: $
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+
+  tag-name-title-case:
+    description: Tag names must use Title Case
+    given: $.tags[*].name
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9 ]*$"
+
+  tag-allowed-values:
+    description: Tags should be drawn from the canonical 123FormBuilder set
+    given: $.tags[*].name
+    severity: warn
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - Login
+          - Forms
+          - Groups
+          - Users
+          - Accounts
+
+  # OPERATIONS
+  operation-summary-required:
+    description: Every operation must have a non-empty summary
+    given: $.paths[*][get,post,put,delete,patch]
+    severity: error
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-title-case:
+    description: Operation summaries should use Title Case
+    given: $.paths[*][get,post,put,delete,patch].summary
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  operation-description-required:
+    description: Every operation must have a description
+    given: $.paths[*][get,post,put,delete,patch]
+    severity: warn
+    then:
+      field: description
+      function: truthy
+
+  operation-operationId-required:
+    description: Every operation must have an operationId
+    given: $.paths[*][get,post,put,delete,patch]
+    severity: error
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationId-kebab-case:
+    description: operationId values should be kebab-case
+    given: $.paths[*][get,post,put,delete,patch].operationId
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9-]*$"
+
+  operation-tags-required:
+    description: Every operation must have at least one tag
+    given: $.paths[*][get,post,put,delete,patch]
+    severity: error
+    then:
+      field: tags
+      function: truthy
+
+  operation-single-tag:
+    description: Operations should use exactly one tag
+    given: $.paths[*][get,post,put,delete,patch].tags
+    severity: warn
+    then:
+      function: length
+      functionOptions:
+        max: 1
+
+  # SECURITY
+  jwt-security-scheme-defined:
+    description: Components must define the JWTQuery security scheme
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: JWTQuery
+      function: truthy
+
+  jwt-query-parameter-required:
+    description: Non-login operations should require the JWT parameter
+    given: $.paths[?(!@property.match(/token/))][get,post,put,delete,patch].parameters[?(@.name=='JWT')]
+    severity: warn
+    then:
+      function: truthy
+
+  global-security-defined:
+    description: Spec must declare a top-level security requirement
+    given: $
+    severity: error
+    then:
+      field: security
+      function: truthy
+
+  # RESPONSES
+  response-2xx-required:
+    description: Every operation must define at least one 2xx response
+    given: $.paths[*][get,post,put,delete,patch].responses
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "2[0-9]{2}"
+
+  response-error-codes-documented:
+    description: Operations should document 400 and 401 error responses
+    given: $.paths[*][get,post,put,delete,patch].responses
+    severity: warn
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["400"]
+            - required: ["401"]
+            - required: ["403"]
+
+  # PATHS
+  path-lowercase:
+    description: Path segments should be lowercase or snake_case
+    given: $.paths.*~
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/[a-z0-9_/{}-]*$"
+
+  # SCHEMAS
+  schema-types-defined:
+    description: All component schemas must declare a type
+    given: $.components.schemas[*]
+    severity: warn
+    then:
+      field: type
+      function: truthy
+
+  schema-error-defined:
+    description: The Error schema must be defined in components
+    given: $.components.schemas
+    severity: error
+    then:
+      field: Error
+      function: truthy
+
+functions: []

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-schema/123formbuilder-rest-api-v2-form-schema.json",
+  "title": "Form",
+  "description": "A 123FormBuilder form including activation window, group assignment, and embed metadata.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Output-only numeric form identifier assigned by 123FormBuilder."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable form name shown to authors and used in dashboards."
+    },
+    "active": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "Whether the form currently accepts submissions. 1 = active, 0 = inactive."
+    },
+    "active_date_from": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start of the activation window. Submissions are rejected before this timestamp."
+    },
+    "active_date_to": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End of the activation window. Submissions are rejected after this timestamp."
+    },
+    "active_days": {
+      "type": "string",
+      "description": "Comma-separated list of weekday numbers (0-6) on which the form is accepting submissions."
+    },
+    "group_id": {
+      "type": "integer",
+      "description": "Identifier of the group this form is filed under, or 0 if ungrouped."
+    },
+    "submissions_count": {
+      "type": "integer",
+      "description": "Running total of submissions received by this form."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Public URL where the form can be filled out."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp the form was created."
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp the form was last modified."
+    }
+  },
+  "required": ["id", "name", "active"]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-schema/123formbuilder-rest-api-v2-field-schema.json",
+  "title": "Field",
+  "description": "A single form field as defined inside a 123FormBuilder form schema.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique field identifier within the form."
+    },
+    "form_id": {
+      "type": "integer",
+      "description": "Identifier of the parent form."
+    },
+    "label": {
+      "type": "string",
+      "description": "Human-readable label rendered to the respondent."
+    },
+    "type": {
+      "type": "string",
+      "description": "Field type. Examples: ShortText, LongText, Email, Number, SingleChoice, MultipleChoice, FileUpload, Signature, Rating, Payment, HTML."
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether the respondent must answer this field before submitting."
+    },
+    "default_value": {
+      "type": "string",
+      "description": "Default value pre-filled when the form is loaded."
+    },
+    "options": {
+      "type": "array",
+      "description": "Choice list for SingleChoice, MultipleChoice, and Dropdown field types.",
+      "items": {"type": "string"}
+    },
+    "validation": {
+      "type": "object",
+      "description": "Optional validation rules (regex, min, max).",
+      "additionalProperties": true
+    }
+  },
+  "required": ["id", "label", "type"]
+}

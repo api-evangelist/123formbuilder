@@ -1,0 +1,214 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: 123FormBuilder
+providerId: 123formbuilder
+created: '2026-05-28'
+modified: '2026-05-28'
+tags:
+  - Online Forms
+  - Form Builder
+  - Surveys
+  - Workflow
+  - Data Collection
+  - Submissions
+  - HIPAA
+  - GDPR
+description: |
+  Machine-readable plans and pricing for the 123FormBuilder REST API v2. Captures the published
+  Free, Gold, Platinum, Diamond, and Enterprise tiers, with API call quotas reconciled from the
+  legacy API quota documentation (Basic = 100 calls/day; Gold/Platinum/Diamond = unlimited daily
+  API calls). Prices are taken from publicly listed monthly pricing and should be re-validated
+  against the provider's pricing page before contractual use.
+plans:
+  - id: 123formbuilder-free
+    name: Free (Basic)
+    type: freemium
+    description: Free entry tier for 123FormBuilder, intended for evaluation and personal use. Single form, capped fields,
+      and a hard daily API quota.
+    entries:
+      - label: API Requests
+        description: Maximum API requests per day on the Free plan
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: 100
+        timeFrame: day
+        geo: global
+        domains:
+          - https://api.123formbuilder.com/v2
+          - https://eu-api.123formbuilder.com/v2
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Active Forms
+        description: Maximum number of active forms allowed on this plan
+        name: active_forms
+        type: quota
+        metric: forms
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Fields Per Form
+        description: Maximum fields per form on this plan
+        name: fields_per_form
+        type: quota
+        metric: fields
+        limit: 10
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: 123FormBuilder REST API v2
+      - name: Public Documentation
+      - name: Community Support
+  - id: 123formbuilder-gold
+    name: Gold
+    type: paid
+    description: Entry paid tier with unlimited daily API calls, conditional logic, and basic integrations.
+    entries:
+      - label: Monthly Subscription
+        description: Per-user monthly subscription fee for the Gold plan
+        name: gold_monthly_fee
+        type: tier
+        metric: users_per_month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '37.00'
+        currency: USD
+        userMultiplied: true
+      - label: API Requests
+        description: Unlimited daily API calls under fair-use
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: -1
+        timeFrame: day
+        geo: global
+        domains:
+          - https://api.123formbuilder.com/v2
+          - https://eu-api.123formbuilder.com/v2
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: 123FormBuilder REST API v2
+      - name: Conditional Logic
+      - name: Custom Email Notifications
+      - name: PayPal / Stripe Payments
+      - name: Basic Form Analytics
+  - id: 123formbuilder-platinum
+    name: Platinum
+    type: paid
+    description: Mid-market paid tier with higher quotas, expanded integrations, and premium support response times.
+    entries:
+      - label: Monthly Subscription
+        description: Per-user monthly subscription fee for the Platinum plan
+        name: platinum_monthly_fee
+        type: tier
+        metric: users_per_month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '49.00'
+        currency: USD
+        userMultiplied: true
+      - label: API Requests
+        description: Unlimited daily API calls under fair-use
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: -1
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: 123FormBuilder REST API v2
+      - name: Salesforce Integration
+      - name: Advanced Form Analytics
+      - name: Custom Reports
+      - name: SMTP Support
+  - id: 123formbuilder-diamond
+    name: Diamond
+    type: paid
+    description: Premium tier including white-label, HIPAA-ready configurations, and deeper Salesforce integration.
+    entries:
+      - label: Monthly Subscription
+        description: Per-user monthly subscription fee for the Diamond plan
+        name: diamond_monthly_fee
+        type: tier
+        metric: users_per_month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '99.00'
+        currency: USD
+        userMultiplied: true
+      - label: API Requests
+        description: Unlimited daily API calls under fair-use
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: -1
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: 123FormBuilder REST API v2
+      - name: HIPAA-Ready Configurations
+      - name: Salesforce Deep Integration
+      - name: White Label
+      - name: Multi-language Forms
+  - id: 123formbuilder-enterprise
+    name: Enterprise
+    type: contract
+    description: Custom-quoted enterprise tier including SLA, data insurance, dedicated account manager, SSO, and
+      Virtual Database Manager. Pricing on request.
+    entries:
+      - label: Annual Contract
+        description: Custom annual contract negotiated directly with sales
+        name: enterprise_contract
+        type: contract
+        metric: annual_contract
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: 'custom'
+        userMultiplied: false
+      - label: API Requests
+        description: Custom quota per enterprise agreement
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: -1
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: 123FormBuilder REST API v2
+      - name: Service Level Agreement
+      - name: Dedicated Account Manager
+      - name: Single Sign-On (SSO)
+      - name: Virtual Database Manager
+      - name: Priority Support
+      - name: White Label
+sources:
+  - https://www.123formbuilder.com/pricing/
+  - https://www.123formbuilder.com/docs/apidocumentation/
+  - https://www.123formbuilder.com/docs/what-features-does-each-service-plan-offer/

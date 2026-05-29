@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-structure/123formbuilder-rest-api-v2-account-structure.json",
+  "name": "Account",
+  "description": "Structural definition of a 123FormBuilder billable account.",
+  "type": "object",
+  "properties": {
+    "user_id": {"type": "int32"},
+    "email": {"type": "string"},
+    "name": {"type": "string"},
+    "company_name": {"type": "string"},
+    "plan": {"type": "string"},
+    "created_at": {"type": "datetime"}
+  }
+}

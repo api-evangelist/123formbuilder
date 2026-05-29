@@ -1,0 +1,12 @@
+{
+  "id": 101,
+  "form_id": 5837291,
+  "label": "Email",
+  "type": "Email",
+  "required": true,
+  "default_value": "",
+  "options": [],
+  "validation": {
+    "regex": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+  }
+}

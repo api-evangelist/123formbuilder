@@ -1,0 +1,134 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "123FormBuilder"
+  description: "Vocabulary covering the 123FormBuilder REST API v2 operational and capability dimensions."
+  created: "2026-05-28"
+  modified: "2026-05-28"
+
+operational:
+  apis:
+    - name: 123FormBuilder REST API v2
+      namespace: rest-api-v2
+      version: 2.0.0
+      baseUrl: https://api.123formbuilder.com/v2
+      regionalBaseUrls:
+        - https://api.123formbuilder.com/v2
+        - https://eu-api.123formbuilder.com/v2
+      status: active
+
+  resources:
+    - name: tokens
+      apis: [rest-api-v2]
+      actions: [create, refresh, invalidate]
+    - name: forms
+      apis: [rest-api-v2]
+      actions: [list, create, get, update, delete, bulkDelete]
+    - name: fields
+      apis: [rest-api-v2]
+      actions: [list]
+    - name: submissions
+      apis: [rest-api-v2]
+      actions: [list, get, update, delete]
+    - name: groups
+      apis: [rest-api-v2]
+      actions: [list, create, get, update, listForms, share, unshare]
+    - name: users
+      apis: [rest-api-v2]
+      actions: [list, create, update]
+    - name: accounts
+      apis: [rest-api-v2]
+      actions: [create, update]
+
+  actions:
+    - name: list
+      methods: [GET]
+      pattern: read
+    - name: get
+      methods: [GET]
+      pattern: read
+    - name: create
+      methods: [POST]
+      pattern: write
+    - name: update
+      methods: [PUT]
+      pattern: write
+    - name: delete
+      methods: [DELETE]
+      pattern: destructive
+    - name: bulkDelete
+      methods: [DELETE]
+      pattern: destructive
+    - name: refresh
+      methods: [POST]
+      pattern: write
+    - name: invalidate
+      methods: [POST]
+      pattern: destructive
+    - name: share
+      methods: [POST]
+      pattern: write
+    - name: unshare
+      methods: [POST]
+      pattern: destructive
+
+  authentication:
+    - name: jwt-query
+      type: apiKey
+      transport: query
+      parameter: JWT
+      issuance: POST /token
+      lifecycle: refresh, invalidate
+
+capability:
+  surfaces:
+    - name: Form Authoring
+      description: Programmatically create and configure forms, including schedule windows and field-level settings.
+      operations: [createForm, updateForm, getForm, listForms, deleteForm, bulkDeleteForms, getFormFields]
+    - name: Submission Collection
+      description: Retrieve, page through, update, and remove submissions tied to forms.
+      operations: [listSubmissions, getSubmission, updateSubmission, deleteSubmission]
+    - name: Group Management
+      description: Organize forms into groups, share with subusers, and register group-level webhooks.
+      operations: [listGroups, createGroup, getGroup, updateGroup, listGroupForms, shareGroup, unshareGroup]
+    - name: Subuser Administration
+      description: Provision subusers under a master account with fine-grained form, group, and user permissions.
+      operations: [listUsers, createUser, updateUser]
+    - name: Account Provisioning
+      description: Create or update billable accounts, used by partners and integrators with reseller permissions.
+      operations: [createAccount, updateAccount]
+    - name: Webhook Routing
+      description: Forward new submissions to external endpoints via group-level webhook URLs.
+      operations: [updateGroup, createGroup]
+
+  domains:
+    - name: Online Forms
+      description: Browser-based form authoring with conditional logic, multi-page flows, and file uploads.
+    - name: Surveys
+      description: Likert scales, NPS, and questionnaire patterns.
+    - name: Payments
+      description: PayPal, Stripe, Square, Authorize.Net, Braintree, and PayU collection through form fields.
+    - name: Workflows
+      description: Approval routing, conditional notifications, and group-based sharing.
+    - name: Compliance
+      description: HIPAA-ready configurations, GDPR controls, IP and country filters, password protection.
+
+  policies:
+    - name: regional-residency
+      description: US and EU regional endpoints; account region determines which base URL to use.
+    - name: deprecation
+      description: v1 API is deprecated; new integrations must use v2.
+    - name: rate-limits
+      description: Tier-driven daily API call quotas; Basic capped, Gold/Platinum/Diamond uncapped at the daily level.
+
+  tags:
+    - Online Forms
+    - Form Builder
+    - Surveys
+    - Workflow
+    - Data Collection
+    - Submissions
+    - Webhooks
+    - HIPAA
+    - GDPR
+    - Payments

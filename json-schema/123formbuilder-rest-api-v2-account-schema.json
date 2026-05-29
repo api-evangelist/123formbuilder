@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-schema/123formbuilder-rest-api-v2-account-schema.json",
+  "title": "Account",
+  "description": "A 123FormBuilder billable account provisioned via the Accounts API.",
+  "type": "object",
+  "properties": {
+    "user_id": {"type": "integer", "description": "Identifier of the account's master user."},
+    "email": {"type": "string", "format": "email"},
+    "name": {"type": "string"},
+    "company_name": {"type": "string"},
+    "plan": {
+      "type": "string",
+      "description": "Subscription plan name.",
+      "enum": ["Free", "Starter", "Individual", "Gold", "Platinum", "Diamond", "Enterprise"]
+    },
+    "created_at": {"type": "string", "format": "date-time"}
+  },
+  "required": ["user_id", "email", "plan"]
+}

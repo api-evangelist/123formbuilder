@@ -1,0 +1,236 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 123FormBuilder REST API v2 — Groups
+  description: |
+    123FormBuilder Groups business surface. Manage form groupings, register group-level
+    webhook destinations, and share/unshare groups with subusers.
+  tags:
+    - 123FormBuilder
+    - Groups
+    - Webhooks
+  created: '2026-05-28'
+  modified: '2026-05-28'
+binds:
+  - namespace: env
+    keys:
+      ONE_TWO_THREE_FORMBUILDER_JWT: ONE_TWO_THREE_FORMBUILDER_JWT
+capability:
+  consumes:
+    - type: http
+      namespace: 123formbuilder-groups
+      baseUri: https://api.123formbuilder.com
+      description: 123FormBuilder Groups capability. Self-contained.
+      resources:
+        - name: v2-groups
+          path: /v2/groups
+          operations:
+            - name: listgroups
+              method: GET
+              description: Get All User Groups
+              outputRawFormat: json
+              inputParameters:
+                - name: JWT
+                  in: query
+                  type: string
+                  required: true
+                - name: per_page
+                  in: query
+                  type: integer
+                  required: false
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+            - name: creategroup
+              method: POST
+              description: Create a New Group
+              outputRawFormat: json
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: v2-groups-id
+          path: /v2/groups/{group_id}
+          operations:
+            - name: getgroup
+              method: GET
+              description: Get Group Details
+              outputRawFormat: json
+              inputParameters:
+                - name: JWT
+                  in: query
+                  type: string
+                  required: true
+                - name: group_id
+                  in: path
+                  type: integer
+                  required: true
+            - name: updategroup
+              method: PUT
+              description: Update Group Data
+              outputRawFormat: json
+              inputParameters:
+                - name: group_id
+                  in: path
+                  type: integer
+                  required: true
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: v2-groups-id-forms
+          path: /v2/groups/{group_id}/forms
+          operations:
+            - name: listgroupforms
+              method: GET
+              description: Get All Forms in a Group
+              outputRawFormat: json
+              inputParameters:
+                - name: JWT
+                  in: query
+                  type: string
+                  required: true
+                - name: group_id
+                  in: path
+                  type: integer
+                  required: true
+        - name: v2-groups-id-share
+          path: /v2/groups/{group_id}/share
+          operations:
+            - name: sharegroup
+              method: POST
+              description: Share a Group with a User
+              outputRawFormat: json
+              inputParameters:
+                - name: group_id
+                  in: path
+                  type: integer
+                  required: true
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: v2-groups-id-unshare
+          path: /v2/groups/{group_id}/unshare
+          operations:
+            - name: unsharegroup
+              method: POST
+              description: Unshare a Group From a User
+              outputRawFormat: json
+              inputParameters:
+                - name: group_id
+                  in: path
+                  type: integer
+                  required: true
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+      authentication:
+        type: apiKey
+        in: query
+        name: JWT
+        value: '{{env.ONE_TWO_THREE_FORMBUILDER_JWT}}'
+  exposes:
+    - type: rest
+      namespace: 123formbuilder-groups-rest
+      port: 8080
+      resources:
+        - name: v2-groups
+          path: /v2/groups
+          operations:
+            - method: GET
+              name: listgroups
+              description: Get All User Groups
+              call: 123formbuilder-groups.listgroups
+            - method: POST
+              name: creategroup
+              description: Create a New Group
+              call: 123formbuilder-groups.creategroup
+        - name: v2-groups-id
+          path: /v2/groups/{group_id}
+          operations:
+            - method: GET
+              name: getgroup
+              description: Get Group Details
+              call: 123formbuilder-groups.getgroup
+            - method: PUT
+              name: updategroup
+              description: Update Group Data
+              call: 123formbuilder-groups.updategroup
+        - name: v2-groups-id-forms
+          path: /v2/groups/{group_id}/forms
+          operations:
+            - method: GET
+              name: listgroupforms
+              description: Get All Forms in a Group
+              call: 123formbuilder-groups.listgroupforms
+        - name: v2-groups-id-share
+          path: /v2/groups/{group_id}/share
+          operations:
+            - method: POST
+              name: sharegroup
+              description: Share a Group with a User
+              call: 123formbuilder-groups.sharegroup
+        - name: v2-groups-id-unshare
+          path: /v2/groups/{group_id}/unshare
+          operations:
+            - method: POST
+              name: unsharegroup
+              description: Unshare a Group From a User
+              call: 123formbuilder-groups.unsharegroup
+    - type: mcp
+      namespace: 123formbuilder-groups-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: 123formbuilder-list-groups
+          description: Get All User Groups
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: 123formbuilder-groups.listgroups
+        - name: 123formbuilder-create-group
+          description: Create a New Group
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: 123formbuilder-groups.creategroup
+        - name: 123formbuilder-get-group
+          description: Get Group Details
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: 123formbuilder-groups.getgroup
+        - name: 123formbuilder-update-group
+          description: Update Group Data
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: 123formbuilder-groups.updategroup
+        - name: 123formbuilder-list-group-forms
+          description: Get All Forms in a Group
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: 123formbuilder-groups.listgroupforms
+        - name: 123formbuilder-share-group
+          description: Share a Group with a User
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: 123formbuilder-groups.sharegroup
+        - name: 123formbuilder-unshare-group
+          description: Unshare a Group From a User
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: 123formbuilder-groups.unsharegroup

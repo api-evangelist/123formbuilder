@@ -1,0 +1,105 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: 123FormBuilder
+providerId: 123formbuilder
+created: '2026-05-28'
+modified: '2026-05-28'
+tags:
+  - Online Forms
+  - Form Builder
+  - Submissions
+  - Rate Limiting
+  - Quotas
+  - Throttling
+description: |
+  Rate limit definitions for the 123FormBuilder REST API v2. Reconciles the published per-plan
+  daily API call quotas with the implicit per-form webhook ceiling. The provider does not
+  publicly document burst, per-second, or per-minute throttles; values marked "unspecified"
+  must be confirmed with support before being relied on contractually.
+headers:
+  limit: unspecified
+  remaining: unspecified
+  reset: unspecified
+  retryAfter: Retry-After
+  policy: unspecified
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+  serviceUnavailable: 503
+limits:
+  - tier: free
+    name: Free Plan Daily API Quota
+    scope: api-key
+    metric: requests_per_day
+    limit: 100
+    timeFrame: day
+    applies:
+      - 123FormBuilder REST API v2
+    notes: Documented as "100 calls/day maximum" for the Basic plan; exceeding returns "You have exceeded the number of requests for today!"
+  - tier: gold
+    name: Gold Plan Daily API Quota
+    scope: api-key
+    metric: requests_per_day
+    limit: -1
+    timeFrame: day
+    applies:
+      - 123FormBuilder REST API v2
+    notes: Documented as unlimited daily API calls subject to fair-use.
+  - tier: platinum
+    name: Platinum Plan Daily API Quota
+    scope: api-key
+    metric: requests_per_day
+    limit: -1
+    timeFrame: day
+    applies:
+      - 123FormBuilder REST API v2
+    notes: Documented as unlimited daily API calls subject to fair-use.
+  - tier: diamond
+    name: Diamond Plan Daily API Quota
+    scope: api-key
+    metric: requests_per_day
+    limit: -1
+    timeFrame: day
+    applies:
+      - 123FormBuilder REST API v2
+    notes: Documented as unlimited daily API calls subject to fair-use.
+  - tier: enterprise
+    name: Enterprise Custom Quota
+    scope: api-key
+    metric: requests_per_day
+    limit: -1
+    timeFrame: day
+    applies:
+      - 123FormBuilder REST API v2
+    notes: Negotiated per enterprise agreement; SLA-backed.
+  - tier: all
+    name: Webhooks Per Form
+    scope: form
+    metric: webhooks
+    limit: 10
+    timeFrame: lifetime
+    applies:
+      - 123FormBuilder REST API v2
+      - Group Webhooks
+    notes: Maximum of 10 webhooks per form; exceeding returns "You have more than 10 webhooks set for this form!"
+  - tier: all
+    name: HTTPS Required
+    scope: transport
+    metric: scheme
+    limit: 1
+    timeFrame: per-request
+    applies:
+      - 123FormBuilder REST API v2
+    notes: Plaintext HTTP is rejected with "You can only access our API via HTTPS!"
+recovery:
+  - strategy: backoff
+    description: When a 429 is returned, wait until the start of the next day (UTC) for the daily quota window to reset on Free
+      plans. Paid plans should slow down request rate and retry after a few seconds; consult support for sustained throughput
+      requirements.
+  - strategy: upgrade
+    description: Upgrade from Basic/Free to Gold or higher to lift the 100 calls/day ceiling.
+sources:
+  - https://www.123formbuilder.com/docs/apidocumentation/
+  - https://www.123formbuilder.com/docs/api-responses/
+  - https://www.123formbuilder.com/developer/api-v2/

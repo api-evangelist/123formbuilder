@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-structure/123formbuilder-rest-api-v2-group-structure.json",
+  "name": "Group",
+  "description": "Structural definition of a 123FormBuilder group.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "int32"},
+    "name": {"type": "string"},
+    "parent_id": {"type": "int32"},
+    "webhook_url": {"type": "uri"},
+    "created_at": {"type": "datetime"},
+    "modified_at": {"type": "datetime"}
+  }
+}

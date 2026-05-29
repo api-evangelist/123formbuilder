@@ -1,0 +1,2547 @@
+openapi: 3.0.3
+info:
+  title: 123FormBuilder REST API v2
+  description: REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users,
+    groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.
+  version: 2.0.0
+  contact:
+    name: 123FormBuilder Developer Support
+    url: https://www.123formbuilder.com/developer/contact-us/
+  license:
+    name: Proprietary
+    url: https://www.123formbuilder.com/terms-of-service/
+servers:
+- url: https://api.123formbuilder.com/v2
+  description: US regional endpoint
+- url: https://eu-api.123formbuilder.com/v2
+  description: EU regional endpoint
+tags:
+- name: Login
+  description: JWT issuance, refresh, and invalidation.
+- name: Forms
+  description: Create, list, read, update, and delete forms, fields, and submissions.
+- name: Groups
+  description: Organize forms into groups and share groups with subusers.
+- name: Users
+  description: Manage subusers, their permissions, and master account info.
+- name: Accounts
+  description: Create and update billable accounts.
+paths:
+  /token:
+    post:
+      summary: User Login
+      description: "Allows you to authenticate users. \n\nRequired parameters:\n- username OR email\n- password OR passhash\n"
+      tags:
+      - Login
+      operationId: login-user-login
+      parameters:
+      - name: username
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: email
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: password
+        in: query
+        required: false
+        description: Plain text password
+        schema:
+          type: string
+      - name: passhash
+        in: query
+        required: false
+        description: MD5 password
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: To be used in  the JWT parameter
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NSJ9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                status_code: 200
+        '403':
+          description: Wrong user credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id001
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+  /token/refresh:
+    post:
+      summary: Refresh Token
+      description: Refresh token
+      tags:
+      - Login
+      operationId: login-refresh-token
+      parameters: []
+      responses:
+        '200':
+          description: The new refreshed JWT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: The new refreshed JWT
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NSJ9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                status_code: 200
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+              required:
+              - JWT
+  /token/invalidate:
+    post:
+      summary: Invalidate Token
+      description: Invalidate token
+      tags:
+      - Login
+      operationId: login-invalidate-token
+      parameters: []
+      responses:
+        '200':
+          description: The token was invalidated and cannot be used any more.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The token was invalidated and cannot be used any more.
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NSJ9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                status_code: 200
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+              required:
+              - JWT
+  /forms:
+    get:
+      summary: List Forms
+      description: The forms endpoint returns information about the forms. The response includes submissions and other details
+        about each form.
+      tags:
+      - Forms
+      operationId: forms-list-forms
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        description: The number of forms to get per page in a request. Default is 100 and the maximum number is 1000.
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+      - name: search
+        in: query
+        required: false
+        description: Filter form name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of forms
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Form'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of forms.
+                          count:
+                            type: integer
+                            description: Indicates how many forms are displayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many forms are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: The URL to the next page
+                              previous:
+                                type: string
+                                description: The URL to the previous page
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                page: 1
+                per_page: 25
+                total: 42
+                forms:
+                - &id002
+                  id: 5837291
+                  name: Customer Feedback Survey
+                  active: 1
+                  created_at: '2026-05-12T09:33:00Z'
+                  modified_at: '2026-05-20T14:18:00Z'
+                  submissions_count: 1284
+                  group_id: 412
+                  url: https://form.jotform.com/5837291
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+    post:
+      summary: Create a New Form
+      description: Create a new form
+      tags:
+      - Forms
+      operationId: forms-create-a-new-form
+      parameters: []
+      responses:
+        '201':
+          description: Form created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/Form'
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 201
+                form: *id002
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '422':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        items:
+                          $ref: '#/definitions/FormCreateValidationError'
+                      status_code:
+                        type: integer
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                name:
+                  type: string
+                  description: The name of the new form
+                group_id:
+                  type: integer
+                  description: The ID of the group in which you want to create the form
+                active:
+                  type: integer
+                  description: 'Form activity status. It can be 0, 1, 2, 3 or 4.
+
+
+                    0 = always active
+
+
+                    1 = active during a specific period
+
+
+                    2 = active only for logged in users
+
+
+                    3 = inactive
+
+
+                    4 = active only on certain days of the week
+
+                    '
+                active_date_from:
+                  type: string
+                  description: 'If activity status is 1, this field is required.
+
+
+                    Format must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+
+                    '
+                active_date_to:
+                  type: string
+                  description: 'If activity status is 1, this field is required.
+
+
+                    Format must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+
+                    '
+                active_days:
+                  type: string
+                  description: 'If activity status is 4, this field is required.
+
+
+                    It should contain comma separated numbers, each number representing the day of the week.
+
+
+                    Example: 1,3,7 means Monday, Wednesday, Sunday
+
+                    '
+              required:
+              - JWT
+              - name
+  /forms/bulk:
+    delete:
+      summary: Delete Multiple Forms
+      description: Delete multiple forms
+      tags:
+      - Forms
+      operationId: forms-delete-multiple-forms
+      parameters: []
+      responses:
+        '200':
+          description: Forms deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Forms deleted.
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 200
+                deleted:
+                - 5837291
+                - 5837292
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access Denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                form_ids:
+                  type: string
+                  description: The IDs of the forms separated by comma
+              required:
+              - JWT
+              - form_ids
+  /forms/{form_id}:
+    get:
+      summary: Get Form Details
+      description: Get the details of a single form
+      tags:
+      - Forms
+      operationId: forms-get-form-details
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Form details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/Form'
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example: *id002
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+    put:
+      summary: Update Form Details
+      description: Update form details
+      tags:
+      - Forms
+      operationId: forms-update-form-details
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The form was updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/Form'
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 200
+                form: *id002
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '422':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        items:
+                          $ref: '#/definitions/FormUpdateValidationError'
+                      status_code:
+                        type: integer
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Change the name of the form. Required when group_id  or active is missing.
+                group_id:
+                  type: integer
+                  description: The ID of the group in which you want to create the form
+                active:
+                  type: integer
+                  description: 'Form activity status. It can be 0, 1, 2, 3 or 4.
+
+
+                    0 = always active
+
+
+                    1 = active during a specific period
+
+
+                    2 = active only for logged in users
+
+
+                    3 = inactive
+
+
+                    4 = active only on certain days of the week
+
+                    '
+                active_date_from:
+                  type: string
+                  description: 'If activity status is 1, this field is required.
+
+
+                    Format must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+
+                    '
+                active_date_to:
+                  type: string
+                  description: 'If activity status is 1, this field is required.
+
+
+                    Format must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+
+                    '
+                active_days:
+                  type: string
+                  description: 'If activity status is 4, this field is required.
+
+
+                    It should contain comma separated numbers, each number representing the day of the week.
+
+
+                    Example: 1,3,7 means Monday, Wednesday, Sunday
+
+                    '
+    delete:
+      summary: Delete a Form
+      description: Delete a form
+      tags:
+      - Forms
+      operationId: forms-delete-a-form
+      parameters:
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Form deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Form deleted.
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 200
+                message: Form deleted
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access Denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '404':
+          description: Form not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+              required:
+              - JWT
+  /forms/{form_id}/fields:
+    get:
+      summary: Get Form Fields
+      description: Get the details of a single form and its fields
+      tags:
+      - Forms
+      operationId: forms-get-form-fields
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Form details and controls
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/FormWithFields'
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+              - id: 101
+                form_id: 5837291
+                label: Email
+                type: Email
+                required: true
+                options: []
+                default_value: ''
+              - id: 102
+                form_id: 5837291
+                label: Rating
+                type: Rating
+                required: false
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+  /forms/{form_id}/submissions:
+    get:
+      summary: Get Submissions
+      description: Get all submissions received through a form
+      tags:
+      - Forms
+      operationId: forms-get-submissions
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      - name: start_date
+        in: query
+        required: false
+        description: List submissions starting with a specific date
+        schema:
+          type: string
+      - name: start_submission_id
+        in: query
+        required: false
+        description: List all submissions starting with the specified submission ID.
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: The number of submissions to get per page in a request. Default is 100 and the maximum number is 1000.
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+      - name: include_recipients
+        in: query
+        required: false
+        description: Returns the recipient(s) who should receive the submissions. When this parameter is used, its value can
+          be anything, but cannot be empty.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of all submissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Submission'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of submissions.
+                          count:
+                            type: integer
+                            description: Indicates how many submissions are displayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many submissions are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: The URL to the next page
+                              previous:
+                                type: string
+                                description: The URL to the previous page
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                page: 1
+                per_page: 25
+                total: 1284
+                submissions:
+                - &id003
+                  submission_id: 9001234
+                  form_id: 5837291
+                  submission_date: '2026-05-27T18:42:11Z'
+                  ip: 203.0.113.42
+                  approved: 1
+                  payed: 'no'
+                  fields:
+                    '100':
+                      label: Full Name
+                      value: Ada Lovelace
+                    '101':
+                      label: Email
+                      value: ada@example.com
+                    '102':
+                      label: Rating
+                      value: '5'
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+  /forms/{form_id}/submissions/{submission_id}:
+    get:
+      summary: Get Submission Details
+      description: Get the details of a single submission
+      tags:
+      - Forms
+      operationId: forms-get-submission-details
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      - name: submission_id
+        in: path
+        required: true
+        description: The ID of the submission
+        schema:
+          type: integer
+      - name: include_recipients
+        in: query
+        required: false
+        description: Returns the recipient(s) who should receive the submission. When this parameter is used, its value can
+          be anything, but cannot be empty.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The submission content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Submission'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of submissions.
+                          count:
+                            type: integer
+                            description: Indicates how many submissions are displayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many submissions are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: The URL to the next page
+                              previous:
+                                type: string
+                                description: The URL to the previous page
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example: *id003
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+    put:
+      summary: Update Submission
+      description: Update Submission
+      tags:
+      - Forms
+      operationId: forms-update-submission
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      - name: submission_id
+        in: path
+        required: true
+        description: The ID of the submission
+        schema:
+          type: integer
+      - name: payed
+        in: query
+        required: false
+        description: Payment status. Possible values 0 - no, 1 - payed, 2 - invoiced, 3 - pending, 4 - declined, yes,  no,
+          payed, invoced, pending, declined
+        schema:
+          type: string
+      - name: approved
+        in: query
+        required: false
+        description: 'Approval status. Possible values: 0 (N/A), 1 (Approved), 2 (Rejected)'
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The submission content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Submission'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of submissions.
+                          count:
+                            type: integer
+                            description: Indicates how many submissions are displayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many submissions are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: The URL to the next page
+                              previous:
+                                type: string
+                                description: The URL to the previous page
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 200
+                message: Submission updated
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+    delete:
+      summary: Delete One Form Submission
+      description: Delete one form submission
+      tags:
+      - Forms
+      operationId: forms-delete-one-form-submission
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      - name: submission_id
+        in: path
+        required: true
+        description: The ID of the submission
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Submission deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Submission deleted.
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 200
+                message: Submission deleted
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+  /groups:
+    get:
+      summary: Get All User Groups
+      description: Get all user groups
+      tags:
+      - Groups
+      operationId: groups-get-all-user-groups
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        description: The number of groups to get per page in a request. Default is 100 and the maximum number is 1000.
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Lists all user groups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Group'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of groups.
+                          count:
+                            type: integer
+                            description: Indicates how many groups are diplayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many groups are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: URL to the next page
+                              previous:
+                                type: string
+                                description: URL to the previous page
+                  status_code:
+                    type: integer
+              example:
+                page: 1
+                per_page: 25
+                total: 3
+                groups:
+                - &id004
+                  id: 412
+                  name: Sales Forms
+                  parent_id: 0
+                  webhook_url: https://example.com/webhooks/123fb
+                  created_at: '2026-04-01T08:00:00Z'
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+    post:
+      summary: Create a New Group
+      description: Create a new group
+      tags:
+      - Groups
+      operationId: groups-create-a-new-group
+      parameters: []
+      responses:
+        '201':
+          description: The group was created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/Group'
+                  status_code:
+                    type: integer
+              example:
+                status_code: 201
+                group: *id004
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '422':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        items:
+                          $ref: '#/definitions/GroupCreateValidationError'
+                      status_code:
+                        type: integer
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                name:
+                  type: string
+                  description: Form name
+                webhook_url:
+                  type: string
+                  description: The URL of the WebHook
+                parent_id:
+                  type: integer
+                  description: Indicates the ID of the parent group. Default value is -1, wich means that the group is in
+                    the root.
+              required:
+              - JWT
+              - name
+  /groups/{group_id}:
+    get:
+      summary: Get Group Details
+      description: Get information about a specific group.
+      tags:
+      - Groups
+      operationId: groups-get-group-details
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: group_id
+        in: path
+        required: true
+        description: The ID of the group
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Details about the group
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/Group'
+                  status_code:
+                    type: integer
+                    description: Status code
+              example: *id004
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access Denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+    put:
+      summary: Update Group Data
+      description: Updates the details of a group.
+      tags:
+      - Groups
+      operationId: groups-update-group-data
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        description: The ID of the group you want to edit
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The group was updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/Group'
+                  status_code:
+                    type: integer
+              example:
+                status_code: 200
+                group: *id004
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '422':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        items:
+                          $ref: '#/definitions/GroupUpdateValidationError'
+                      status_code:
+                        type: integer
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                name:
+                  type: string
+                  description: This is required when the webhook_url or parent_id is missing.
+                webhook_url:
+                  type: string
+                  description: This is required when the name or parent_id is missing.
+                parent_id:
+                  type: integer
+                  description: Indicates the ID of the parent group. Default value is -1, wich means that the group is in
+                    the root. This field is required when the name or the webhook_url are missing.
+              required:
+              - JWT
+  /groups/{group_id}/forms:
+    get:
+      summary: Get All Forms in a Group
+      description: Displays a list of all of the forms within a specific group.
+      tags:
+      - Groups
+      operationId: groups-get-all-forms-in-a-group
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: group_id
+        in: path
+        required: true
+        description: The ID of the group
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List all user groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/GroupWithForms'
+                  status_code:
+                    type: integer
+              example:
+              - *id002
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+  /groups/{group_id}/share:
+    post:
+      summary: Share a Group with a User
+      description: This may not be available for your account. It is specific to certain users.
+      tags:
+      - Groups
+      operationId: groups-share-a-group-with-a-user
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        description: The ID of the group you want to share
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Group was shared.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status_code:
+                    type: integer
+              example:
+                status_code: 200
+                message: Group shared with subuser
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '422':
+          description: Validation errors occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                subuser_id:
+                  type: integer
+                  description: The ID of the user with whom you want to share this group. This is required when subuser_email
+                    is missing.
+                subuser_email:
+                  type: string
+                  description: The username with whom you want to share this group. This is required when subuser_id is missing.
+              required:
+              - JWT
+  /groups/{group_id}/unshare:
+    post:
+      summary: Unshare a Group From a User
+      description: This may not be available for your account. It is specific to certain users.
+      tags:
+      - Groups
+      operationId: groups-unshare-a-group-from-a-user
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        description: The ID of the group you want to unshare
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: Group was unshared.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status_code:
+                    type: integer
+              example:
+                status_code: 201
+                message: Group unshared from subuser
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '422':
+          description: Validation errors occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                subuser_id:
+                  type: integer
+                  description: The ID of the subuser from whom you want to unshare the group. This is required when subuser_email
+                    is missing.
+                subuser_email:
+                  type: string
+                  description: The username from whom you want to unshare the group. This is required when subuser_id is missing.
+              required:
+              - JWT
+  /users:
+    get:
+      summary: Get Info About Master User and Subusers
+      description: Get info about master user and subusers
+      tags:
+      - Users
+      operationId: users-get-info-about-master-user-and-subusers
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        description: The number of groups to get per page in a request. Default is 100 and the maximum number is 1000.
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Lists all master users and subusers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/User'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of subusers.
+                          count:
+                            type: integer
+                            description: Indicates how many subusers are displayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many subusers are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: The URL to the next page
+                              previous:
+                                type: string
+                                description: The URL to the previous page
+                  status_code:
+                    type: integer
+              example:
+                page: 1
+                per_page: 25
+                total: 2
+                users:
+                - &id005
+                  id: 78901
+                  email: sub@example.com
+                  name: Grace Hopper
+                  admin: 0
+                  company_name: Acme
+                  allow_create_form: 1
+                  allow_duplicate_form: 1
+                  allow_delete_form: 0
+                  can_manage_groups: 1
+                  can_manage_users: 0
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+    post:
+      summary: Create a New Subuser
+      description: Create a new subuser
+      tags:
+      - Users
+      operationId: users-create-a-new-subuser
+      parameters: []
+      responses:
+        '200':
+          description: A new user was created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/User'
+                  status_code:
+                    type: integer
+              example:
+                status_code: 200
+                user: *id005
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '422':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        items:
+                          $ref: '#/definitions/UsersCreateValidationError'
+                      status_code:
+                        type: integer
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                email:
+                  type: string
+                  description: Email address of the account. You should use this or username.
+                name:
+                  type: string
+                  description: Username of the account. You should use this or the email address.
+                passhash:
+                  type: string
+                  description: MD5 password. You should use this or the plain text password.
+                password:
+                  type: string
+                  description: Plain text password. You should use this or the passhash.
+                admin:
+                  type: integer
+                  description: Indicates if the subuser is admin or not. Default value is 0, which means that the subuser
+                    is not admin.
+                company_name:
+                  type: string
+                  description: The name of the company to which the subuser belongs
+                allow_create_form:
+                  type: integer
+                  description: 'Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.
+
+
+                    Possible values: 0, 1, 2 or 3.
+
+
+                    0 (default value) = No access to creating new forms
+
+
+                    1 = Forms are available only to this user
+
+
+                    2 = Forms are available to current users from parent company
+
+
+                    3 = Forms are available to all current users
+
+                    '
+                allow_duplicate_form:
+                  type: integer
+                  description: Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot
+                    duplicate forms.
+                allow_delete_form:
+                  type: integer
+                  description: Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete
+                    forms.
+                can_manage_groups:
+                  type: integer
+                  description: Allow admin subusers to manage groups. This works only for admin subusers. Default value is
+                    0, which means that the subuser cannot manage groups.
+                can_manage_users:
+                  type: integer
+                  description: Allow admin subusers to manage users. This works only for admin subusers. Default value is
+                    0, which means that the subuser cannot manage users.
+              required:
+              - JWT
+  /users/{identifier}:
+    put:
+      summary: Update User
+      description: Update user information
+      tags:
+      - Users
+      operationId: users-update-user
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        description: The ID or username of the user to be modified
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User was updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/User'
+                  status_code:
+                    type: integer
+              example:
+                status_code: 200
+                user: *id005
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                email:
+                  type: string
+                  description: Email address of the account. You should use this or username.
+                passhash:
+                  type: string
+                  description: MD5 password. You should use this or the plain text password.
+                password:
+                  type: string
+                  description: Plain text password. You should use this or the passhash.
+                admin:
+                  type: integer
+                  description: Indicates if the subuser is admin or not. Default value is 0, which means that the subuser
+                    is not admin.
+                company_name:
+                  type: string
+                  description: The name of the company to which the subuser belongs
+                allow_create_form:
+                  type: integer
+                  description: 'Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.
+
+
+                    Possible values: 0, 1, 2 or 3.
+
+
+                    0 (default value) = No access to creating new forms
+
+
+                    1 = Forms are available only to this user
+
+
+                    2 = Forms are available to current users from parent company
+
+
+                    3 = Forms are available to all current users
+
+                    '
+                allow_duplicate_form:
+                  type: integer
+                  description: Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot
+                    duplicate forms.
+                allow_delete_form:
+                  type: integer
+                  description: Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete
+                    forms.
+                can_manage_groups:
+                  type: integer
+                  description: Allow admin subusers to manage groups. This works only for admin subusers. Default value is
+                    0, which means that the subuser cannot manage groups.
+                can_manage_users:
+                  type: integer
+                  description: Allow admin subusers to manage users. This works only for admin subusers. Default value is
+                    0, which means that the subuser cannot manage users.
+              required:
+              - JWT
+  /accounts:
+    post:
+      summary: Create New Account
+      description: Creates a new account (standalone user). This is available only upon request.
+      tags:
+      - Accounts
+      operationId: accounts-create-new-account
+      parameters: []
+      responses:
+        '201':
+          description: Account created successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/User'
+                  status_code:
+                    type: integer
+              example:
+                status_code: 201
+                account: &id006
+                  user_id: 200001
+                  email: newuser@example.com
+                  name: New User
+                  company_name: Acme Corp
+                  plan: Gold
+                  created_at: '2026-05-28T00:00:00Z'
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                email:
+                  type: string
+                  description: The email address associated with the account
+                name:
+                  type: string
+                  description: The username associated with the account
+                password:
+                  type: string
+                  description: The password associated with the account
+                password_repeat:
+                  type: string
+                  description: Password repeat
+                plan:
+                  type: string
+                  description: 'The service plan of the account: 0 - Free (default value), 1 - Gold, 2 - Platinum, 3 - Diamond.
+                    In order to be able to assign a plan, you need additional permissions.'
+                company_name:
+                  type: string
+                  description: The company name associated with the account
+              required:
+              - JWT
+              - email
+              - password
+              - password_repeat
+  /accounts/{user_id}:
+    put:
+      summary: Update Account
+      description: Updates an account. You can only update the users that you have created using your account token.
+      tags:
+      - Accounts
+      operationId: accounts-update-account
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        description: The ID of the account that you want to update
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Account updated successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/User'
+                  status_code:
+                    type: integer
+              example:
+                status_code: 200
+                account: *id006
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                email:
+                  type: string
+                  description: The email address associated with the account
+                password:
+                  type: string
+                  description: The password associated with the account
+                password_repeat:
+                  type: string
+                  description: Password repeat
+                plan:
+                  type: string
+                  description: 'The service plan of the account: 0 - Free (default value), 1 - Gold, 2 - Platinum, 3 - Diamond.
+                    In order to be able to assign a plan, you need additional permissions.'
+                company_name:
+                  type: string
+                  description: The company name associated with the account
+              required:
+              - JWT
+              - email
+              - password
+              - password_repeat
+components:
+  securitySchemes:
+    JWTQuery:
+      type: apiKey
+      in: query
+      name: JWT
+      description: JWT token obtained from POST /token, supplied as the JWT query parameter.
+  schemas:
+    FormWithFields:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Form details
+        name:
+          type: string
+          description: Form name
+        group_id:
+          type: integer
+          description: The ID of the group to which the form belongs
+        user_id:
+          type: integer
+          description: The ID of the form owner
+        submissions_count:
+          type: integer
+          description: The total number of submissions sent on the form
+        submissions_count_month:
+          type: integer
+          description: The number of submissions sent on the form in the current month
+        latest_submission:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the last submission on the form
+            date:
+              type: string
+              format: date-time
+              description: The datetime of the last submission on the form
+        created_by:
+          type: integer
+          description: The ID of the user who created the form
+        controls:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Control'
+    Control:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The Field ID
+        form_id:
+          type: integer
+          description: The form ID
+        name:
+          type: string
+          description: The label of the field
+        instruction:
+          type: string
+          description: The instructions displayed below the label (empty by default)
+        position:
+          type: integer
+          description: The position of the field in the form (numeric)
+        type:
+          type: integer
+          description: The type of the field (numeric)
+        subtype:
+          type: integer
+          description: The subtype of the field (numeric)
+        required:
+          type: integer
+          description: Specifies whether a field is required or not (accepts only 0 - not required or 1 - required; default
+            is 0).
+        values:
+          type: string
+          description: This is used for radio buttons, checkboxes and dropdown lists and contains the options available in
+            the choice field.
+        hidden:
+          type: integer
+          description: Specifies the field visibility (accepts only 0 - visible or 1 - hidden; default is 0).
+        other_value:
+          type: integer
+          description: This is used for radio buttons and checkboxes. If it is set to 1, then an additional input is displayed,
+            where users can enter a different value.
+        hide_label:
+          type: integer
+          description: Specifies the label visibility (accepts only 0 - visible or 1 - hidden; default is 0).
+        validation:
+          type: integer
+          description: Speficies the validation type for an input (default is 0 - numeric).
+        width:
+          type: integer
+          description: Specifies the width of the field in percentage (default is 100%).
+        height:
+          type: integer
+          description: Specifies the heigth of the field in pixels (default is 0 - auto).
+    Form:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Form details
+        name:
+          type: string
+          description: Form name
+        group_id:
+          type: integer
+          description: The group to which the form belongs
+        user_id:
+          type: integer
+          description: The ID of the form owner
+        submissions_count:
+          type: integer
+          description: The total number of submissions sent on the form
+        submissions_count_month:
+          type: integer
+          description: The number of submissions sent on the form in the current month
+        latest_submission:
+          type: object
+          properties:
+            date:
+              type: string
+              format: date-time
+              description: The datetime of the last submission on the form
+            id:
+              type: integer
+              description: The ID of the last submission on the form
+        created_by:
+          type: integer
+          description: The ID of the subuser who created the form
+        active:
+          type: integer
+          description: The form activity status
+        active_date_from:
+          type: string
+          format: date
+          description: This value is returned only when activity status is 1.
+        active_date_to:
+          type: string
+          format: date
+          description: This value is returned only when activity status is 1.
+        active_days:
+          type: string
+          description: This value is returned only when activity status is 4.
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the group
+        name:
+          type: string
+          description: The name of the group
+        webhook_url:
+          type: string
+          description: The URL of the WebHook attached to the group
+        parent_id:
+          type: integer
+          description: The ID of the parent group
+    GroupWithForms:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the group
+        webhook_url:
+          type: string
+          description: The URL of the WebHook attached to the group
+        parent_id:
+          type: integer
+          description: The ID of the parent group
+        forms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Form'
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the subuser
+        name:
+          type: string
+          description: The username of the subuser
+        email:
+          type: string
+          description: The email address of the subuser
+        user_parent:
+          type: integer
+          description: The ID of the parent user
+        admin:
+          type: integer
+        allow_create_form:
+          type: integer
+          description: Indicates if the subuser can create new forms.
+        allow_duplicate_form:
+          type: integer
+          description: Indicates if the subuser can duplicate new forms.
+        allow_delete_form:
+          type: integer
+          description: Indicates if the subuser can delete new forms.
+        permissions:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/AdminPermissions'
+    AdminPermissions:
+      type: object
+      properties:
+        can_manage_groups:
+          type: integer
+          description: Indicates if the admin subuser can manage groups.
+        can_manage_users:
+          type: integer
+          description: Indicates if the admin subuser can manage users.
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Details about the error
+            status_code:
+              type: integer
+              description: The status code of the request
+    FormUpdateValidationError:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            enum:
+            - The name field is required when none of group id / email are present.
+        group_id:
+          type: array
+          items:
+            enum:
+            - The group id field is required when none of name / email are present.
+    FormCreateValidationError:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            enum:
+            - The name field is required.
+        group_id:
+          type: array
+          items:
+            enum:
+            - The group id must be an integer.
+    GroupCreateValidationError:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            enum:
+            - The name field is required.
+        webhook_url:
+          type: array
+          items:
+            enum:
+            - The webhook url is not a valid URL.
+    GroupUpdateValidationError:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            enum:
+            - The name field is required when webhook url is not present.
+        webhook_url:
+          type: array
+          items:
+            enum:
+            - The webhook url field is required when name is not present.
+    UsersCreateValidationError:
+      type: object
+      properties:
+        password:
+          type: array
+          items:
+            enum:
+            - The password field is required when passhash is not present.
+        passhash:
+          type: array
+          items:
+            enum:
+            - The passhash field is required when password is not present.
+        email:
+          type: array
+          items:
+            enum:
+            - The email field is required.
+    Submission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Submission ID
+        form_id:
+          type: integer
+          description: Form ID
+        entry_id:
+          type: integer
+          description: Entry ID of the submission
+        country:
+          type: string
+          description: Two-letter country code
+        deleted:
+          type: integer
+          description: Shows if the submission was deleted.
+        status:
+          type: integer
+          description: Submission status
+        payed:
+          type: integer
+          description: Payment status (for forms with payment integration)
+        approved:
+          type: integer
+          description: Shows if the submission was approved.
+        date:
+          type: string
+          description: The date when the submission was made.
+        content:
+          type: string
+          description: JSON with all of the submission fields
+        recipients:
+          type: object
+          description: Submission recipients
+security:
+- JWTQuery: []

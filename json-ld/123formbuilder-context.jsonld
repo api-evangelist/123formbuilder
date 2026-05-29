@@ -1,0 +1,60 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "fb": "https://www.123formbuilder.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Form": "fb:Form",
+    "Field": "fb:Field",
+    "Submission": "fb:Submission",
+    "Group": "fb:Group",
+    "User": "schema:Person",
+    "Account": "schema:Organization",
+
+    "id": {"@id": "schema:identifier"},
+    "form_id": {"@id": "fb:formId", "@type": "xsd:integer"},
+    "submission_id": {"@id": "fb:submissionId", "@type": "xsd:integer"},
+    "group_id": {"@id": "fb:groupId", "@type": "xsd:integer"},
+    "user_id": {"@id": "fb:userId", "@type": "xsd:integer"},
+    "parent_id": {"@id": "fb:parentId", "@type": "xsd:integer"},
+
+    "name": {"@id": "schema:name"},
+    "label": {"@id": "schema:name"},
+    "description": {"@id": "schema:description"},
+    "email": {"@id": "schema:email"},
+    "company_name": {"@id": "schema:legalName"},
+
+    "url": {"@id": "schema:url", "@type": "@id"},
+    "webhook_url": {"@id": "fb:webhookUrl", "@type": "@id"},
+    "ip": {"@id": "fb:ipAddress"},
+
+    "active": {"@id": "fb:active", "@type": "xsd:integer"},
+    "approved": {"@id": "fb:approved", "@type": "xsd:integer"},
+    "payed": {"@id": "fb:payed"},
+    "required": {"@id": "fb:required", "@type": "xsd:boolean"},
+    "type": {"@id": "fb:fieldType"},
+    "default_value": {"@id": "fb:defaultValue"},
+    "options": {"@id": "fb:options", "@container": "@list"},
+
+    "active_date_from": {"@id": "fb:activeFrom", "@type": "xsd:dateTime"},
+    "active_date_to": {"@id": "fb:activeTo", "@type": "xsd:dateTime"},
+    "active_days": {"@id": "fb:activeDays"},
+    "submission_date": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "modified_at": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+
+    "submissions_count": {"@id": "fb:submissionsCount", "@type": "xsd:integer"},
+    "fields": {"@id": "fb:fields", "@container": "@index"},
+    "recipients": {"@id": "fb:recipients", "@container": "@set"},
+
+    "plan": {"@id": "fb:plan"},
+    "admin": {"@id": "fb:admin", "@type": "xsd:integer"},
+    "allow_create_form": {"@id": "fb:allowCreateForm", "@type": "xsd:integer"},
+    "allow_duplicate_form": {"@id": "fb:allowDuplicateForm", "@type": "xsd:integer"},
+    "allow_delete_form": {"@id": "fb:allowDeleteForm", "@type": "xsd:integer"},
+    "can_manage_groups": {"@id": "fb:canManageGroups", "@type": "xsd:integer"},
+    "can_manage_users": {"@id": "fb:canManageUsers", "@type": "xsd:integer"}
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": 78901,
+  "email": "grace@example.com",
+  "name": "Grace Hopper",
+  "admin": 0,
+  "company_name": "Acme Engineering",
+  "allow_create_form": 1,
+  "allow_duplicate_form": 1,
+  "allow_delete_form": 0,
+  "can_manage_groups": 1,
+  "can_manage_users": 0
+}

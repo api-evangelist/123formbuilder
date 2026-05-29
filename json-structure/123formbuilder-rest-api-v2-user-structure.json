@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-structure/123formbuilder-rest-api-v2-user-structure.json",
+  "name": "User",
+  "description": "Structural definition of a 123FormBuilder user or subuser.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "int32"},
+    "email": {"type": "string"},
+    "name": {"type": "string"},
+    "admin": {"type": "int32"},
+    "company_name": {"type": "string"},
+    "allow_create_form": {"type": "int32"},
+    "allow_duplicate_form": {"type": "int32"},
+    "allow_delete_form": {"type": "int32"},
+    "can_manage_groups": {"type": "int32"},
+    "can_manage_users": {"type": "int32"}
+  }
+}

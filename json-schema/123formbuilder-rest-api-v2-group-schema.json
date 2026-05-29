@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/json-schema/123formbuilder-rest-api-v2-group-schema.json",
+  "title": "Group",
+  "description": "A 123FormBuilder group bundling forms, sharing settings, and a webhook destination.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "integer", "description": "Unique group identifier."},
+    "name": {"type": "string", "description": "Group display name."},
+    "parent_id": {"type": "integer", "description": "Parent group identifier or 0 if top-level."},
+    "webhook_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "HTTPS endpoint that receives submission events for forms in this group."
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "modified_at": {"type": "string", "format": "date-time"}
+  },
+  "required": ["id", "name"]
+}

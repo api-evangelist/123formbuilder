@@ -1,0 +1,13 @@
+{
+  "id": 5837291,
+  "name": "Customer Feedback Survey",
+  "active": 1,
+  "active_date_from": "2026-05-01T00:00:00Z",
+  "active_date_to": "2026-12-31T23:59:59Z",
+  "active_days": "1,2,3,4,5",
+  "group_id": 412,
+  "submissions_count": 1284,
+  "url": "https://form.123formbuilder.com/5837291/customer-feedback-survey",
+  "created_at": "2026-05-12T09:33:00Z",
+  "modified_at": "2026-05-20T14:18:00Z"
+}
