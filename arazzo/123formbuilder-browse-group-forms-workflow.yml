@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: 123FormBuilder Browse a Group's Forms
+  summary: Authenticate, list groups, read a chosen group's details, and list the forms it contains.
+  description: >-
+    A navigation flow across the group hierarchy. After logging in for a JWT the
+    workflow lists the account's groups, reads the details of a chosen group,
+    and lists the forms that belong to it. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: formBuilderApi
+  url: ../openapi/123formbuilder-rest-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: browse-group-forms
+  summary: List groups, read one group's details, and enumerate its forms.
+  description: >-
+    Logs in for a JWT, lists the account's groups, reads the details of the
+    supplied group id, and then lists the forms contained in that group.
+  inputs:
+    type: object
+    required:
+    - username
+    - password
+    - groupId
+    properties:
+      username:
+        type: string
+        description: The 123FormBuilder username to authenticate with.
+      password:
+        type: string
+        description: The plain text password for the account.
+      groupId:
+        type: integer
+        description: The ID of the group to read details for and enumerate forms from.
+      perPage:
+        type: integer
+        description: How many groups to return per page (default 100, max 1000).
+  steps:
+  - stepId: authenticate
+    description: >-
+      Authenticate to obtain a JWT token used as the JWT query parameter on the
+      group requests.
+    operationId: login-user-login
+    parameters:
+    - name: username
+      in: query
+      value: $inputs.username
+    - name: password
+      in: query
+      value: $inputs.password
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      token: $response.body#/token
+  - stepId: listGroups
+    description: >-
+      List the account's groups so the caller has the full set of groups to
+      navigate.
+    operationId: groups-get-all-user-groups
+    parameters:
+    - name: JWT
+      in: query
+      value: $steps.authenticate.outputs.token
+    - name: per_page
+      in: query
+      value: $inputs.perPage
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      groups: $response.body#/data
+  - stepId: getGroup
+    description: >-
+      Read the details of the chosen group, confirming its name and parent
+      before listing its forms.
+    operationId: groups-get-group-details
+    parameters:
+    - name: JWT
+      in: query
+      value: $steps.authenticate.outputs.token
+    - name: group_id
+      in: path
+      value: $inputs.groupId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      group: $response.body#/data
+  - stepId: listGroupForms
+    description: >-
+      List the forms that belong to the chosen group.
+    operationId: groups-get-all-forms-in-a-group
+    parameters:
+    - name: JWT
+      in: query
+      value: $steps.authenticate.outputs.token
+    - name: group_id
+      in: path
+      value: $inputs.groupId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      forms: $response.body#/data
+  outputs:
+    groups: $steps.listGroups.outputs.groups
+    group: $steps.getGroup.outputs.group
+    forms: $steps.listGroupForms.outputs.forms

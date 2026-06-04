@@ -1,0 +1,115 @@
+arazzo: 1.0.1
+info:
+  title: 123FormBuilder Inspect a Form End to End
+  summary: Authenticate, read a form's details, enumerate its fields, and pull its submissions.
+  description: >-
+    A full read profile of a single form. After logging in for a JWT token the
+    workflow fetches the form's metadata, enumerates the field definitions that
+    make up the form, and then retrieves the submissions captured by the form.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: formBuilderApi
+  url: ../openapi/123formbuilder-rest-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: inspect-form
+  summary: Read a form's details, fields, and submissions in one pass.
+  description: >-
+    Logs in for a JWT, then chains the form details, form fields, and form
+    submissions endpoints for a single form id so an integration can fully
+    describe a form and the data it has collected.
+  inputs:
+    type: object
+    required:
+    - username
+    - password
+    - formId
+    properties:
+      username:
+        type: string
+        description: The 123FormBuilder username to authenticate with.
+      password:
+        type: string
+        description: The plain text password for the account.
+      formId:
+        type: integer
+        description: The ID of the form to inspect.
+      perPage:
+        type: integer
+        description: How many submissions to return per page (default 100, max 1000).
+  steps:
+  - stepId: authenticate
+    description: >-
+      Authenticate to obtain a JWT token used as the JWT query parameter on the
+      subsequent form read requests.
+    operationId: login-user-login
+    parameters:
+    - name: username
+      in: query
+      value: $inputs.username
+    - name: password
+      in: query
+      value: $inputs.password
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      token: $response.body#/token
+  - stepId: getForm
+    description: >-
+      Fetch the metadata for the target form so the integration can confirm the
+      form exists and read its name and group before reading fields.
+    operationId: forms-get-form-details
+    parameters:
+    - name: JWT
+      in: query
+      value: $steps.authenticate.outputs.token
+    - name: form_id
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      form: $response.body#/data
+  - stepId: getFields
+    description: >-
+      Enumerate the field definitions that make up the form so the consumer
+      knows the shape of the data each submission carries.
+    operationId: forms-get-form-fields
+    parameters:
+    - name: JWT
+      in: query
+      value: $steps.authenticate.outputs.token
+    - name: form_id
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      fields: $response.body#/data
+  - stepId: getSubmissions
+    description: >-
+      Retrieve the submissions captured by the form, paged according to the
+      supplied per-page size.
+    operationId: forms-get-submissions
+    parameters:
+    - name: JWT
+      in: query
+      value: $steps.authenticate.outputs.token
+    - name: form_id
+      in: path
+      value: $inputs.formId
+    - name: per_page
+      in: query
+      value: $inputs.perPage
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      submissions: $response.body#/data
+      total: $response.body#/meta/pagination/total
+  outputs:
+    form: $steps.getForm.outputs.form
+    fields: $steps.getFields.outputs.fields
+    submissions: $steps.getSubmissions.outputs.submissions
+    total: $steps.getSubmissions.outputs.total

@@ -1,0 +1,112 @@
+arazzo: 1.0.1
+info:
+  title: 123FormBuilder Review a Form Submission
+  summary: List a form's submissions and, when any exist, fetch the full detail of the first one.
+  description: >-
+    A targeted drill-down from the submissions list into a single submission.
+    After logging in for a JWT the workflow lists the submissions for a form and
+    branches: when at least one submission is present it fetches the full detail
+    of the first submission, and when none are present it ends without a detail
+    lookup. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: formBuilderApi
+  url: ../openapi/123formbuilder-rest-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: review-submission
+  summary: List submissions for a form and fetch the first one's details if present.
+  description: >-
+    Logs in for a JWT, lists the submissions for the target form, and branches
+    on whether any submissions exist, fetching the detail of the first
+    submission only when the list is non-empty.
+  inputs:
+    type: object
+    required:
+    - username
+    - password
+    - formId
+    properties:
+      username:
+        type: string
+        description: The 123FormBuilder username to authenticate with.
+      password:
+        type: string
+        description: The plain text password for the account.
+      formId:
+        type: integer
+        description: The ID of the form whose submissions are being reviewed.
+  steps:
+  - stepId: authenticate
+    description: >-
+      Authenticate to obtain a JWT token used as the JWT query parameter on the
+      submission requests.
+    operationId: login-user-login
+    parameters:
+    - name: username
+      in: query
+      value: $inputs.username
+    - name: password
+      in: query
+      value: $inputs.password
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      token: $response.body#/token
+  - stepId: listSubmissions
+    description: >-
+      List the submissions for the form, capturing the id of the first
+      submission so its detail can be fetched when the list is non-empty.
+    operationId: forms-get-submissions
+    parameters:
+    - name: JWT
+      in: query
+      value: $steps.authenticate.outputs.token
+    - name: form_id
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      submissions: $response.body#/data
+      firstSubmissionId: $response.body#/data/0/submission_id
+    onSuccess:
+    - name: hasSubmissions
+      type: goto
+      stepId: getSubmissionDetail
+      criteria:
+      - context: $response.body
+        condition: $.data.length > 0
+        type: jsonpath
+    - name: noSubmissions
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.length == 0
+        type: jsonpath
+  - stepId: getSubmissionDetail
+    description: >-
+      Fetch the full content of the first submission, including the recipients
+      that should receive it.
+    operationId: forms-get-submission-details
+    parameters:
+    - name: JWT
+      in: query
+      value: $steps.authenticate.outputs.token
+    - name: form_id
+      in: path
+      value: $inputs.formId
+    - name: submission_id
+      in: path
+      value: $steps.listSubmissions.outputs.firstSubmissionId
+    - name: include_recipients
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      submission: $response.body#/data
+  outputs:
+    submissions: $steps.listSubmissions.outputs.submissions
+    submission: $steps.getSubmissionDetail.outputs.submission

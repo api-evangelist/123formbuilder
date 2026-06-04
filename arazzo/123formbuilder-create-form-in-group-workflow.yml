@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: 123FormBuilder Create a Form Inside a New Group
+  summary: Authenticate, create a group, create a form within it, then list the group's forms.
+  description: >-
+    A provisioning flow that stands up a new group and a first form inside it.
+    After logging in for a JWT the workflow creates a group, creates a form
+    assigned to that group, and then lists the forms in the group to confirm the
+    new form is present. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: formBuilderApi
+  url: ../openapi/123formbuilder-rest-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-form-in-group
+  summary: Create a group, add a form to it, and confirm the group's contents.
+  description: >-
+    Logs in for a JWT, creates a new group, creates a form whose group_id is the
+    id returned by the group creation, and then lists the forms in the group to
+    verify the new form landed there.
+  inputs:
+    type: object
+    required:
+    - username
+    - password
+    - groupName
+    - formName
+    properties:
+      username:
+        type: string
+        description: The 123FormBuilder username to authenticate with.
+      password:
+        type: string
+        description: The plain text password for the account.
+      groupName:
+        type: string
+        description: The name of the group to create.
+      webhookUrl:
+        type: string
+        description: Optional webhook URL to attach to the new group.
+      formName:
+        type: string
+        description: The name of the form to create inside the group.
+  steps:
+  - stepId: authenticate
+    description: >-
+      Authenticate to obtain a JWT token, which is supplied both as the JWT
+      query parameter and in the urlencoded bodies the create endpoints require.
+    operationId: login-user-login
+    parameters:
+    - name: username
+      in: query
+      value: $inputs.username
+    - name: password
+      in: query
+      value: $inputs.password
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      token: $response.body#/token
+  - stepId: createGroup
+    description: >-
+      Create a new group to hold the form, optionally attaching a webhook URL.
+    operationId: groups-create-a-new-group
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        JWT: $steps.authenticate.outputs.token
+        name: $inputs.groupName
+        webhook_url: $inputs.webhookUrl
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      groupId: $response.body#/data/id
+  - stepId: createForm
+    description: >-
+      Create a form assigned to the newly created group using its returned id.
+    operationId: forms-create-a-new-form
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        JWT: $steps.authenticate.outputs.token
+        name: $inputs.formName
+        group_id: $steps.createGroup.outputs.groupId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      formId: $response.body#/data/id
+  - stepId: listGroupForms
+    description: >-
+      List the forms in the group to confirm the newly created form is present.
+    operationId: groups-get-all-forms-in-a-group
+    parameters:
+    - name: JWT
+      in: query
+      value: $steps.authenticate.outputs.token
+    - name: group_id
+      in: path
+      value: $steps.createGroup.outputs.groupId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      forms: $response.body#/data
+  outputs:
+    groupId: $steps.createGroup.outputs.groupId
+    formId: $steps.createForm.outputs.formId
+    forms: $steps.listGroupForms.outputs.forms

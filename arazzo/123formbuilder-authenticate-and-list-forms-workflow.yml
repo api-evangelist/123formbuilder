@@ -1,0 +1,81 @@
+arazzo: 1.0.1
+info:
+  title: 123FormBuilder Authenticate and List Forms
+  summary: Obtain a JWT token and list the forms available to the authenticated user.
+  description: >-
+    The entry point for every 123FormBuilder integration. The workflow logs in
+    with a username or email and password to obtain a JWT token, then uses that
+    token to page through the forms owned by the account. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: formBuilderApi
+  url: ../openapi/123formbuilder-rest-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: authenticate-and-list-forms
+  summary: Log in for a JWT token and list the account's forms.
+  description: >-
+    Authenticates against the token endpoint to mint a JWT, then lists the
+    forms visible to the account using that token as the required JWT query
+    parameter.
+  inputs:
+    type: object
+    required:
+    - username
+    - password
+    properties:
+      username:
+        type: string
+        description: The 123FormBuilder username to authenticate with.
+      password:
+        type: string
+        description: The plain text password for the account.
+      perPage:
+        type: integer
+        description: How many forms to return per page (default 100, max 1000).
+      page:
+        type: integer
+        description: The page number of forms to retrieve.
+  steps:
+  - stepId: authenticate
+    description: >-
+      Authenticate with the username and password to obtain a JWT token that
+      will be supplied as the JWT query parameter on subsequent requests.
+    operationId: login-user-login
+    parameters:
+    - name: username
+      in: query
+      value: $inputs.username
+    - name: password
+      in: query
+      value: $inputs.password
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      token: $response.body#/token
+  - stepId: listForms
+    description: >-
+      List the forms available to the authenticated account, passing the JWT
+      obtained during login as the required JWT query parameter.
+    operationId: forms-list-forms
+    parameters:
+    - name: JWT
+      in: query
+      value: $steps.authenticate.outputs.token
+    - name: per_page
+      in: query
+      value: $inputs.perPage
+    - name: page
+      in: query
+      value: $inputs.page
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      forms: $response.body#/data
+      total: $response.body#/meta/pagination/total
+  outputs:
+    token: $steps.authenticate.outputs.token
+    forms: $steps.listForms.outputs.forms
+    total: $steps.listForms.outputs.total
