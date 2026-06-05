@@ -104,37 +104,33 @@ apis:
         url: examples/123formbuilder-rest-api-v2-account-example.json
       - type: Example
         url: examples/123formbuilder-rest-api-v2-token-example.json
-      - type: NaftikoCapability
-        url: capabilities/forms.yaml
-      - type: NaftikoCapability
-        url: capabilities/groups.yaml
-      - type: NaftikoCapability
-        url: capabilities/users-accounts.yaml
     contact:
       - type: Support
         url: https://www.123formbuilder.com/developer/contact-us/
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/123formbuilder/overview
   - type: ArazzoWorkflows
     url: arazzo/
     workflows:
-    - url: arazzo/123formbuilder-authenticate-and-list-forms-workflow.yml
-      name: 123FormBuilder Authenticate and List Forms
-      summary: Obtain a JWT token and list the forms available to the authenticated user.
-    - url: arazzo/123formbuilder-browse-group-forms-workflow.yml
-      name: 123FormBuilder Browse a Group's Forms
-      summary: Authenticate, list groups, read a chosen group's details, and list the forms it contains.
-    - url: arazzo/123formbuilder-create-form-in-group-workflow.yml
-      name: 123FormBuilder Create a Form Inside a New Group
-      summary: Authenticate, create a group, create a form within it, then list the group's forms.
-    - url: arazzo/123formbuilder-inspect-form-workflow.yml
-      name: 123FormBuilder Inspect a Form End to End
-      summary: Authenticate, read a form's details, enumerate its fields, and pull its submissions.
-    - url: arazzo/123formbuilder-moderate-submission-workflow.yml
-      name: 123FormBuilder Moderate a Submission
-      summary: Read a single submission, then update its approval and payment status.
-    - url: arazzo/123formbuilder-review-submission-workflow.yml
-      name: 123FormBuilder Review a Form Submission
-      summary: List a form's submissions and, when any exist, fetch the full detail of the first one.
+      - url: arazzo/123formbuilder-authenticate-and-list-forms-workflow.yml
+        name: 123FormBuilder Authenticate and List Forms
+        summary: Obtain a JWT token and list the forms available to the authenticated user.
+      - url: arazzo/123formbuilder-browse-group-forms-workflow.yml
+        name: 123FormBuilder Browse a Group's Forms
+        summary: Authenticate, list groups, read a chosen group's details, and list the forms it contains.
+      - url: arazzo/123formbuilder-create-form-in-group-workflow.yml
+        name: 123FormBuilder Create a Form Inside a New Group
+        summary: Authenticate, create a group, create a form within it, then list the group's forms.
+      - url: arazzo/123formbuilder-inspect-form-workflow.yml
+        name: 123FormBuilder Inspect a Form End to End
+        summary: Authenticate, read a form's details, enumerate its fields, and pull its submissions.
+      - url: arazzo/123formbuilder-moderate-submission-workflow.yml
+        name: 123FormBuilder Moderate a Submission
+        summary: Read a single submission, then update its approval and payment status.
+      - url: arazzo/123formbuilder-review-submission-workflow.yml
+        name: 123FormBuilder Review a Form Submission
+        summary: List a form's submissions and, when any exist, fetch the full detail of the first one.
   - type: Website
     url: https://www.123formbuilder.com
   - type: GitHubOrganization
