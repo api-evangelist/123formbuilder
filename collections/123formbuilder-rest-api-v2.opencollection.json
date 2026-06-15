@@ -1,0 +1,1016 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "123FormBuilder REST API v2",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JWT",
+      "value": "{{JWT}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Login",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "User Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/token",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "password",
+                "value": "",
+                "type": "query",
+                "description": "Plain text password"
+              },
+              {
+                "name": "passhash",
+                "value": "",
+                "type": "query",
+                "description": "MD5 password"
+              }
+            ]
+          },
+          "docs": "Allows you to authenticate users. \n\nRequired parameters:\n- username OR email\n- password OR passhash\n"
+        },
+        {
+          "info": {
+            "name": "Refresh Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/token/refresh",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Refresh token"
+        },
+        {
+          "info": {
+            "name": "Invalidate Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/token/invalidate",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Invalidate token"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/forms",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of forms to get per page in a request. Default is 100 and the maximum number is 1000."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter form name"
+              }
+            ]
+          },
+          "docs": "The forms endpoint returns information about the forms. The response includes submissions and other details about each form."
+        },
+        {
+          "info": {
+            "name": "Create a New Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/forms",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "group_id",
+                  "value": ""
+                },
+                {
+                  "name": "active",
+                  "value": ""
+                },
+                {
+                  "name": "active_date_from",
+                  "value": ""
+                },
+                {
+                  "name": "active_date_to",
+                  "value": ""
+                },
+                {
+                  "name": "active_days",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new form"
+        },
+        {
+          "info": {
+            "name": "Delete Multiple Forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.123formbuilder.com/v2/forms/bulk",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "form_ids",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Delete multiple forms"
+        },
+        {
+          "info": {
+            "name": "Get Form Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              }
+            ]
+          },
+          "docs": "Get the details of a single form"
+        },
+        {
+          "info": {
+            "name": "Update Form Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "group_id",
+                  "value": ""
+                },
+                {
+                  "name": "active",
+                  "value": ""
+                },
+                {
+                  "name": "active_date_from",
+                  "value": ""
+                },
+                {
+                  "name": "active_date_to",
+                  "value": ""
+                },
+                {
+                  "name": "active_days",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update form details"
+        },
+        {
+          "info": {
+            "name": "Delete a Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id",
+            "params": [
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Delete a form"
+        },
+        {
+          "info": {
+            "name": "Get Form Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id/fields",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              }
+            ]
+          },
+          "docs": "Get the details of a single form and its fields"
+        },
+        {
+          "info": {
+            "name": "Get Submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id/submissions",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "List submissions starting with a specific date"
+              },
+              {
+                "name": "start_submission_id",
+                "value": "",
+                "type": "query",
+                "description": "List all submissions starting with the specified submission ID."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of submissions to get per page in a request. Default is 100 and the maximum number is 1000."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "include_recipients",
+                "value": "",
+                "type": "query",
+                "description": "Returns the recipient(s) who should receive the submissions. When this parameter is used, its value can be anything, but cannot be empty."
+              }
+            ]
+          },
+          "docs": "Get all submissions received through a form"
+        },
+        {
+          "info": {
+            "name": "Get Submission Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id/submissions/:submission_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              },
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the submission"
+              },
+              {
+                "name": "include_recipients",
+                "value": "",
+                "type": "query",
+                "description": "Returns the recipient(s) who should receive the submission. When this parameter is used, its value can be anything, but cannot be empty."
+              }
+            ]
+          },
+          "docs": "Get the details of a single submission"
+        },
+        {
+          "info": {
+            "name": "Update Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id/submissions/:submission_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              },
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the submission"
+              },
+              {
+                "name": "payed",
+                "value": "",
+                "type": "query",
+                "description": "Payment status. Possible values 0 - no, 1 - payed, 2 - invoiced, 3 - pending, 4 - declined, yes,  no, payed, invoced, pending, declined"
+              },
+              {
+                "name": "approved",
+                "value": "",
+                "type": "query",
+                "description": "Approval status. Possible values: 0 (N/A), 1 (Approved), 2 (Rejected)"
+              }
+            ]
+          },
+          "docs": "Update Submission"
+        },
+        {
+          "info": {
+            "name": "Delete One Form Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id/submissions/:submission_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              },
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the submission"
+              }
+            ]
+          },
+          "docs": "Delete one form submission"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All User Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/groups",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of groups to get per page in a request. Default is 100 and the maximum number is 1000."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              }
+            ]
+          },
+          "docs": "Get all user groups"
+        },
+        {
+          "info": {
+            "name": "Create a New Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/groups",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "webhook_url",
+                  "value": ""
+                },
+                {
+                  "name": "parent_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new group"
+        },
+        {
+          "info": {
+            "name": "Get Group Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/groups/:group_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group"
+              }
+            ]
+          },
+          "docs": "Get information about a specific group."
+        },
+        {
+          "info": {
+            "name": "Update Group Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.123formbuilder.com/v2/groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group you want to edit"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "webhook_url",
+                  "value": ""
+                },
+                {
+                  "name": "parent_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates the details of a group."
+        },
+        {
+          "info": {
+            "name": "Get All Forms in a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/groups/:group_id/forms",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group"
+              }
+            ]
+          },
+          "docs": "Displays a list of all of the forms within a specific group."
+        },
+        {
+          "info": {
+            "name": "Share a Group with a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/groups/:group_id/share",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group you want to share"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "subuser_id",
+                  "value": ""
+                },
+                {
+                  "name": "subuser_email",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "This may not be available for your account. It is specific to certain users."
+        },
+        {
+          "info": {
+            "name": "Unshare a Group From a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/groups/:group_id/unshare",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group you want to unshare"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "subuser_id",
+                  "value": ""
+                },
+                {
+                  "name": "subuser_email",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "This may not be available for your account. It is specific to certain users."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Info About Master User and Subusers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/users",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of groups to get per page in a request. Default is 100 and the maximum number is 1000."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              }
+            ]
+          },
+          "docs": "Get info about master user and subusers"
+        },
+        {
+          "info": {
+            "name": "Create a New Subuser",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/users",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "passhash",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "admin",
+                  "value": ""
+                },
+                {
+                  "name": "company_name",
+                  "value": ""
+                },
+                {
+                  "name": "allow_create_form",
+                  "value": ""
+                },
+                {
+                  "name": "allow_duplicate_form",
+                  "value": ""
+                },
+                {
+                  "name": "allow_delete_form",
+                  "value": ""
+                },
+                {
+                  "name": "can_manage_groups",
+                  "value": ""
+                },
+                {
+                  "name": "can_manage_users",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new subuser"
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.123formbuilder.com/v2/users/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or username of the user to be modified"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "passhash",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "admin",
+                  "value": ""
+                },
+                {
+                  "name": "company_name",
+                  "value": ""
+                },
+                {
+                  "name": "allow_create_form",
+                  "value": ""
+                },
+                {
+                  "name": "allow_duplicate_form",
+                  "value": ""
+                },
+                {
+                  "name": "allow_delete_form",
+                  "value": ""
+                },
+                {
+                  "name": "can_manage_groups",
+                  "value": ""
+                },
+                {
+                  "name": "can_manage_users",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update user information"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create New Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/accounts",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "password_repeat",
+                  "value": ""
+                },
+                {
+                  "name": "plan",
+                  "value": ""
+                },
+                {
+                  "name": "company_name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new account (standalone user). This is available only upon request."
+        },
+        {
+          "info": {
+            "name": "Update Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.123formbuilder.com/v2/accounts/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account that you want to update"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "password_repeat",
+                  "value": ""
+                },
+                {
+                  "name": "plan",
+                  "value": ""
+                },
+                {
+                  "name": "company_name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates an account. You can only update the users that you have created using your account token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
