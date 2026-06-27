@@ -2,13 +2,20 @@
   "repo": "123formbuilder",
   "feeds": [
     {
-      "source": "https://www.123formbuilder.com/blog/",
+      "source": "https://www.123formbuilder.com/blog/feed/",
       "feed_url": "https://www.123formbuilder.com/blog/feed/",
-      "title": "123FormBuilder Blog",
+      "title": "",
       "saved": 0,
       "method": "feed"
+    },
+    {
+      "source": "https://www.123formbuilder.com/gdpr-compliance/",
+      "feed_url": "https://www.123formbuilder.com/gdpr-compliance/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-21T17:00:00Z"
+  "fetched": "2026-06-27T12:03:07Z"
 }

@@ -54,11 +54,11 @@ apis:
         url: https://www.123formbuilder.com/developer/api-v2-forms/
       - type: Authentication
         url: https://www.123formbuilder.com/developer/api-v2-authentication/
-      - type: Quickstart
+      - type: GettingStarted
         url: https://www.123formbuilder.com/docs/how-to-retrieve-data-through-api/
       - type: KnowledgeCenter
         url: https://www.123formbuilder.com/docs/apidocumentation/
-      - type: Errors
+      - type: ErrorCodes
         url: https://www.123formbuilder.com/docs/api-responses/
       - type: Regions
         url: https://www.123formbuilder.com/developer/api-v2/
@@ -90,19 +90,19 @@ apis:
         url: json-structure/123formbuilder-rest-api-v2-user-structure.json
       - type: JSONStructure
         url: json-structure/123formbuilder-rest-api-v2-account-structure.json
-      - type: Example
+      - type: Examples
         url: examples/123formbuilder-rest-api-v2-form-example.json
-      - type: Example
+      - type: Examples
         url: examples/123formbuilder-rest-api-v2-field-example.json
-      - type: Example
+      - type: Examples
         url: examples/123formbuilder-rest-api-v2-submission-example.json
-      - type: Example
+      - type: Examples
         url: examples/123formbuilder-rest-api-v2-group-example.json
-      - type: Example
+      - type: Examples
         url: examples/123formbuilder-rest-api-v2-user-example.json
-      - type: Example
+      - type: Examples
         url: examples/123formbuilder-rest-api-v2-account-example.json
-      - type: Example
+      - type: Examples
         url: examples/123formbuilder-rest-api-v2-token-example.json
     contact:
       - type: Support
@@ -110,27 +110,24 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/123formbuilder/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/123formbuilder-authenticate-and-list-forms-workflow.yml
-        name: 123FormBuilder Authenticate and List Forms
-        summary: Obtain a JWT token and list the forms available to the authenticated user.
-      - url: arazzo/123formbuilder-browse-group-forms-workflow.yml
-        name: 123FormBuilder Browse a Group's Forms
-        summary: Authenticate, list groups, read a chosen group's details, and list the forms it contains.
-      - url: arazzo/123formbuilder-create-form-in-group-workflow.yml
-        name: 123FormBuilder Create a Form Inside a New Group
-        summary: Authenticate, create a group, create a form within it, then list the group's forms.
-      - url: arazzo/123formbuilder-inspect-form-workflow.yml
-        name: 123FormBuilder Inspect a Form End to End
-        summary: Authenticate, read a form's details, enumerate its fields, and pull its submissions.
-      - url: arazzo/123formbuilder-moderate-submission-workflow.yml
-        name: 123FormBuilder Moderate a Submission
-        summary: Read a single submission, then update its approval and payment status.
-      - url: arazzo/123formbuilder-review-submission-workflow.yml
-        name: 123FormBuilder Review a Form Submission
-        summary: List a form's submissions and, when any exist, fetch the full detail of the first one.
+  - type: Arazzo
+    url: arazzo/123formbuilder-authenticate-and-list-forms-workflow.yml
+    name: 123FormBuilder Authenticate and List Forms
+  - type: Arazzo
+    url: arazzo/123formbuilder-browse-group-forms-workflow.yml
+    name: 123FormBuilder Browse a Group's Forms
+  - type: Arazzo
+    url: arazzo/123formbuilder-create-form-in-group-workflow.yml
+    name: 123FormBuilder Create a Form Inside a New Group
+  - type: Arazzo
+    url: arazzo/123formbuilder-inspect-form-workflow.yml
+    name: 123FormBuilder Inspect a Form End to End
+  - type: Arazzo
+    url: arazzo/123formbuilder-moderate-submission-workflow.yml
+    name: 123FormBuilder Moderate a Submission
+  - type: Arazzo
+    url: arazzo/123formbuilder-review-submission-workflow.yml
+    name: 123FormBuilder Review a Form Submission
   - type: Website
     url: https://www.123formbuilder.com
   - type: GitHubOrganization
@@ -147,7 +144,7 @@ common:
     url: https://www.123formbuilder.com/developer/api-v2/
   - type: KnowledgeCenter
     url: https://www.123formbuilder.com/docs/all-categories/developers/
-  - type: SignUp
+  - type: Signup
     url: https://www.123formbuilder.com/sign-up/
   - type: Login
     url: https://www.123formbuilder.com/login/
