@@ -108,6 +108,12 @@ apis:
       - type: Support
         url: https://www.123formbuilder.com/developer/contact-us/
 common:
+  - type: VulnerabilityDisclosure
+    url: security/123formbuilder-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/123formbuilder-domain-security.yml
+  - type: Authentication
+    url: authentication/123formbuilder-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/123formbuilder/overview
   - type: Arazzo

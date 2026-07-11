@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/123formbuilder-rest-api-v2-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: JWTQuery
+  type: apiKey
+  in: query
+  parameter: JWT
+  description: JWT token obtained from POST /token, supplied as the JWT query parameter.
+  sources:
+  - openapi/123formbuilder-rest-api-v2-openapi.yml
