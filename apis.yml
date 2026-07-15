@@ -108,6 +108,8 @@ apis:
       - type: Support
         url: https://www.123formbuilder.com/developer/contact-us/
 common:
+  - type: AgenticAccess
+    url: agentic-access/123formbuilder-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/123formbuilder-vulnerability-disclosure.yml
   - type: DomainSecurity
