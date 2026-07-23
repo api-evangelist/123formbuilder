@@ -1,0 +1,203 @@
+openapi: 3.0.3
+info:
+  title: 123FormBuilder REST API v2 Accounts API
+  description: REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users, groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.
+  version: 2.0.0
+  contact:
+    name: 123FormBuilder Developer Support
+    url: https://www.123formbuilder.com/developer/contact-us/
+  license:
+    name: Proprietary
+    url: https://www.123formbuilder.com/terms-of-service/
+servers:
+- url: https://api.123formbuilder.com/v2
+  description: US regional endpoint
+- url: https://eu-api.123formbuilder.com/v2
+  description: EU regional endpoint
+security:
+- JWTQuery: []
+tags:
+- name: Accounts
+  description: Create and update billable accounts.
+paths:
+  /accounts:
+    post:
+      summary: Create New Account
+      description: Creates a new account (standalone user). This is available only upon request.
+      tags:
+      - Accounts
+      operationId: accounts-create-new-account
+      parameters: []
+      responses:
+        '201':
+          description: Account created successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/User'
+                  status_code:
+                    type: integer
+              example:
+                status_code: 201
+                account:
+                  user_id: 200001
+                  email: newuser@example.com
+                  name: New User
+                  company_name: Acme Corp
+                  plan: Gold
+                  created_at: '2026-05-28T00:00:00Z'
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id001
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                email:
+                  type: string
+                  description: The email address associated with the account
+                name:
+                  type: string
+                  description: The username associated with the account
+                password:
+                  type: string
+                  description: The password associated with the account
+                password_repeat:
+                  type: string
+                  description: Password repeat
+                plan:
+                  type: string
+                  description: 'The service plan of the account: 0 - Free (default value), 1 - Gold, 2 - Platinum, 3 - Diamond. In order to be able to assign a plan, you need additional permissions.'
+                company_name:
+                  type: string
+                  description: The company name associated with the account
+              required:
+              - JWT
+              - email
+              - password
+              - password_repeat
+  /accounts/{user_id}:
+    put:
+      summary: Update Account
+      description: Updates an account. You can only update the users that you have created using your account token.
+      tags:
+      - Accounts
+      operationId: accounts-update-account
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        description: The ID of the account that you want to update
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Account updated successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/User'
+                  status_code:
+                    type: integer
+              example:
+                status_code: 200
+                account:
+                  user_id: 200001
+                  email: newuser@example.com
+                  name: New User
+                  company_name: Acme Corp
+                  plan: Gold
+                  created_at: '2026-05-28T00:00:00Z'
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id002
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id002
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                email:
+                  type: string
+                  description: The email address associated with the account
+                password:
+                  type: string
+                  description: The password associated with the account
+                password_repeat:
+                  type: string
+                  description: Password repeat
+                plan:
+                  type: string
+                  description: 'The service plan of the account: 0 - Free (default value), 1 - Gold, 2 - Platinum, 3 - Diamond. In order to be able to assign a plan, you need additional permissions.'
+                company_name:
+                  type: string
+                  description: The company name associated with the account
+              required:
+              - JWT
+              - email
+              - password
+              - password_repeat
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Details about the error
+            status_code:
+              type: integer
+              description: The status code of the request
+  securitySchemes:
+    JWTQuery:
+      type: apiKey
+      in: query
+      name: JWT
+      description: JWT token obtained from POST /token, supplied as the JWT query parameter.

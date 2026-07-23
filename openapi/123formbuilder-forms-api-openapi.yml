@@ -1,0 +1,1126 @@
+openapi: 3.0.3
+info:
+  title: 123FormBuilder REST API v2 Accounts Forms API
+  description: REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users, groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.
+  version: 2.0.0
+  contact:
+    name: 123FormBuilder Developer Support
+    url: https://www.123formbuilder.com/developer/contact-us/
+  license:
+    name: Proprietary
+    url: https://www.123formbuilder.com/terms-of-service/
+servers:
+- url: https://api.123formbuilder.com/v2
+  description: US regional endpoint
+- url: https://eu-api.123formbuilder.com/v2
+  description: EU regional endpoint
+security:
+- JWTQuery: []
+tags:
+- name: Forms
+  description: Create, list, read, update, and delete forms, fields, and submissions.
+paths:
+  /forms:
+    get:
+      summary: List Forms
+      description: The forms endpoint returns information about the forms. The response includes submissions and other details about each form.
+      tags:
+      - Forms
+      operationId: forms-list-forms
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        description: The number of forms to get per page in a request. Default is 100 and the maximum number is 1000.
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+      - name: search
+        in: query
+        required: false
+        description: Filter form name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of forms
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Form'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of forms.
+                          count:
+                            type: integer
+                            description: Indicates how many forms are displayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many forms are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: The URL to the next page
+                              previous:
+                                type: string
+                                description: The URL to the previous page
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                page: 1
+                per_page: 25
+                total: 42
+                forms:
+                - id: 5837291
+                  name: Customer Feedback Survey
+                  active: 1
+                  created_at: '2026-05-12T09:33:00Z'
+                  modified_at: '2026-05-20T14:18:00Z'
+                  submissions_count: 1284
+                  group_id: 412
+                  url: https://form.jotform.com/5837291
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id001
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+    post:
+      summary: Create a New Form
+      description: Create a new form
+      tags:
+      - Forms
+      operationId: forms-create-a-new-form
+      parameters: []
+      responses:
+        '201':
+          description: Form created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/Form'
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 201
+                form:
+                  id: 5837291
+                  name: Customer Feedback Survey
+                  active: 1
+                  created_at: '2026-05-12T09:33:00Z'
+                  modified_at: '2026-05-20T14:18:00Z'
+                  submissions_count: 1284
+                  group_id: 412
+                  url: https://form.jotform.com/5837291
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id002
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id002
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id002
+        '422':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        items:
+                          $ref: '#/definitions/FormCreateValidationError'
+                      status_code:
+                        type: integer
+              example: *id002
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                name:
+                  type: string
+                  description: The name of the new form
+                group_id:
+                  type: integer
+                  description: The ID of the group in which you want to create the form
+                active:
+                  type: integer
+                  description: 'Form activity status. It can be 0, 1, 2, 3 or 4.
+
+
+                    0 = always active
+
+
+                    1 = active during a specific period
+
+
+                    2 = active only for logged in users
+
+
+                    3 = inactive
+
+
+                    4 = active only on certain days of the week
+
+                    '
+                active_date_from:
+                  type: string
+                  description: 'If activity status is 1, this field is required.
+
+
+                    Format must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+
+                    '
+                active_date_to:
+                  type: string
+                  description: 'If activity status is 1, this field is required.
+
+
+                    Format must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+
+                    '
+                active_days:
+                  type: string
+                  description: 'If activity status is 4, this field is required.
+
+
+                    It should contain comma separated numbers, each number representing the day of the week.
+
+
+                    Example: 1,3,7 means Monday, Wednesday, Sunday
+
+                    '
+              required:
+              - JWT
+              - name
+  /forms/bulk:
+    delete:
+      summary: Delete Multiple Forms
+      description: Delete multiple forms
+      tags:
+      - Forms
+      operationId: forms-delete-multiple-forms
+      parameters: []
+      responses:
+        '200':
+          description: Forms deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Forms deleted.
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 200
+                deleted:
+                - 5837291
+                - 5837292
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id003
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '403':
+          description: Access Denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id003
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                form_ids:
+                  type: string
+                  description: The IDs of the forms separated by comma
+              required:
+              - JWT
+              - form_ids
+  /forms/{form_id}:
+    get:
+      summary: Get Form Details
+      description: Get the details of a single form
+      tags:
+      - Forms
+      operationId: forms-get-form-details
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Form details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/Form'
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                id: 5837291
+                name: Customer Feedback Survey
+                active: 1
+                created_at: '2026-05-12T09:33:00Z'
+                modified_at: '2026-05-20T14:18:00Z'
+                submissions_count: 1284
+                group_id: 412
+                url: https://form.jotform.com/5837291
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id004
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id004
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id004
+    put:
+      summary: Update Form Details
+      description: Update form details
+      tags:
+      - Forms
+      operationId: forms-update-form-details
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The form was updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/Form'
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 200
+                form:
+                  id: 5837291
+                  name: Customer Feedback Survey
+                  active: 1
+                  created_at: '2026-05-12T09:33:00Z'
+                  modified_at: '2026-05-20T14:18:00Z'
+                  submissions_count: 1284
+                  group_id: 412
+                  url: https://form.jotform.com/5837291
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id005
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id005
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id005
+        '422':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        items:
+                          $ref: '#/definitions/FormUpdateValidationError'
+                      status_code:
+                        type: integer
+              example: *id005
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Change the name of the form. Required when group_id  or active is missing.
+                group_id:
+                  type: integer
+                  description: The ID of the group in which you want to create the form
+                active:
+                  type: integer
+                  description: 'Form activity status. It can be 0, 1, 2, 3 or 4.
+
+
+                    0 = always active
+
+
+                    1 = active during a specific period
+
+
+                    2 = active only for logged in users
+
+
+                    3 = inactive
+
+
+                    4 = active only on certain days of the week
+
+                    '
+                active_date_from:
+                  type: string
+                  description: 'If activity status is 1, this field is required.
+
+
+                    Format must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+
+                    '
+                active_date_to:
+                  type: string
+                  description: 'If activity status is 1, this field is required.
+
+
+                    Format must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+
+                    '
+                active_days:
+                  type: string
+                  description: 'If activity status is 4, this field is required.
+
+
+                    It should contain comma separated numbers, each number representing the day of the week.
+
+
+                    Example: 1,3,7 means Monday, Wednesday, Sunday
+
+                    '
+    delete:
+      summary: Delete a Form
+      description: Delete a form
+      tags:
+      - Forms
+      operationId: forms-delete-a-form
+      parameters:
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Form deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Form deleted.
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 200
+                message: Form deleted
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id006
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '403':
+          description: Access Denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id006
+        '404':
+          description: Form not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id006
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+              required:
+              - JWT
+  /forms/{form_id}/fields:
+    get:
+      summary: Get Form Fields
+      description: Get the details of a single form and its fields
+      tags:
+      - Forms
+      operationId: forms-get-form-fields
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Form details and controls
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/FormWithFields'
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+              - id: 101
+                form_id: 5837291
+                label: Email
+                type: Email
+                required: true
+                options: []
+                default_value: ''
+              - id: 102
+                form_id: 5837291
+                label: Rating
+                type: Rating
+                required: false
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id007
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id007
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id007
+  /forms/{form_id}/submissions:
+    get:
+      summary: Get Submissions
+      description: Get all submissions received through a form
+      tags:
+      - Forms
+      operationId: forms-get-submissions
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      - name: start_date
+        in: query
+        required: false
+        description: List submissions starting with a specific date
+        schema:
+          type: string
+      - name: start_submission_id
+        in: query
+        required: false
+        description: List all submissions starting with the specified submission ID.
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: The number of submissions to get per page in a request. Default is 100 and the maximum number is 1000.
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+      - name: include_recipients
+        in: query
+        required: false
+        description: Returns the recipient(s) who should receive the submissions. When this parameter is used, its value can be anything, but cannot be empty.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of all submissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Submission'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of submissions.
+                          count:
+                            type: integer
+                            description: Indicates how many submissions are displayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many submissions are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: The URL to the next page
+                              previous:
+                                type: string
+                                description: The URL to the previous page
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                page: 1
+                per_page: 25
+                total: 1284
+                submissions:
+                - submission_id: 9001234
+                  form_id: 5837291
+                  submission_date: '2026-05-27T18:42:11Z'
+                  ip: 203.0.113.42
+                  approved: 1
+                  payed: 'no'
+                  fields:
+                    '100':
+                      label: Full Name
+                      value: Ada Lovelace
+                    '101':
+                      label: Email
+                      value: ada@example.com
+                    '102':
+                      label: Rating
+                      value: '5'
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id008
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id008
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id008
+  /forms/{form_id}/submissions/{submission_id}:
+    get:
+      summary: Get Submission Details
+      description: Get the details of a single submission
+      tags:
+      - Forms
+      operationId: forms-get-submission-details
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      - name: submission_id
+        in: path
+        required: true
+        description: The ID of the submission
+        schema:
+          type: integer
+      - name: include_recipients
+        in: query
+        required: false
+        description: Returns the recipient(s) who should receive the submission. When this parameter is used, its value can be anything, but cannot be empty.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The submission content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Submission'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of submissions.
+                          count:
+                            type: integer
+                            description: Indicates how many submissions are displayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many submissions are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: The URL to the next page
+                              previous:
+                                type: string
+                                description: The URL to the previous page
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                submission_id: 9001234
+                form_id: 5837291
+                submission_date: '2026-05-27T18:42:11Z'
+                ip: 203.0.113.42
+                approved: 1
+                payed: 'no'
+                fields:
+                  '100':
+                    label: Full Name
+                    value: Ada Lovelace
+                  '101':
+                    label: Email
+                    value: ada@example.com
+                  '102':
+                    label: Rating
+                    value: '5'
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id009
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id009
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id009
+    put:
+      summary: Update Submission
+      description: Update Submission
+      tags:
+      - Forms
+      operationId: forms-update-submission
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      - name: submission_id
+        in: path
+        required: true
+        description: The ID of the submission
+        schema:
+          type: integer
+      - name: payed
+        in: query
+        required: false
+        description: Payment status. Possible values 0 - no, 1 - payed, 2 - invoiced, 3 - pending, 4 - declined, yes,  no, payed, invoced, pending, declined
+        schema:
+          type: string
+      - name: approved
+        in: query
+        required: false
+        description: 'Approval status. Possible values: 0 (N/A), 1 (Approved), 2 (Rejected)'
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The submission content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Submission'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of submissions.
+                          count:
+                            type: integer
+                            description: Indicates how many submissions are displayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many submissions are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: The URL to the next page
+                              previous:
+                                type: string
+                                description: The URL to the previous page
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 200
+                message: Submission updated
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id010
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id010
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id010
+    delete:
+      summary: Delete One Form Submission
+      description: Delete one form submission
+      tags:
+      - Forms
+      operationId: forms-delete-one-form-submission
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: form_id
+        in: path
+        required: true
+        description: The ID of the form
+        schema:
+          type: integer
+      - name: submission_id
+        in: path
+        required: true
+        description: The ID of the submission
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Submission deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Submission deleted.
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                status_code: 200
+                message: Submission deleted
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id011
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id011
+        '403':
+          description: Access was denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id011
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Details about the error
+            status_code:
+              type: integer
+              description: The status code of the request
+  securitySchemes:
+    JWTQuery:
+      type: apiKey
+      in: query
+      name: JWT
+      description: JWT token obtained from POST /token, supplied as the JWT query parameter.

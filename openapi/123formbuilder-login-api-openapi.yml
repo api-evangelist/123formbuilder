@@ -1,0 +1,209 @@
+openapi: 3.0.3
+info:
+  title: 123FormBuilder REST API v2 Accounts Login API
+  description: REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users, groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.
+  version: 2.0.0
+  contact:
+    name: 123FormBuilder Developer Support
+    url: https://www.123formbuilder.com/developer/contact-us/
+  license:
+    name: Proprietary
+    url: https://www.123formbuilder.com/terms-of-service/
+servers:
+- url: https://api.123formbuilder.com/v2
+  description: US regional endpoint
+- url: https://eu-api.123formbuilder.com/v2
+  description: EU regional endpoint
+security:
+- JWTQuery: []
+tags:
+- name: Login
+  description: JWT issuance, refresh, and invalidation.
+paths:
+  /token:
+    post:
+      summary: User Login
+      description: "Allows you to authenticate users. \n\nRequired parameters:\n- username OR email\n- password OR passhash\n"
+      tags:
+      - Login
+      operationId: login-user-login
+      parameters:
+      - name: username
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: email
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: password
+        in: query
+        required: false
+        description: Plain text password
+        schema:
+          type: string
+      - name: passhash
+        in: query
+        required: false
+        description: MD5 password
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: To be used in  the JWT parameter
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NSJ9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                status_code: 200
+        '403':
+          description: Wrong user credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+  /token/refresh:
+    post:
+      summary: Refresh Token
+      description: Refresh token
+      tags:
+      - Login
+      operationId: login-refresh-token
+      parameters: []
+      responses:
+        '200':
+          description: The new refreshed JWT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: The new refreshed JWT
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NSJ9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                status_code: 200
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id001
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+              required:
+              - JWT
+  /token/invalidate:
+    post:
+      summary: Invalidate Token
+      description: Invalidate token
+      tags:
+      - Login
+      operationId: login-invalidate-token
+      parameters: []
+      responses:
+        '200':
+          description: The token was invalidated and cannot be used any more.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The token was invalidated and cannot be used any more.
+                  status_code:
+                    type: integer
+                    description: The status code of the request
+              example:
+                token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NSJ9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                status_code: 200
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id002
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id002
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+              required:
+              - JWT
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Details about the error
+            status_code:
+              type: integer
+              description: The status code of the request
+  securitySchemes:
+    JWTQuery:
+      type: apiKey
+      in: query
+      name: JWT
+      description: JWT token obtained from POST /token, supplied as the JWT query parameter.

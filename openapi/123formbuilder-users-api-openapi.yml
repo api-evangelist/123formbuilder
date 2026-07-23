@@ -1,0 +1,387 @@
+openapi: 3.0.3
+info:
+  title: 123FormBuilder REST API v2 Accounts Users API
+  description: REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users, groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.
+  version: 2.0.0
+  contact:
+    name: 123FormBuilder Developer Support
+    url: https://www.123formbuilder.com/developer/contact-us/
+  license:
+    name: Proprietary
+    url: https://www.123formbuilder.com/terms-of-service/
+servers:
+- url: https://api.123formbuilder.com/v2
+  description: US regional endpoint
+- url: https://eu-api.123formbuilder.com/v2
+  description: EU regional endpoint
+security:
+- JWTQuery: []
+tags:
+- name: Users
+  description: Manage subusers, their permissions, and master account info.
+paths:
+  /users:
+    get:
+      summary: Get Info About Master User and Subusers
+      description: Get info about master user and subusers
+      tags:
+      - Users
+      operationId: users-get-info-about-master-user-and-subusers
+      parameters:
+      - name: JWT
+        in: query
+        required: true
+        description: JWT authentication token
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        description: The number of groups to get per page in a request. Default is 100 and the maximum number is 1000.
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Lists all master users and subusers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/User'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Indicates the total number of subusers.
+                          count:
+                            type: integer
+                            description: Indicates how many subusers are displayed on the current page.
+                          per_page:
+                            type: integer
+                            description: Indicates how many subusers are displayed per page.
+                          current_page:
+                            type: integer
+                            description: Indicates the number of the current page.
+                          total_pages:
+                            type: integer
+                            description: Indicates the total number of pages.
+                          links:
+                            type: object
+                            properties:
+                              next:
+                                type: string
+                                description: The URL to the next page
+                              previous:
+                                type: string
+                                description: The URL to the previous page
+                  status_code:
+                    type: integer
+              example:
+                page: 1
+                per_page: 25
+                total: 2
+                users:
+                - id: 78901
+                  email: sub@example.com
+                  name: Grace Hopper
+                  admin: 0
+                  company_name: Acme
+                  allow_create_form: 1
+                  allow_duplicate_form: 1
+                  allow_delete_form: 0
+                  can_manage_groups: 1
+                  can_manage_users: 0
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id001
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id001
+    post:
+      summary: Create a New Subuser
+      description: Create a new subuser
+      tags:
+      - Users
+      operationId: users-create-a-new-subuser
+      parameters: []
+      responses:
+        '200':
+          description: A new user was created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/User'
+                  status_code:
+                    type: integer
+              example:
+                status_code: 200
+                user:
+                  id: 78901
+                  email: sub@example.com
+                  name: Grace Hopper
+                  admin: 0
+                  company_name: Acme
+                  allow_create_form: 1
+                  allow_duplicate_form: 1
+                  allow_delete_form: 0
+                  can_manage_groups: 1
+                  can_manage_users: 0
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id002
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id002
+        '422':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        items:
+                          $ref: '#/definitions/UsersCreateValidationError'
+                      status_code:
+                        type: integer
+              example: *id002
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                email:
+                  type: string
+                  description: Email address of the account. You should use this or username.
+                name:
+                  type: string
+                  description: Username of the account. You should use this or the email address.
+                passhash:
+                  type: string
+                  description: MD5 password. You should use this or the plain text password.
+                password:
+                  type: string
+                  description: Plain text password. You should use this or the passhash.
+                admin:
+                  type: integer
+                  description: Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin.
+                company_name:
+                  type: string
+                  description: The name of the company to which the subuser belongs
+                allow_create_form:
+                  type: integer
+                  description: 'Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.
+
+
+                    Possible values: 0, 1, 2 or 3.
+
+
+                    0 (default value) = No access to creating new forms
+
+
+                    1 = Forms are available only to this user
+
+
+                    2 = Forms are available to current users from parent company
+
+
+                    3 = Forms are available to all current users
+
+                    '
+                allow_duplicate_form:
+                  type: integer
+                  description: Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms.
+                allow_delete_form:
+                  type: integer
+                  description: Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms.
+                can_manage_groups:
+                  type: integer
+                  description: Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups.
+                can_manage_users:
+                  type: integer
+                  description: Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users.
+              required:
+              - JWT
+  /users/{identifier}:
+    put:
+      summary: Update User
+      description: Update user information
+      tags:
+      - Users
+      operationId: users-update-user
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        description: The ID or username of the user to be modified
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User was updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/definitions/User'
+                  status_code:
+                    type: integer
+              example:
+                status_code: 200
+                user:
+                  id: 78901
+                  email: sub@example.com
+                  name: Grace Hopper
+                  admin: 0
+                  company_name: Acme
+                  allow_create_form: 1
+                  allow_duplicate_form: 1
+                  allow_delete_form: 0
+                  can_manage_groups: 1
+                  can_manage_users: 0
+        '400':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: &id003
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
+        '401':
+          description: Token is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example: *id003
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                JWT:
+                  type: string
+                  description: JWT authentication token
+                email:
+                  type: string
+                  description: Email address of the account. You should use this or username.
+                passhash:
+                  type: string
+                  description: MD5 password. You should use this or the plain text password.
+                password:
+                  type: string
+                  description: Plain text password. You should use this or the passhash.
+                admin:
+                  type: integer
+                  description: Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin.
+                company_name:
+                  type: string
+                  description: The name of the company to which the subuser belongs
+                allow_create_form:
+                  type: integer
+                  description: 'Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.
+
+
+                    Possible values: 0, 1, 2 or 3.
+
+
+                    0 (default value) = No access to creating new forms
+
+
+                    1 = Forms are available only to this user
+
+
+                    2 = Forms are available to current users from parent company
+
+
+                    3 = Forms are available to all current users
+
+                    '
+                allow_duplicate_form:
+                  type: integer
+                  description: Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms.
+                allow_delete_form:
+                  type: integer
+                  description: Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms.
+                can_manage_groups:
+                  type: integer
+                  description: Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups.
+                can_manage_users:
+                  type: integer
+                  description: Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users.
+              required:
+              - JWT
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Details about the error
+            status_code:
+              type: integer
+              description: The status code of the request
+  securitySchemes:
+    JWTQuery:
+      type: apiKey
+      in: query
+      name: JWT
+      description: JWT token obtained from POST /token, supplied as the JWT query parameter.
