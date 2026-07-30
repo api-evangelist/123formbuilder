@@ -8,7 +8,20 @@ description: |
   authenticate by exchanging credentials at POST /token for a JWT and pass the token as a
   query parameter on subsequent requests. Separate US and EU regional base URLs are provided.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/123formbuilder.png
 tags:
   - Online Forms
   - Form Builder
@@ -25,88 +38,326 @@ created: '2026-05-11'
 modified: '2026-05-28'
 specificationVersion: '0.19'
 apis:
-  - aid: 123formbuilder:rest-api-v2
-    name: 123FormBuilder REST API v2
-    description: |
-      REST API v2 for managing forms, fields, submissions, groups, users, and accounts in
-      123FormBuilder. Requests authenticate with a JWT issued by POST /token and passed as the
-      JWT query parameter on subsequent calls. Separate US (api.123formbuilder.com) and EU
-      (eu-api.123formbuilder.com) regional base URLs are offered; account region determines
-      which to use. Common workflows include listing and filtering forms, paging submissions,
-      bulk-deleting forms, registering group-level webhooks, and provisioning subusers with
-      fine-grained permission flags.
-    humanURL: https://www.123formbuilder.com/developer/api-v2/
-    baseURL: https://api.123formbuilder.com/v2
-    tags:
-      - Online Forms
-      - Form Builder
-      - Submissions
-      - Webhooks
-      - JWT
-      - Forms
-      - Groups
-      - Users
-      - Accounts
-    properties:
-      - type: Documentation
-        url: https://www.123formbuilder.com/developer/api-v2/
-      - type: APIReference
-        url: https://www.123formbuilder.com/developer/api-v2-forms/
-      - type: Authentication
-        url: https://www.123formbuilder.com/developer/api-v2-authentication/
-      - type: GettingStarted
-        url: https://www.123formbuilder.com/docs/how-to-retrieve-data-through-api/
-      - type: KnowledgeCenter
-        url: https://www.123formbuilder.com/docs/apidocumentation/
-      - type: ErrorCodes
-        url: https://www.123formbuilder.com/docs/api-responses/
-      - type: Regions
-        url: https://www.123formbuilder.com/developer/api-v2/
-      - type: RateLimits
-        url: rate-limits/123formbuilder-rate-limits.yml
-      - type: OpenAPI
-        url: openapi/123formbuilder-rest-api-v2-openapi.yml
-      - type: JSONSchema
-        url: json-schema/123formbuilder-rest-api-v2-form-schema.json
-      - type: JSONSchema
-        url: json-schema/123formbuilder-rest-api-v2-field-schema.json
-      - type: JSONSchema
-        url: json-schema/123formbuilder-rest-api-v2-submission-schema.json
-      - type: JSONSchema
-        url: json-schema/123formbuilder-rest-api-v2-group-schema.json
-      - type: JSONSchema
-        url: json-schema/123formbuilder-rest-api-v2-user-schema.json
-      - type: JSONSchema
-        url: json-schema/123formbuilder-rest-api-v2-account-schema.json
-      - type: JSONStructure
-        url: json-structure/123formbuilder-rest-api-v2-form-structure.json
-      - type: JSONStructure
-        url: json-structure/123formbuilder-rest-api-v2-field-structure.json
-      - type: JSONStructure
-        url: json-structure/123formbuilder-rest-api-v2-submission-structure.json
-      - type: JSONStructure
-        url: json-structure/123formbuilder-rest-api-v2-group-structure.json
-      - type: JSONStructure
-        url: json-structure/123formbuilder-rest-api-v2-user-structure.json
-      - type: JSONStructure
-        url: json-structure/123formbuilder-rest-api-v2-account-structure.json
-      - type: Examples
-        url: examples/123formbuilder-rest-api-v2-form-example.json
-      - type: Examples
-        url: examples/123formbuilder-rest-api-v2-field-example.json
-      - type: Examples
-        url: examples/123formbuilder-rest-api-v2-submission-example.json
-      - type: Examples
-        url: examples/123formbuilder-rest-api-v2-group-example.json
-      - type: Examples
-        url: examples/123formbuilder-rest-api-v2-user-example.json
-      - type: Examples
-        url: examples/123formbuilder-rest-api-v2-account-example.json
-      - type: Examples
-        url: examples/123formbuilder-rest-api-v2-token-example.json
-    contact:
-      - type: Support
-        url: https://www.123formbuilder.com/developer/contact-us/
+- aid: 123formbuilder:123formbuilder-accounts-api
+  name: 123FormBuilder Accounts API
+  description: Create and update billable accounts.
+  humanURL: https://www.123formbuilder.com/developer/api-v2/
+  baseURL: https://api.123formbuilder.com/v2
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/123formbuilder-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: APIReference
+    url: https://www.123formbuilder.com/developer/api-v2-forms/
+  - type: Authentication
+    url: https://www.123formbuilder.com/developer/api-v2-authentication/
+  - type: GettingStarted
+    url: https://www.123formbuilder.com/docs/how-to-retrieve-data-through-api/
+  - type: KnowledgeCenter
+    url: https://www.123formbuilder.com/docs/apidocumentation/
+  - type: ErrorCodes
+    url: https://www.123formbuilder.com/docs/api-responses/
+  - type: Regions
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: RateLimits
+    url: rate-limits/123formbuilder-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-form-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-field-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-submission-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-group-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-user-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-account-schema.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-form-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-field-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-submission-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-group-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-user-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-account-structure.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-form-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-field-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-submission-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-group-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-user-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-account-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-token-example.json
+- aid: 123formbuilder:123formbuilder-forms-api
+  name: 123FormBuilder Forms API
+  description: Create, list, read, update, and delete forms, fields, and submissions.
+  humanURL: https://www.123formbuilder.com/developer/api-v2/
+  baseURL: https://api.123formbuilder.com/v2
+  tags:
+  - Forms
+  properties:
+  - type: OpenAPI
+    url: openapi/123formbuilder-forms-api-openapi.yml
+  - type: Documentation
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: APIReference
+    url: https://www.123formbuilder.com/developer/api-v2-forms/
+  - type: Authentication
+    url: https://www.123formbuilder.com/developer/api-v2-authentication/
+  - type: GettingStarted
+    url: https://www.123formbuilder.com/docs/how-to-retrieve-data-through-api/
+  - type: KnowledgeCenter
+    url: https://www.123formbuilder.com/docs/apidocumentation/
+  - type: ErrorCodes
+    url: https://www.123formbuilder.com/docs/api-responses/
+  - type: Regions
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: RateLimits
+    url: rate-limits/123formbuilder-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-form-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-field-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-submission-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-group-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-user-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-account-schema.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-form-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-field-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-submission-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-group-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-user-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-account-structure.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-form-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-field-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-submission-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-group-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-user-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-account-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-token-example.json
+- aid: 123formbuilder:123formbuilder-groups-api
+  name: 123FormBuilder Groups API
+  description: Organize forms into groups and share groups with subusers.
+  humanURL: https://www.123formbuilder.com/developer/api-v2/
+  baseURL: https://api.123formbuilder.com/v2
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/123formbuilder-groups-api-openapi.yml
+  - type: Documentation
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: APIReference
+    url: https://www.123formbuilder.com/developer/api-v2-forms/
+  - type: Authentication
+    url: https://www.123formbuilder.com/developer/api-v2-authentication/
+  - type: GettingStarted
+    url: https://www.123formbuilder.com/docs/how-to-retrieve-data-through-api/
+  - type: KnowledgeCenter
+    url: https://www.123formbuilder.com/docs/apidocumentation/
+  - type: ErrorCodes
+    url: https://www.123formbuilder.com/docs/api-responses/
+  - type: Regions
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: RateLimits
+    url: rate-limits/123formbuilder-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-form-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-field-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-submission-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-group-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-user-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-account-schema.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-form-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-field-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-submission-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-group-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-user-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-account-structure.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-form-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-field-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-submission-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-group-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-user-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-account-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-token-example.json
+- aid: 123formbuilder:123formbuilder-login-api
+  name: 123FormBuilder Login API
+  description: JWT issuance, refresh, and invalidation.
+  humanURL: https://www.123formbuilder.com/developer/api-v2/
+  baseURL: https://api.123formbuilder.com/v2
+  tags:
+  - Login
+  properties:
+  - type: OpenAPI
+    url: openapi/123formbuilder-login-api-openapi.yml
+  - type: Documentation
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: APIReference
+    url: https://www.123formbuilder.com/developer/api-v2-forms/
+  - type: Authentication
+    url: https://www.123formbuilder.com/developer/api-v2-authentication/
+  - type: GettingStarted
+    url: https://www.123formbuilder.com/docs/how-to-retrieve-data-through-api/
+  - type: KnowledgeCenter
+    url: https://www.123formbuilder.com/docs/apidocumentation/
+  - type: ErrorCodes
+    url: https://www.123formbuilder.com/docs/api-responses/
+  - type: Regions
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: RateLimits
+    url: rate-limits/123formbuilder-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-form-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-field-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-submission-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-group-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-user-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-account-schema.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-form-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-field-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-submission-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-group-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-user-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-account-structure.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-form-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-field-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-submission-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-group-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-user-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-account-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-token-example.json
+- aid: 123formbuilder:123formbuilder-users-api
+  name: 123FormBuilder Users API
+  description: Manage subusers, their permissions, and master account info.
+  humanURL: https://www.123formbuilder.com/developer/api-v2/
+  baseURL: https://api.123formbuilder.com/v2
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/123formbuilder-users-api-openapi.yml
+  - type: Documentation
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: APIReference
+    url: https://www.123formbuilder.com/developer/api-v2-forms/
+  - type: Authentication
+    url: https://www.123formbuilder.com/developer/api-v2-authentication/
+  - type: GettingStarted
+    url: https://www.123formbuilder.com/docs/how-to-retrieve-data-through-api/
+  - type: KnowledgeCenter
+    url: https://www.123formbuilder.com/docs/apidocumentation/
+  - type: ErrorCodes
+    url: https://www.123formbuilder.com/docs/api-responses/
+  - type: Regions
+    url: https://www.123formbuilder.com/developer/api-v2/
+  - type: RateLimits
+    url: rate-limits/123formbuilder-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-form-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-field-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-submission-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-group-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-user-schema.json
+  - type: JSONSchema
+    url: json-schema/123formbuilder-rest-api-v2-account-schema.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-form-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-field-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-submission-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-group-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-user-structure.json
+  - type: JSONStructure
+    url: json-structure/123formbuilder-rest-api-v2-account-structure.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-form-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-field-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-submission-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-group-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-user-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-account-example.json
+  - type: Examples
+    url: examples/123formbuilder-rest-api-v2-token-example.json
 common:
   - type: AgenticAccess
     url: agentic-access/123formbuilder-agentic-access.yml
