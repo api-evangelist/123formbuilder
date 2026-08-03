@@ -1,0 +1,35 @@
+{
+  "provider": "123formbuilder",
+  "sources": [
+    "123formbuilder-accounts-api-openapi.yml",
+    "123formbuilder-forms-api-openapi.yml",
+    "123formbuilder-groups-api-openapi.yml",
+    "123formbuilder-login-api-openapi.yml",
+    "123formbuilder-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "123formbuilder-accounts-api-openapi.yml",
+    "123formbuilder-forms-api-openapi.yml",
+    "123formbuilder-groups-api-openapi.yml",
+    "123formbuilder-login-api-openapi.yml",
+    "123formbuilder-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [
+    "123formbuilder-accounts-api-openapi.yml: dangling $ref: #/definitions/User",
+    "123formbuilder-forms-api-openapi.yml: dangling $ref: #/definitions/Form",
+    "123formbuilder-forms-api-openapi.yml: dangling $ref: #/definitions/FormCreateValidationError",
+    "123formbuilder-forms-api-openapi.yml: dangling $ref: #/definitions/FormUpdateValidationError",
+    "123formbuilder-forms-api-openapi.yml: dangling $ref: #/definitions/FormWithFields",
+    "123formbuilder-forms-api-openapi.yml: dangling $ref: #/definitions/Submission",
+    "123formbuilder-groups-api-openapi.yml: dangling $ref: #/definitions/Group",
+    "123formbuilder-groups-api-openapi.yml: dangling $ref: #/definitions/GroupCreateValidationError",
+    "123formbuilder-groups-api-openapi.yml: dangling $ref: #/definitions/GroupUpdateValidationError",
+    "123formbuilder-groups-api-openapi.yml: dangling $ref: #/definitions/GroupWithForms",
+    "123formbuilder-users-api-openapi.yml: dangling $ref: #/definitions/User",
+    "123formbuilder-users-api-openapi.yml: dangling $ref: #/definitions/UsersCreateValidationError"
+  ],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
