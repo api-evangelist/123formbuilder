@@ -359,6 +359,11 @@ apis:
   - type: Examples
     url: examples/123formbuilder-rest-api-v2-token-example.json
 common:
+  - type: IssueTracker
+    url: https://github.com/123FormBuilder/123contacform-api-v1-php/issues
+  - type: License
+    name: MIT
+    url: https://github.com/123FormBuilder/123contacform-api-v1-php/blob/master/LICENSE
   - type: AgenticAccess
     url: agentic-access/123formbuilder-agentic-access.yml
   - type: VulnerabilityDisclosure
