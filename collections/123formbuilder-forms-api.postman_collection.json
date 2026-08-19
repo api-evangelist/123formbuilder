@@ -1,0 +1,4001 @@
+{
+  "item": [
+    {
+      "id": "cc2d96f0-1b94-4700-a655-06a04045a2d2",
+      "name": "Forms",
+      "description": {
+        "content": "Create, list, read, update, and delete forms, fields, and submissions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dcd7b9ef-836c-4f0d-ac3f-1ae807a3b26e",
+          "name": "List Forms",
+          "request": {
+            "name": "List Forms",
+            "description": {
+              "content": "The forms endpoint returns information about the forms. The response includes submissions and other details about each form.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "The number of forms to get per page in a request. Default is 100 and the maximum number is 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter form name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9414139-1e8f-49ea-824c-7de5ad797513",
+              "name": "An array of forms",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": 1,\n  \"per_page\": 25,\n  \"total\": 42,\n  \"forms\": [\n    {\n      \"id\": 5837291,\n      \"name\": \"Customer Feedback Survey\",\n      \"active\": 1,\n      \"created_at\": \"2026-05-12T09:33:00Z\",\n      \"modified_at\": \"2026-05-20T14:18:00Z\",\n      \"submissions_count\": 1284,\n      \"group_id\": 412,\n      \"url\": \"https://form.jotform.com/5837291\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5d0a3c2-cf1d-412e-98ff-7c7b42a76dee",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42b02ce7-1490-4008-9849-5dfcc045a37b",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9defa574-3cde-4acc-9055-8dc49f226cce",
+          "name": "Create a New Form",
+          "request": {
+            "name": "Create a New Form",
+            "description": {
+              "content": "Create a new form",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the new form"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<integer>",
+                  "description": "The ID of the group in which you want to create the form"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<integer>",
+                  "description": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "active_date_from",
+                  "value": "<string>",
+                  "description": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "active_date_to",
+                  "value": "<string>",
+                  "description": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "active_days",
+                  "value": "<string>",
+                  "description": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9b29ecda-fdf1-4a1a-9cac-f6884948f50d",
+              "name": "Form created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The name of the new form",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the group in which you want to create the form",
+                        "type": "text/plain"
+                      },
+                      "key": "group_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_days",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 201,\n  \"form\": {\n    \"id\": 5837291,\n    \"name\": \"Customer Feedback Survey\",\n    \"active\": 1,\n    \"created_at\": \"2026-05-12T09:33:00Z\",\n    \"modified_at\": \"2026-05-20T14:18:00Z\",\n    \"submissions_count\": 1284,\n    \"group_id\": 412,\n    \"url\": \"https://form.jotform.com/5837291\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb635bfa-5ab5-493c-876a-32ba4333e478",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The name of the new form",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the group in which you want to create the form",
+                        "type": "text/plain"
+                      },
+                      "key": "group_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_days",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "146a3903-c92a-4644-bcf0-4c80fe488020",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The name of the new form",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the group in which you want to create the form",
+                        "type": "text/plain"
+                      },
+                      "key": "group_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_days",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26bb473c-bf75-4e16-8781-5f9e261437a1",
+              "name": "Access was denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The name of the new form",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the group in which you want to create the form",
+                        "type": "text/plain"
+                      },
+                      "key": "group_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_days",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d02da4b-27fa-4910-94dc-39b427c2f5e2",
+              "name": "Validation errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The name of the new form",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the group in which you want to create the form",
+                        "type": "text/plain"
+                      },
+                      "key": "group_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_days",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2540a6e8-cf25-45bb-ac8b-3ab75f08db1f",
+          "name": "Delete Multiple Forms",
+          "request": {
+            "name": "Delete Multiple Forms",
+            "description": {
+              "content": "Delete multiple forms",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                },
+                {
+                  "disabled": false,
+                  "key": "form_ids",
+                  "value": "<string>",
+                  "description": "(Required) The IDs of the forms separated by comma"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d7301414-1a47-4fcb-ac2a-0de1a80e02da",
+              "name": "Forms deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The IDs of the forms separated by comma",
+                        "type": "text/plain"
+                      },
+                      "key": "form_ids",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 200,\n  \"deleted\": [\n    5837291,\n    5837292\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24cc123a-d286-4433-a152-f6ed785442de",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The IDs of the forms separated by comma",
+                        "type": "text/plain"
+                      },
+                      "key": "form_ids",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e26120d9-8839-4fce-99e5-9eca4a4fd805",
+              "name": "Access Denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The IDs of the forms separated by comma",
+                        "type": "text/plain"
+                      },
+                      "key": "form_ids",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1299b6a-6f83-402a-94b0-72a8edff2bb7",
+          "name": "Get Form Details",
+          "request": {
+            "name": "Get Form Details",
+            "description": {
+              "content": "Get the details of a single form",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms",
+                ":form_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "form_id",
+                  "description": "(Required) The ID of the form"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9faa0397-1325-4835-a3dc-77d646cdcf52",
+              "name": "Form details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5837291,\n  \"name\": \"Customer Feedback Survey\",\n  \"active\": 1,\n  \"created_at\": \"2026-05-12T09:33:00Z\",\n  \"modified_at\": \"2026-05-20T14:18:00Z\",\n  \"submissions_count\": 1284,\n  \"group_id\": 412,\n  \"url\": \"https://form.jotform.com/5837291\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b667d29-f18b-4e9a-9002-0a549802bd9c",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53f8fad1-b53c-40df-be6f-3758c0f3a00d",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1cbf081-9246-44c3-9391-5d21b5b47ab2",
+              "name": "Access was denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0bcb9a3-b255-4a37-adb4-60cc804a5974",
+          "name": "Update Form Details",
+          "request": {
+            "name": "Update Form Details",
+            "description": {
+              "content": "Update form details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms",
+                ":form_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "form_id",
+                  "description": "(Required) The ID of the form"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Change the name of the form. Required when group_id  or active is missing."
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<integer>",
+                  "description": "The ID of the group in which you want to create the form"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<integer>",
+                  "description": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "active_date_from",
+                  "value": "<string>",
+                  "description": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "active_date_to",
+                  "value": "<string>",
+                  "description": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "active_days",
+                  "value": "<string>",
+                  "description": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "47f46078-cea4-45b0-9103-6df1af6dc092",
+              "name": "The form was updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Change the name of the form. Required when group_id  or active is missing.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the group in which you want to create the form",
+                        "type": "text/plain"
+                      },
+                      "key": "group_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_days",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 200,\n  \"form\": {\n    \"id\": 5837291,\n    \"name\": \"Customer Feedback Survey\",\n    \"active\": 1,\n    \"created_at\": \"2026-05-12T09:33:00Z\",\n    \"modified_at\": \"2026-05-20T14:18:00Z\",\n    \"submissions_count\": 1284,\n    \"group_id\": 412,\n    \"url\": \"https://form.jotform.com/5837291\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06ac9d8a-7a8a-409d-a935-121d76e30887",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Change the name of the form. Required when group_id  or active is missing.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the group in which you want to create the form",
+                        "type": "text/plain"
+                      },
+                      "key": "group_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_days",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b31064c-2240-4022-8abb-900f000033c7",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Change the name of the form. Required when group_id  or active is missing.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the group in which you want to create the form",
+                        "type": "text/plain"
+                      },
+                      "key": "group_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_days",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "551377f7-68b9-40e9-934d-4d2ccd8473e6",
+              "name": "Access was denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Change the name of the form. Required when group_id  or active is missing.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the group in which you want to create the form",
+                        "type": "text/plain"
+                      },
+                      "key": "group_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_days",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "058bb818-91a1-47e4-9273-2c1616ccd7c7",
+              "name": "Validation errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Change the name of the form. Required when group_id  or active is missing.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the group in which you want to create the form",
+                        "type": "text/plain"
+                      },
+                      "key": "group_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Form activity status. It can be 0, 1, 2, 3 or 4.\n\n0 = always active\n\n1 = active during a specific period\n\n2 = active only for logged in users\n\n3 = inactive\n\n4 = active only on certain days of the week\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 1, this field is required.\n\nFormat must be YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_date_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If activity status is 4, this field is required.\n\nIt should contain comma separated numbers, each number representing the day of the week.\n\nExample: 1,3,7 means Monday, Wednesday, Sunday\n",
+                        "type": "text/plain"
+                      },
+                      "key": "active_days",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9231525a-08ca-4d26-bd74-5d0fe61c63a8",
+          "name": "Delete a Form",
+          "request": {
+            "name": "Delete a Form",
+            "description": {
+              "content": "Delete a form",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms",
+                ":form_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "form_id",
+                  "description": "(Required) The ID of the form"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f3075ab3-0c70-4b1c-bfed-48fc4acc65ee",
+              "name": "Form deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 200,\n  \"message\": \"Form deleted\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a19537db-c1c8-4ae3-9f37-6f99c040379e",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdcc0308-5814-4e38-8fed-acc6fcfc69c9",
+              "name": "Access Denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4caa6494-5f54-47a2-a3f1-6566f7aa1468",
+              "name": "Form not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4853d02-1f6f-4dea-ba46-33def8bcf34e",
+          "name": "Get Form Fields",
+          "request": {
+            "name": "Get Form Fields",
+            "description": {
+              "content": "Get the details of a single form and its fields",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms",
+                ":form_id",
+                "fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "form_id",
+                  "description": "(Required) The ID of the form"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fe1cdab-a044-404e-9d41-780a79edd799",
+              "name": "Form details and controls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 101,\n    \"form_id\": 5837291,\n    \"label\": \"Email\",\n    \"type\": \"Email\",\n    \"required\": true,\n    \"options\": [],\n    \"default_value\": \"\"\n  },\n  {\n    \"id\": 102,\n    \"form_id\": 5837291,\n    \"label\": \"Rating\",\n    \"type\": \"Rating\",\n    \"required\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66a800fc-d62f-4a83-b0e3-279c159f2287",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64d0295c-db10-4afb-8218-4149228e5ca9",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e263105-0359-4523-b374-94524c5c0ef0",
+              "name": "Access was denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cca747fd-beb8-44d3-801a-824bff7ed1a6",
+          "name": "Get Submissions",
+          "request": {
+            "name": "Get Submissions",
+            "description": {
+              "content": "Get all submissions received through a form",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms",
+                ":form_id",
+                "submissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "List submissions starting with a specific date"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_submission_id",
+                  "value": "<integer>",
+                  "description": "List all submissions starting with the specified submission ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "The number of submissions to get per page in a request. Default is 100 and the maximum number is 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_recipients",
+                  "value": "<integer>",
+                  "description": "Returns the recipient(s) who should receive the submissions. When this parameter is used, its value can be anything, but cannot be empty."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "form_id",
+                  "description": "(Required) The ID of the form"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0d89470-ef5a-4a1a-82ab-91b9d1f6ca5a",
+              "name": "List of all submissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_submission_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_recipients",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": 1,\n  \"per_page\": 25,\n  \"total\": 1284,\n  \"submissions\": [\n    {\n      \"submission_id\": 9001234,\n      \"form_id\": 5837291,\n      \"submission_date\": \"2026-05-27T18:42:11Z\",\n      \"ip\": \"203.0.113.42\",\n      \"approved\": 1,\n      \"payed\": \"no\",\n      \"fields\": {\n        \"100\": {\n          \"label\": \"Full Name\",\n          \"value\": \"Ada Lovelace\"\n        },\n        \"101\": {\n          \"label\": \"Email\",\n          \"value\": \"ada@example.com\"\n        },\n        \"102\": {\n          \"label\": \"Rating\",\n          \"value\": \"5\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d50593c1-0fae-4ba0-8730-e7e18207f2e5",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_submission_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_recipients",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea7532b6-6e43-44b0-b653-e4f46326c7be",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_submission_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_recipients",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c797a3fe-817d-439b-9f8a-eaf309ec185d",
+              "name": "Access was denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_submission_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_recipients",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "658a5c40-ac9d-4820-98f7-9bf4adc2f182",
+          "name": "Get Submission Details",
+          "request": {
+            "name": "Get Submission Details",
+            "description": {
+              "content": "Get the details of a single submission",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms",
+                ":form_id",
+                "submissions",
+                ":submission_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_recipients",
+                  "value": "<integer>",
+                  "description": "Returns the recipient(s) who should receive the submission. When this parameter is used, its value can be anything, but cannot be empty."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "form_id",
+                  "description": "(Required) The ID of the form"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "submission_id",
+                  "description": "(Required) The ID of the submission"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36ede8ff-557f-4ddb-a8e6-8629ddfcff21",
+              "name": "The submission content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_recipients",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"submission_id\": 9001234,\n  \"form_id\": 5837291,\n  \"submission_date\": \"2026-05-27T18:42:11Z\",\n  \"ip\": \"203.0.113.42\",\n  \"approved\": 1,\n  \"payed\": \"no\",\n  \"fields\": {\n    \"100\": {\n      \"label\": \"Full Name\",\n      \"value\": \"Ada Lovelace\"\n    },\n    \"101\": {\n      \"label\": \"Email\",\n      \"value\": \"ada@example.com\"\n    },\n    \"102\": {\n      \"label\": \"Rating\",\n      \"value\": \"5\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd02a378-692a-44ce-babc-1d5fe2a5b3f4",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_recipients",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae1f9995-3a33-4482-a3d0-85de4bd0bba9",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_recipients",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af9cd124-899b-4c22-9c95-79922bac8eba",
+              "name": "Access was denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_recipients",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c686bf79-2d8a-42b9-a128-90938f8b5c90",
+          "name": "Update Submission",
+          "request": {
+            "name": "Update Submission",
+            "description": {
+              "content": "Update Submission",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms",
+                ":form_id",
+                "submissions",
+                ":submission_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                },
+                {
+                  "disabled": false,
+                  "key": "payed",
+                  "value": "<string>",
+                  "description": "Payment status. Possible values 0 - no, 1 - payed, 2 - invoiced, 3 - pending, 4 - declined, yes,  no, payed, invoced, pending, declined"
+                },
+                {
+                  "disabled": false,
+                  "key": "approved",
+                  "value": "<integer>",
+                  "description": "Approval status. Possible values: 0 (N/A), 1 (Approved), 2 (Rejected)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "form_id",
+                  "description": "(Required) The ID of the form"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "submission_id",
+                  "description": "(Required) The ID of the submission"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71d7a4c7-84c6-4da3-a899-13c88eecf3b1",
+              "name": "The submission content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "approved",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 200,\n  \"message\": \"Submission updated\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0835d136-92ba-4f63-9a72-3a8b6647b8bf",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "approved",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "288ad774-8eb1-42b1-a4f3-23cf71f071df",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "approved",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b597435a-788e-4bb1-90d8-c941b75a6ce6",
+              "name": "Access was denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "approved",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28b7f2a0-a5c4-47b7-a1d9-75fc7404a358",
+          "name": "Delete One Form Submission",
+          "request": {
+            "name": "Delete One Form Submission",
+            "description": {
+              "content": "Delete one form submission",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "forms",
+                ":form_id",
+                "submissions",
+                ":submission_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "form_id",
+                  "description": "(Required) The ID of the form"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "submission_id",
+                  "description": "(Required) The ID of the submission"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6affb59-5008-4dde-8557-2898cf5f4ffc",
+              "name": "Submission deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 200,\n  \"message\": \"Submission deleted\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75a31470-cd64-4f00-a2bd-a45540593f8f",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "232ae5fc-d905-4921-8514-97f7f03486b3",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f0d0abf-6f4f-4bed-abbe-e9045ac91c2a",
+              "name": "Access was denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    ":form_id",
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "form_id",
+                      "description": "(Required) The ID of the form"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "submission_id",
+                      "description": "(Required) The ID of the submission"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.123formbuilder.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JWT"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "19edee59-ecb8-4c7c-99c4-fb31bc9341a1",
+    "name": "123FormBuilder REST API v2 Accounts Forms API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users, groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.\n\nContact Support:\n Name: 123FormBuilder Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

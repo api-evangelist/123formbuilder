@@ -1,0 +1,429 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "123FormBuilder REST API v2 Accounts Forms API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JWT",
+      "value": "{{JWT}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/forms",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of forms to get per page in a request. Default is 100 and the maximum number is 1000."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter form name"
+              }
+            ]
+          },
+          "docs": "The forms endpoint returns information about the forms. The response includes submissions and other details about each form."
+        },
+        {
+          "info": {
+            "name": "Create a New Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/forms",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "group_id",
+                  "value": ""
+                },
+                {
+                  "name": "active",
+                  "value": ""
+                },
+                {
+                  "name": "active_date_from",
+                  "value": ""
+                },
+                {
+                  "name": "active_date_to",
+                  "value": ""
+                },
+                {
+                  "name": "active_days",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new form"
+        },
+        {
+          "info": {
+            "name": "Delete Multiple Forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.123formbuilder.com/v2/forms/bulk",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "form_ids",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Delete multiple forms"
+        },
+        {
+          "info": {
+            "name": "Get Form Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              }
+            ]
+          },
+          "docs": "Get the details of a single form"
+        },
+        {
+          "info": {
+            "name": "Update Form Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "group_id",
+                  "value": ""
+                },
+                {
+                  "name": "active",
+                  "value": ""
+                },
+                {
+                  "name": "active_date_from",
+                  "value": ""
+                },
+                {
+                  "name": "active_date_to",
+                  "value": ""
+                },
+                {
+                  "name": "active_days",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update form details"
+        },
+        {
+          "info": {
+            "name": "Delete a Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id",
+            "params": [
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Delete a form"
+        },
+        {
+          "info": {
+            "name": "Get Form Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id/fields",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              }
+            ]
+          },
+          "docs": "Get the details of a single form and its fields"
+        },
+        {
+          "info": {
+            "name": "Get Submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id/submissions",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "List submissions starting with a specific date"
+              },
+              {
+                "name": "start_submission_id",
+                "value": "",
+                "type": "query",
+                "description": "List all submissions starting with the specified submission ID."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of submissions to get per page in a request. Default is 100 and the maximum number is 1000."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "include_recipients",
+                "value": "",
+                "type": "query",
+                "description": "Returns the recipient(s) who should receive the submissions. When this parameter is used, its value can be anything, but cannot be empty."
+              }
+            ]
+          },
+          "docs": "Get all submissions received through a form"
+        },
+        {
+          "info": {
+            "name": "Get Submission Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id/submissions/:submission_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              },
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the submission"
+              },
+              {
+                "name": "include_recipients",
+                "value": "",
+                "type": "query",
+                "description": "Returns the recipient(s) who should receive the submission. When this parameter is used, its value can be anything, but cannot be empty."
+              }
+            ]
+          },
+          "docs": "Get the details of a single submission"
+        },
+        {
+          "info": {
+            "name": "Update Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id/submissions/:submission_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              },
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the submission"
+              },
+              {
+                "name": "payed",
+                "value": "",
+                "type": "query",
+                "description": "Payment status. Possible values 0 - no, 1 - payed, 2 - invoiced, 3 - pending, 4 - declined, yes,  no, payed, invoced, pending, declined"
+              },
+              {
+                "name": "approved",
+                "value": "",
+                "type": "query",
+                "description": "Approval status. Possible values: 0 (N/A), 1 (Approved), 2 (Rejected)"
+              }
+            ]
+          },
+          "docs": "Update Submission"
+        },
+        {
+          "info": {
+            "name": "Delete One Form Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.123formbuilder.com/v2/forms/:form_id/submissions/:submission_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form"
+              },
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the submission"
+              }
+            ]
+          },
+          "docs": "Delete one form submission"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,251 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "123FormBuilder REST API v2 Accounts Groups API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JWT",
+      "value": "{{JWT}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All User Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/groups",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of groups to get per page in a request. Default is 100 and the maximum number is 1000."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              }
+            ]
+          },
+          "docs": "Get all user groups"
+        },
+        {
+          "info": {
+            "name": "Create a New Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/groups",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "webhook_url",
+                  "value": ""
+                },
+                {
+                  "name": "parent_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new group"
+        },
+        {
+          "info": {
+            "name": "Get Group Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/groups/:group_id",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group"
+              }
+            ]
+          },
+          "docs": "Get information about a specific group."
+        },
+        {
+          "info": {
+            "name": "Update Group Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.123formbuilder.com/v2/groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group you want to edit"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "webhook_url",
+                  "value": ""
+                },
+                {
+                  "name": "parent_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates the details of a group."
+        },
+        {
+          "info": {
+            "name": "Get All Forms in a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/groups/:group_id/forms",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group"
+              }
+            ]
+          },
+          "docs": "Displays a list of all of the forms within a specific group."
+        },
+        {
+          "info": {
+            "name": "Share a Group with a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/groups/:group_id/share",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group you want to share"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "subuser_id",
+                  "value": ""
+                },
+                {
+                  "name": "subuser_email",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "This may not be available for your account. It is specific to certain users."
+        },
+        {
+          "info": {
+            "name": "Unshare a Group From a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/groups/:group_id/unshare",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group you want to unshare"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "subuser_id",
+                  "value": ""
+                },
+                {
+                  "name": "subuser_email",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "This may not be available for your account. It is specific to certain users."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

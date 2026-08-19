@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "123FormBuilder REST API v2 Accounts API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JWT",
+      "value": "{{JWT}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create New Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/accounts",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "password_repeat",
+                  "value": ""
+                },
+                {
+                  "name": "plan",
+                  "value": ""
+                },
+                {
+                  "name": "company_name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new account (standalone user). This is available only upon request."
+        },
+        {
+          "info": {
+            "name": "Update Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.123formbuilder.com/v2/accounts/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account that you want to update"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "password_repeat",
+                  "value": ""
+                },
+                {
+                  "name": "plan",
+                  "value": ""
+                },
+                {
+                  "name": "company_name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates an account. You can only update the users that you have created using your account token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

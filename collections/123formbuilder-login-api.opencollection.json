@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "123FormBuilder REST API v2 Accounts Login API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JWT",
+      "value": "{{JWT}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Login",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "User Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/token",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "password",
+                "value": "",
+                "type": "query",
+                "description": "Plain text password"
+              },
+              {
+                "name": "passhash",
+                "value": "",
+                "type": "query",
+                "description": "MD5 password"
+              }
+            ]
+          },
+          "docs": "Allows you to authenticate users. \n\nRequired parameters:\n- username OR email\n- password OR passhash\n"
+        },
+        {
+          "info": {
+            "name": "Refresh Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/token/refresh",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Refresh token"
+        },
+        {
+          "info": {
+            "name": "Invalidate Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/token/invalidate",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Invalidate token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1558 @@
+{
+  "item": [
+    {
+      "id": "d59f8066-5876-456a-bcdd-f391c6eedfa5",
+      "name": "Users",
+      "description": {
+        "content": "Manage subusers, their permissions, and master account info.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "01792a70-f34e-44ab-b327-3446755d1c10",
+          "name": "Get Info About Master User and Subusers",
+          "request": {
+            "name": "Get Info About Master User and Subusers",
+            "description": {
+              "content": "Get info about master user and subusers",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "The number of groups to get per page in a request. Default is 100 and the maximum number is 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35514a2d-fbb3-4eb9-b3f9-69dd13291b86",
+              "name": "Lists all master users and subusers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": 1,\n  \"per_page\": 25,\n  \"total\": 2,\n  \"users\": [\n    {\n      \"id\": 78901,\n      \"email\": \"sub@example.com\",\n      \"name\": \"Grace Hopper\",\n      \"admin\": 0,\n      \"company_name\": \"Acme\",\n      \"allow_create_form\": 1,\n      \"allow_duplicate_form\": 1,\n      \"allow_delete_form\": 0,\n      \"can_manage_groups\": 1,\n      \"can_manage_users\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf3a5a43-dbf9-4c6b-8956-c118e98d62bf",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5162227-1306-46df-8157-221adf105615",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a45f1218-5765-4e3e-b7c4-de72223727c2",
+          "name": "Create a New Subuser",
+          "request": {
+            "name": "Create a New Subuser",
+            "description": {
+              "content": "Create a new subuser",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "Email address of the account. You should use this or username."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Username of the account. You should use this or the email address."
+                },
+                {
+                  "disabled": false,
+                  "key": "passhash",
+                  "value": "<string>",
+                  "description": "MD5 password. You should use this or the plain text password."
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>",
+                  "description": "Plain text password. You should use this or the passhash."
+                },
+                {
+                  "disabled": false,
+                  "key": "admin",
+                  "value": "<integer>",
+                  "description": "Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin."
+                },
+                {
+                  "disabled": false,
+                  "key": "company_name",
+                  "value": "<string>",
+                  "description": "The name of the company to which the subuser belongs"
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_create_form",
+                  "value": "<integer>",
+                  "description": "Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.\n\nPossible values: 0, 1, 2 or 3.\n\n0 (default value) = No access to creating new forms\n\n1 = Forms are available only to this user\n\n2 = Forms are available to current users from parent company\n\n3 = Forms are available to all current users\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_duplicate_form",
+                  "value": "<integer>",
+                  "description": "Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms."
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_delete_form",
+                  "value": "<integer>",
+                  "description": "Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms."
+                },
+                {
+                  "disabled": false,
+                  "key": "can_manage_groups",
+                  "value": "<integer>",
+                  "description": "Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups."
+                },
+                {
+                  "disabled": false,
+                  "key": "can_manage_users",
+                  "value": "<integer>",
+                  "description": "Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6c112758-8b8d-47bf-907e-cecca058ae08",
+              "name": "A new user was created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the account. You should use this or username.",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Username of the account. You should use this or the email address.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "MD5 password. You should use this or the plain text password.",
+                        "type": "text/plain"
+                      },
+                      "key": "passhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Plain text password. You should use this or the passhash.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin.",
+                        "type": "text/plain"
+                      },
+                      "key": "admin",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name of the company to which the subuser belongs",
+                        "type": "text/plain"
+                      },
+                      "key": "company_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.\n\nPossible values: 0, 1, 2 or 3.\n\n0 (default value) = No access to creating new forms\n\n1 = Forms are available only to this user\n\n2 = Forms are available to current users from parent company\n\n3 = Forms are available to all current users\n",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_create_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_duplicate_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_delete_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_groups",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_users",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 200,\n  \"user\": {\n    \"id\": 78901,\n    \"email\": \"sub@example.com\",\n    \"name\": \"Grace Hopper\",\n    \"admin\": 0,\n    \"company_name\": \"Acme\",\n    \"allow_create_form\": 1,\n    \"allow_duplicate_form\": 1,\n    \"allow_delete_form\": 0,\n    \"can_manage_groups\": 1,\n    \"can_manage_users\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d4814f7-dca0-44d9-9f21-856a189106af",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the account. You should use this or username.",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Username of the account. You should use this or the email address.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "MD5 password. You should use this or the plain text password.",
+                        "type": "text/plain"
+                      },
+                      "key": "passhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Plain text password. You should use this or the passhash.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin.",
+                        "type": "text/plain"
+                      },
+                      "key": "admin",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name of the company to which the subuser belongs",
+                        "type": "text/plain"
+                      },
+                      "key": "company_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.\n\nPossible values: 0, 1, 2 or 3.\n\n0 (default value) = No access to creating new forms\n\n1 = Forms are available only to this user\n\n2 = Forms are available to current users from parent company\n\n3 = Forms are available to all current users\n",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_create_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_duplicate_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_delete_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_groups",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_users",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d668d69-e2e7-4284-a0b2-5bb0840094a6",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the account. You should use this or username.",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Username of the account. You should use this or the email address.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "MD5 password. You should use this or the plain text password.",
+                        "type": "text/plain"
+                      },
+                      "key": "passhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Plain text password. You should use this or the passhash.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin.",
+                        "type": "text/plain"
+                      },
+                      "key": "admin",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name of the company to which the subuser belongs",
+                        "type": "text/plain"
+                      },
+                      "key": "company_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.\n\nPossible values: 0, 1, 2 or 3.\n\n0 (default value) = No access to creating new forms\n\n1 = Forms are available only to this user\n\n2 = Forms are available to current users from parent company\n\n3 = Forms are available to all current users\n",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_create_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_duplicate_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_delete_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_groups",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_users",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40c5632b-f419-4c62-959c-48f8324669b5",
+              "name": "Validation errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the account. You should use this or username.",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Username of the account. You should use this or the email address.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "MD5 password. You should use this or the plain text password.",
+                        "type": "text/plain"
+                      },
+                      "key": "passhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Plain text password. You should use this or the passhash.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin.",
+                        "type": "text/plain"
+                      },
+                      "key": "admin",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name of the company to which the subuser belongs",
+                        "type": "text/plain"
+                      },
+                      "key": "company_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.\n\nPossible values: 0, 1, 2 or 3.\n\n0 (default value) = No access to creating new forms\n\n1 = Forms are available only to this user\n\n2 = Forms are available to current users from parent company\n\n3 = Forms are available to all current users\n",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_create_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_duplicate_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_delete_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_groups",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_users",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc5bbf8e-cf81-48c6-9e5b-e2f3efe20414",
+          "name": "Update User",
+          "request": {
+            "name": "Update User",
+            "description": {
+              "content": "Update user information",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identifier",
+                  "description": "(Required) The ID or username of the user to be modified"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "JWT",
+                  "value": "<string>",
+                  "description": "(Required) JWT authentication token"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "Email address of the account. You should use this or username."
+                },
+                {
+                  "disabled": false,
+                  "key": "passhash",
+                  "value": "<string>",
+                  "description": "MD5 password. You should use this or the plain text password."
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>",
+                  "description": "Plain text password. You should use this or the passhash."
+                },
+                {
+                  "disabled": false,
+                  "key": "admin",
+                  "value": "<integer>",
+                  "description": "Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin."
+                },
+                {
+                  "disabled": false,
+                  "key": "company_name",
+                  "value": "<string>",
+                  "description": "The name of the company to which the subuser belongs"
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_create_form",
+                  "value": "<integer>",
+                  "description": "Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.\n\nPossible values: 0, 1, 2 or 3.\n\n0 (default value) = No access to creating new forms\n\n1 = Forms are available only to this user\n\n2 = Forms are available to current users from parent company\n\n3 = Forms are available to all current users\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_duplicate_form",
+                  "value": "<integer>",
+                  "description": "Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms."
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_delete_form",
+                  "value": "<integer>",
+                  "description": "Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms."
+                },
+                {
+                  "disabled": false,
+                  "key": "can_manage_groups",
+                  "value": "<integer>",
+                  "description": "Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups."
+                },
+                {
+                  "disabled": false,
+                  "key": "can_manage_users",
+                  "value": "<integer>",
+                  "description": "Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "275ea83c-fbf5-440c-8d07-f0048cfc5a81",
+              "name": "User was updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) The ID or username of the user to be modified"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the account. You should use this or username.",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "MD5 password. You should use this or the plain text password.",
+                        "type": "text/plain"
+                      },
+                      "key": "passhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Plain text password. You should use this or the passhash.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin.",
+                        "type": "text/plain"
+                      },
+                      "key": "admin",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name of the company to which the subuser belongs",
+                        "type": "text/plain"
+                      },
+                      "key": "company_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.\n\nPossible values: 0, 1, 2 or 3.\n\n0 (default value) = No access to creating new forms\n\n1 = Forms are available only to this user\n\n2 = Forms are available to current users from parent company\n\n3 = Forms are available to all current users\n",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_create_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_duplicate_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_delete_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_groups",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_users",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 200,\n  \"user\": {\n    \"id\": 78901,\n    \"email\": \"sub@example.com\",\n    \"name\": \"Grace Hopper\",\n    \"admin\": 0,\n    \"company_name\": \"Acme\",\n    \"allow_create_form\": 1,\n    \"allow_duplicate_form\": 1,\n    \"allow_delete_form\": 0,\n    \"can_manage_groups\": 1,\n    \"can_manage_users\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11637b3c-3402-4542-baaa-16dbd33e3e52",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) The ID or username of the user to be modified"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the account. You should use this or username.",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "MD5 password. You should use this or the plain text password.",
+                        "type": "text/plain"
+                      },
+                      "key": "passhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Plain text password. You should use this or the passhash.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin.",
+                        "type": "text/plain"
+                      },
+                      "key": "admin",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name of the company to which the subuser belongs",
+                        "type": "text/plain"
+                      },
+                      "key": "company_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.\n\nPossible values: 0, 1, 2 or 3.\n\n0 (default value) = No access to creating new forms\n\n1 = Forms are available only to this user\n\n2 = Forms are available to current users from parent company\n\n3 = Forms are available to all current users\n",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_create_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_duplicate_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_delete_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_groups",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_users",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d87f793-63be-421d-9bd9-ac3e94f919d0",
+              "name": "Token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "JWT",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) The ID or username of the user to be modified"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JWT authentication token",
+                        "type": "text/plain"
+                      },
+                      "key": "JWT",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the account. You should use this or username.",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "MD5 password. You should use this or the plain text password.",
+                        "type": "text/plain"
+                      },
+                      "key": "passhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Plain text password. You should use this or the passhash.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates if the subuser is admin or not. Default value is 0, which means that the subuser is not admin.",
+                        "type": "text/plain"
+                      },
+                      "key": "admin",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name of the company to which the subuser belongs",
+                        "type": "text/plain"
+                      },
+                      "key": "company_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow or restrict subuser access to creating new forms. This works only for non-admin subusers.\n\nPossible values: 0, 1, 2 or 3.\n\n0 (default value) = No access to creating new forms\n\n1 = Forms are available only to this user\n\n2 = Forms are available to current users from parent company\n\n3 = Forms are available to all current users\n",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_create_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to duplicate forms. Default value is 0, which means that the subuser cannot duplicate forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_duplicate_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow subusers to delete forms. Default value is 0, which means that the subuser cannot delete forms.",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_delete_form",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage groups. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage groups.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_groups",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allow admin subusers to manage users. This works only for admin subusers. Default value is 0, which means that the subuser cannot manage users.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_manage_users",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid or missing parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.123formbuilder.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JWT"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1fb4b844-3bd2-4506-9c4b-de9cfabfc208",
+    "name": "123FormBuilder REST API v2 Accounts Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users, groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.\n\nContact Support:\n Name: 123FormBuilder Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

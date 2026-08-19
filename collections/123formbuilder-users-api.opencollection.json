@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "123FormBuilder REST API v2 Accounts Users API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JWT",
+      "value": "{{JWT}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Info About Master User and Subusers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.123formbuilder.com/v2/users",
+            "params": [
+              {
+                "name": "JWT",
+                "value": "",
+                "type": "query",
+                "description": "JWT authentication token"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of groups to get per page in a request. Default is 100 and the maximum number is 1000."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              }
+            ]
+          },
+          "docs": "Get info about master user and subusers"
+        },
+        {
+          "info": {
+            "name": "Create a New Subuser",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.123formbuilder.com/v2/users",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "passhash",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "admin",
+                  "value": ""
+                },
+                {
+                  "name": "company_name",
+                  "value": ""
+                },
+                {
+                  "name": "allow_create_form",
+                  "value": ""
+                },
+                {
+                  "name": "allow_duplicate_form",
+                  "value": ""
+                },
+                {
+                  "name": "allow_delete_form",
+                  "value": ""
+                },
+                {
+                  "name": "can_manage_groups",
+                  "value": ""
+                },
+                {
+                  "name": "can_manage_users",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new subuser"
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.123formbuilder.com/v2/users/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "The ID or username of the user to be modified"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "JWT",
+                  "value": ""
+                },
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "passhash",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "admin",
+                  "value": ""
+                },
+                {
+                  "name": "company_name",
+                  "value": ""
+                },
+                {
+                  "name": "allow_create_form",
+                  "value": ""
+                },
+                {
+                  "name": "allow_duplicate_form",
+                  "value": ""
+                },
+                {
+                  "name": "allow_delete_form",
+                  "value": ""
+                },
+                {
+                  "name": "can_manage_groups",
+                  "value": ""
+                },
+                {
+                  "name": "can_manage_users",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update user information"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
