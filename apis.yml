@@ -36,7 +36,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/apis.yml
 created: '2026-05-11'
 modified: '2026-05-28'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: 123formbuilder:123formbuilder-accounts-api
   name: 123FormBuilder Accounts API
