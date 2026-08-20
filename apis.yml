@@ -26,6 +26,17 @@ tags:
   - Online Forms
   - Form Builder
   - Surveys
+  - Workflows
+  - Data Collection
+  - Submissions
+  - Webhook
+  - HIPAA
+  - GDPR
+  - Payments
+tags_raw:
+  - Online Forms
+  - Form Builder
+  - Surveys
   - Workflow
   - Data Collection
   - Submissions
@@ -44,6 +55,8 @@ apis:
   humanURL: https://www.123formbuilder.com/developer/api-v2/
   baseURL: https://api.123formbuilder.com/v2
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -172,6 +185,8 @@ apis:
   humanURL: https://www.123formbuilder.com/developer/api-v2/
   baseURL: https://api.123formbuilder.com/v2
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -300,6 +315,8 @@ apis:
   humanURL: https://www.123formbuilder.com/developer/api-v2/
   baseURL: https://api.123formbuilder.com/v2
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
