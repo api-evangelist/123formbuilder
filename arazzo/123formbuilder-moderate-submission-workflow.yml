@@ -10,8 +10,11 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: formBuilderApi
-  url: ../openapi/123formbuilder-rest-api-v2-openapi.yml
+- name: formsApi
+  url: ../openapi/123formbuilder-forms-api-openapi.yml
+  type: openapi
+- name: loginApi
+  url: ../openapi/123formbuilder-login-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: moderate-submission
