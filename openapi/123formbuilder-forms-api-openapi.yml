@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 123FormBuilder REST API v2 Accounts Forms API
+  title: 123FormBuilder REST API v2 Forms API
   description: REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users, groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.
   version: 2.0.0
   contact:
@@ -116,7 +116,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id001
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -126,7 +126,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id001
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
     post:
       summary: Create a New Form
       description: Create a new form
@@ -164,7 +167,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id002
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -174,14 +177,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id002
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id002
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '422':
           description: Validation errors
           content:
@@ -198,7 +207,10 @@ paths:
                           $ref: '#/definitions/FormCreateValidationError'
                       status_code:
                         type: integer
-              example: *id002
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:
@@ -298,7 +310,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id003
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -308,7 +320,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id003
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:
@@ -373,7 +388,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id004
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -383,14 +398,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id004
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id004
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
     put:
       summary: Update Form Details
       description: Update form details
@@ -440,7 +461,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id005
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -450,14 +471,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id005
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id005
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '422':
           description: Validation errors
           content:
@@ -474,7 +501,10 @@ paths:
                           $ref: '#/definitions/FormUpdateValidationError'
                       status_code:
                         type: integer
-              example: *id005
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:
@@ -571,7 +601,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id006
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -581,14 +611,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id006
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '404':
           description: Form not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id006
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:
@@ -653,7 +689,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id007
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -663,14 +699,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id007
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id007
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
   /forms/{form_id}/submissions:
     get:
       summary: Get Submissions
@@ -793,7 +835,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id008
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -803,14 +845,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id008
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id008
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
   /forms/{form_id}/submissions/{submission_id}:
     get:
       summary: Get Submission Details
@@ -911,7 +959,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id009
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -921,17 +969,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id009
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id009
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
     put:
       summary: Update Submission
-      description: Update Submission
       tags:
       - Forms
       operationId: forms-update-submission
@@ -1020,7 +1073,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id010
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -1030,14 +1083,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id010
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id010
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
     delete:
       summary: Delete One Form Submission
       description: Delete one form submission
@@ -1086,7 +1145,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id011
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -1096,14 +1155,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id011
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id011
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
 components:
   schemas:
     Error:

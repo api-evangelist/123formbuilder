@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 123FormBuilder REST API v2 Accounts Groups API
+  title: 123FormBuilder REST API v2 Groups API
   description: REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users, groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.
   version: 2.0.0
   contact:
@@ -106,7 +106,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id001
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -116,7 +116,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id001
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
     post:
       summary: Create a New Group
       description: Create a new group
@@ -150,7 +153,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id002
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -160,7 +163,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id002
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '422':
           description: Validation errors
           content:
@@ -177,7 +183,10 @@ paths:
                           $ref: '#/definitions/GroupCreateValidationError'
                       status_code:
                         type: integer
-              example: *id002
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:
@@ -245,7 +254,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id003
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -255,14 +264,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id003
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access Denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id003
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
     put:
       summary: Update Group Data
       description: Updates the details of a group.
@@ -302,7 +317,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id004
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -312,14 +327,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id004
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id004
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '422':
           description: Validation errors
           content:
@@ -336,7 +357,10 @@ paths:
                           $ref: '#/definitions/GroupUpdateValidationError'
                       status_code:
                         type: integer
-              example: *id004
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:
@@ -405,7 +429,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id005
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -415,14 +439,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id005
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id005
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
   /groups/{group_id}/share:
     post:
       summary: Share a Group with a User
@@ -458,7 +488,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id006
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -468,21 +498,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id006
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id006
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '422':
           description: Validation errors occurred.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id006
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:
@@ -536,7 +575,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id007
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -546,21 +585,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id007
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '403':
           description: Access was denied.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id007
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '422':
           description: Validation errors occurred.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id007
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:

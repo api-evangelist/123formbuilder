@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: 123FormBuilder REST API v2 Accounts API
   description: REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users, groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.
@@ -55,7 +55,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id001
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -65,7 +65,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id001
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:
@@ -140,7 +143,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id002
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -150,7 +153,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id002
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:

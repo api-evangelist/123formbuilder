@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 123FormBuilder REST API v2 Accounts Users API
+  title: 123FormBuilder REST API v2 Users API
   description: REST API v2 for 123FormBuilder. Manage forms, retrieve and update submissions, list fields, administer users, groups, and accounts. Authenticate by exchanging credentials at /token for a JWT, then pass the token on subsequent requests.
   version: 2.0.0
   contact:
@@ -111,7 +111,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id001
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -121,7 +121,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id001
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
     post:
       summary: Create a New Subuser
       description: Create a new subuser
@@ -160,7 +163,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id002
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -170,7 +173,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id002
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
         '422':
           description: Validation errors
           content:
@@ -187,7 +193,10 @@ paths:
                           $ref: '#/definitions/UsersCreateValidationError'
                       status_code:
                         type: integer
-              example: *id002
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:
@@ -295,7 +304,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: &id003
+              example:
                 status_code: 400
                 error: Bad Request
                 message: Invalid or missing parameter.
@@ -305,7 +314,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example: *id003
+              example:
+                status_code: 400
+                error: Bad Request
+                message: Invalid or missing parameter.
       requestBody:
         required: true
         content:
