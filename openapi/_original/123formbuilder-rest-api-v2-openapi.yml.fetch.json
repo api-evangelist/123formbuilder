@@ -1,0 +1,12 @@
+{
+ "url": "https://www.123formbuilder.com/wp-content/uploads/sites/5/2024/01/swagger-4.json",
+ "requested_url": "https://www.123formbuilder.com/wp-content/uploads/sites/5/2024/01/swagger-4.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 89026,
+ "sha256": "280f83532040e317fbef0e0082d25084ed826b6ae9f1f8b1aaa2b4917e900385",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
