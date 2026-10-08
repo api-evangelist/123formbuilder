@@ -391,6 +391,10 @@ apis:
   - type: Examples
     url: examples/123formbuilder-rest-api-v2-token-example.json
 common:
+  - type: RateLimits
+    url: rate-limits/123formbuilder-rate-limits.yml
+  - type: FinOps
+    url: finops/123formbuilder-finops.yml
   - type: IssueTracker
     url: https://github.com/123FormBuilder/123contacform-api-v1-php/issues
   - type: License
