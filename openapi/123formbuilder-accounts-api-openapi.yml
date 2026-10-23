@@ -207,3 +207,9 @@ components:
       in: query
       name: JWT
       description: JWT token obtained from POST /token, supplied as the JWT query parameter.
+x-provenance:
+  method: harvested
+  publisher: 123FormBuilder
+  source: https://www.123formbuilder.com/wp-content/uploads/sites/5/2024/01/swagger-4.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
