@@ -1,4 +1,4 @@
-# 123FormBuilder (123formbuilder)
+# 123FormBuilder
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,127 +64,197 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-123FormBuilder is an online form, survey, and workflow builder used to collect, route, and
-integrate submission data across websites, customer portals, and back-office systems with
-no-code design and HIPAA-ready configurations. The 123FormBuilder REST API v2 enables
-programmatic access to forms, fields, submissions, groups, users, and accounts. Clients
-authenticate by exchanging credentials at POST /token for a JWT and pass the token as a
-query parameter on subsequent requests. Separate US and EU regional base URLs are provided.
+123FormBuilder is an online form, survey, and workflow builder used to collect, route, and integrate submission data across websites, customer portals, and back-office systems with no-code design and HIPAA-ready configurations. The 123FormBuilder REST API v2 enables programmatic access to forms, fields, submissions, groups, users, and accounts. Clients authenticate by exchanging credentials at POST /token for a JWT and pass the token as a query parameter on subsequent requests. Separate US and EU regional base URLs are provided.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/123formbuilder/refs/heads/main/apis.yml)
+**Areas:** Online Forms · Form Builder · Surveys · Workflows · Data Collection · Submissions · Webhook · HIPAA · GDPR · Payments
 
-## Scope
+## 123FormBuilder on APIs.io
 
-- **Type:** Index
+Everything profiled for 123FormBuilder is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/123formbuilder/](https://apis.io/providers/123formbuilder/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (5)
 
-- Online Forms
-- Form Builder
-- Surveys
-- Workflow
-- Data Collection
-- Submissions
-- Webhooks
-- HIPAA
-- GDPR
-- Payments
+- [123FormBuilder Accounts API](https://apis.io/apis/123formbuilder/123formbuilder-accounts-api/) — Create and update billable accounts.
+- [123FormBuilder Forms API](https://apis.io/apis/123formbuilder/123formbuilder-forms-api/) — Create, list, read, update, and delete forms, fields, and submissions.
+- [123FormBuilder Groups API](https://apis.io/apis/123formbuilder/123formbuilder-groups-api/) — Organize forms into groups and share groups with subusers.
+- [123FormBuilder Login API](https://apis.io/apis/123formbuilder/123formbuilder-login-api/) — JWT issuance, refresh, and invalidation.
+- [123FormBuilder Users API](https://apis.io/apis/123formbuilder/123formbuilder-users-api/) — Manage subusers, their permissions, and master account info.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (6)
 
-### 123FormBuilder REST API v2
+Multi-step workflows that chain operations into a business task.
 
-REST API v2 for managing forms, fields, submissions, groups, users, and accounts in
-123FormBuilder. Requests authenticate with a JWT issued by POST /token and passed as the
-JWT query parameter on subsequent calls. Separate US (api.123formbuilder.com) and EU
-(eu-api.123formbuilder.com) regional base URLs are offered; account region determines
-which to use. Common workflows include listing and filtering forms, paging submissions,
-bulk-deleting forms, registering group-level webhooks, and provisioning subusers with
-fine-grained permission flags.
+- [123FormBuilder Authenticate and List Forms](https://apis.io/arazzos/123formbuilder/123formbuilder-authenticate-and-list-forms-workflow/)
+- [123FormBuilder Browse a Group's Forms](https://apis.io/arazzos/123formbuilder/123formbuilder-browse-group-forms-workflow/)
+- [123FormBuilder Create a Form Inside a New Group](https://apis.io/arazzos/123formbuilder/123formbuilder-create-form-in-group-workflow/)
+- [123FormBuilder Inspect a Form End to End](https://apis.io/arazzos/123formbuilder/123formbuilder-inspect-form-workflow/)
+- [123FormBuilder Moderate a Submission](https://apis.io/arazzos/123formbuilder/123formbuilder-moderate-submission-workflow/)
+- [123FormBuilder Review a Form Submission](https://apis.io/arazzos/123formbuilder/123formbuilder-review-submission-workflow/)
 
-- **Human URL:** [https://www.123formbuilder.com/developer/api-v2/](https://www.123formbuilder.com/developer/api-v2/)
-- **Base URL:** `https://api.123formbuilder.com/v2`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Online Forms
-- Form Builder
-- Submissions
-- Webhooks
-- JWT
-- Forms
-- Groups
-- Users
-- Accounts
+- [123Formbuilder Agentic Access](https://apis.io/agentic-access/123formbuilder/123formbuilder-agentic-access/)
 
-#### Properties
+#### JSON Schema (6)
 
-- [Documentation](https://www.123formbuilder.com/developer/api-v2/)
-- [API Reference](https://www.123formbuilder.com/developer/api-v2-forms/)
-- [Authentication](https://www.123formbuilder.com/developer/api-v2-authentication/)
-- [Quickstart](https://www.123formbuilder.com/docs/how-to-retrieve-data-through-api/)
-- [Knowledge Center](https://www.123formbuilder.com/docs/apidocumentation/)
-- [Errors](https://www.123formbuilder.com/docs/api-responses/)
-- [Regions](https://www.123formbuilder.com/developer/api-v2/)
-- [Rate Limits](rate-limits/123formbuilder-rate-limits.yml)
-- [OpenAPI](openapi/123formbuilder-rest-api-v2-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/123formbuilder-rest-api-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/123formbuilder-rest-api-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/123formbuilder-rest-api-v2-form-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/123formbuilder-rest-api-v2-field-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/123formbuilder-rest-api-v2-submission-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/123formbuilder-rest-api-v2-group-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/123formbuilder-rest-api-v2-user-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/123formbuilder-rest-api-v2-account-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/123formbuilder-rest-api-v2-form-structure.json)
-- [JSON Structure](json-structure/123formbuilder-rest-api-v2-field-structure.json)
-- [JSON Structure](json-structure/123formbuilder-rest-api-v2-submission-structure.json)
-- [JSON Structure](json-structure/123formbuilder-rest-api-v2-group-structure.json)
-- [JSON Structure](json-structure/123formbuilder-rest-api-v2-user-structure.json)
-- [JSON Structure](json-structure/123formbuilder-rest-api-v2-account-structure.json)
-- [Example](examples/123formbuilder-rest-api-v2-form-example.json)
-- [Example](examples/123formbuilder-rest-api-v2-field-example.json)
-- [Example](examples/123formbuilder-rest-api-v2-submission-example.json)
-- [Example](examples/123formbuilder-rest-api-v2-group-example.json)
-- [Example](examples/123formbuilder-rest-api-v2-user-example.json)
-- [Example](examples/123formbuilder-rest-api-v2-account-example.json)
-- [Example](examples/123formbuilder-rest-api-v2-token-example.json)
+The data models the API reads and writes.
 
-## Common Properties
+- [Account](https://apis.io/schemas/123formbuilder/123formbuilder-rest-api-v2-account/)
+- [Field](https://apis.io/schemas/123formbuilder/123formbuilder-rest-api-v2-field/)
+- [Form](https://apis.io/schemas/123formbuilder/123formbuilder-rest-api-v2-form/)
+- [Group](https://apis.io/schemas/123formbuilder/123formbuilder-rest-api-v2-group/)
+- [Submission](https://apis.io/schemas/123formbuilder/123formbuilder-rest-api-v2-submission/)
+- [User](https://apis.io/schemas/123formbuilder/123formbuilder-rest-api-v2-user/)
 
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
+#### JSON Structure (6)
+
+Data models expressed in JSON Structure.
+
+- [123Formbuilder Rest Api V2 Account Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-account-structure/)
+- [123Formbuilder Rest Api V2 Field Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-field-structure/)
+- [123Formbuilder Rest Api V2 Form Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-form-structure/)
+- [123Formbuilder Rest Api V2 Group Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-group-structure/)
+- [123Formbuilder Rest Api V2 Submission Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-submission-structure/)
+- [123Formbuilder Rest Api V2 User Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-user-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [123Formbuilder Context](https://apis.io/jsonld/123formbuilder/123formbuilder-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [123Formbuilder Vocabulary](https://apis.io/vocabularies/123formbuilder/123formbuilder-vocabulary/)
+
+#### Examples (7)
+
+Example requests and responses.
+
+- [123Formbuilder Rest Api V2 Account Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-account-example/)
+- [123Formbuilder Rest Api V2 Field Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-field-example/)
+- [123Formbuilder Rest Api V2 Form Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-form-example/)
+- [123Formbuilder Rest Api V2 Group Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-group-example/)
+- [123Formbuilder Rest Api V2 Submission Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-submission-example/)
+- [123Formbuilder Rest Api V2 Token Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-token-example/)
+- [123Formbuilder Rest Api V2 User Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-user-example/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [123FormBuilder REST API v2 Accounts API](https://apis.io/collections/123formbuilder/open-123formbuilder-accounts-api/)
+- [123FormBuilder REST API v2 Accounts Forms API](https://apis.io/collections/123formbuilder/open-123formbuilder-forms-api/)
+- [123FormBuilder REST API v2 Accounts Groups API](https://apis.io/collections/123formbuilder/open-123formbuilder-groups-api/)
+- [123FormBuilder REST API v2 Accounts Login API](https://apis.io/collections/123formbuilder/open-123formbuilder-login-api/)
+- [123FormBuilder REST API v2](https://apis.io/collections/123formbuilder/open-123formbuilder-rest-api-v2/)
+- [123FormBuilder REST API v2 Accounts Users API](https://apis.io/collections/123formbuilder/open-123formbuilder-users-api/)
+- [123FormBuilder REST API v2](https://apis.io/collections/123formbuilder/postman-123formbuilder-rest-api-v2/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [123FormBuilder — jsonschema rules](https://apis.io/rules/123formbuilder/123formbuilder-jsonschema-spectral-rules/)
+- [123FormBuilder API Rules](https://apis.io/rules/123formbuilder/123formbuilder-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [123Formbuilder Authentication](https://apis.io/security/123formbuilder/123formbuilder-authentication/)
+- [123Formbuilder Domain Security](https://apis.io/security/123formbuilder/123formbuilder-domain-security/)
+- [123Formbuilder Vulnerability Disclosure](https://apis.io/security/123formbuilder/123formbuilder-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [123Formbuilder Plans Pricing](https://apis.io/plans/123formbuilder/123formbuilder-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [123Formbuilder Rate Limits](https://apis.io/rate-limits/123formbuilder/123formbuilder-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [123Formbuilder Finops](https://apis.io/finops/123formbuilder/123formbuilder-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.123formbuilder.com)
-- [GitHub Organization](https://github.com/123formbuilder)
-- [GitHub Repository](https://github.com/123FormBuilder/123contacform-api-v1-php)
-- [GitHub Repository](https://github.com/123FormBuilder/wix-code)
-- [LinkedIn](https://www.linkedin.com/company/123formbuilder)
-- [Developer Portal](https://www.123formbuilder.com/developer/)
 - [Documentation](https://www.123formbuilder.com/developer/api-v2/)
-- [Knowledge Center](https://www.123formbuilder.com/docs/all-categories/developers/)
-- [Sign Up](https://www.123formbuilder.com/sign-up/)
-- [Login](https://www.123formbuilder.com/login/)
 - [Pricing](https://www.123formbuilder.com/pricing/)
-- [Plans](plans/123formbuilder-plans-pricing.yml)
-- [Terms of Service](https://www.123formbuilder.com/terms-of-service/)
-- [Privacy Policy](https://www.123formbuilder.com/privacy/)
-- [Compliance](https://www.123formbuilder.com/gdpr-compliance/)
-- [Blog](https://www.123formbuilder.com/blog/)
 - [Support](https://www.123formbuilder.com/contact-us/)
-- [Integrations](https://www.123formbuilder.com/integrations/)
-- [JSON-LD](json-ld/123formbuilder-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](rules/123formbuilder-rules.yml)
-- [Vocabulary](vocabulary/123formbuilder-vocabulary.yaml)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Solutions](undefined)
+- [Blog](https://www.123formbuilder.com/blog/)
+- [Compliance](https://www.123formbuilder.com/gdpr-compliance/)
+- [Terms of service](https://www.123formbuilder.com/terms-of-service/)
+- [Privacy policy](https://www.123formbuilder.com/privacy/)
+- [GitHub](https://github.com/123formbuilder)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 51.1** — developing · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 68.6 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 53.6 |
+| Access clarity | 53.9 |
+
+**Agent readiness 28.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 32.1** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/123formbuilder/](https://apis.io/providers/123formbuilder/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for 123FormBuilder: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/123formbuilder/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
