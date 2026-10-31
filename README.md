@@ -64,7 +64,12 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-123FormBuilder is an online form, survey, and workflow builder used to collect, route, and integrate submission data across websites, customer portals, and back-office systems with no-code design and HIPAA-ready configurations. The 123FormBuilder REST API v2 enables programmatic access to forms, fields, submissions, groups, users, and accounts. Clients authenticate by exchanging credentials at POST /token for a JWT and pass the token as a query parameter on subsequent requests. Separate US and EU regional base URLs are provided.
+123FormBuilder is an online form, survey, and workflow builder used to collect, route, and
+integrate submission data across websites, customer portals, and back-office systems with
+no-code design and HIPAA-ready configurations. The 123FormBuilder REST API v2 enables
+programmatic access to forms, fields, submissions, groups, users, and accounts. Clients
+authenticate by exchanging credentials at POST /token for a JWT and pass the token as a
+query parameter on subsequent requests. Separate US and EU regional base URLs are provided.
 
 **Areas:** Online Forms · Form Builder · Surveys · Workflows · Data Collection · Submissions · Webhook · HIPAA · GDPR · Payments
 
@@ -208,18 +213,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 51.1** — developing · rubric 0.24.0 · scored 2026-10-17
+**Kin Score 52.5** — developing · rubric 0.25.0 · scored 2026-10-23
 
 | Facet | Score |
 |---|---|
 | Discoverability | 66.1 |
 | Contract quality | 68.6 |
 | Contract governance | 27.3 |
-| Operational transparency | 10.5 |
+| Operational transparency | 21.1 |
 | Developer ergonomics | 53.6 |
 | Access clarity | 53.9 |
 
-**Agent readiness 28.7** — agent-ready
+**Agent readiness 30.9** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -242,6 +247,8 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Protected Resource Metadata | — |
 | Dynamic Client Registration | — |
 | Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
 
 **Regulatory alignment 32.1** — Payments
 
