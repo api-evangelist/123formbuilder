@@ -104,7 +104,7 @@ Multi-step workflows that chain operations into a business task.
 
 Which operations an agent can call, which act, and which need a human in the loop.
 
-- [123Formbuilder Agentic Access](https://apis.io/agentic-access/123formbuilder/123formbuilder-agentic-access/)
+- [123FormBuilder Agentic Access](https://apis.io/agentic-access/123formbuilder/123formbuilder-agentic-access/)
 
 #### JSON Schema (6)
 
@@ -121,12 +121,12 @@ The data models the API reads and writes.
 
 Data models expressed in JSON Structure.
 
-- [123Formbuilder Rest Api V2 Account Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-account-structure/)
-- [123Formbuilder Rest Api V2 Field Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-field-structure/)
-- [123Formbuilder Rest Api V2 Form Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-form-structure/)
-- [123Formbuilder Rest Api V2 Group Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-group-structure/)
-- [123Formbuilder Rest Api V2 Submission Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-submission-structure/)
-- [123Formbuilder Rest Api V2 User Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-user-structure/)
+- [123FormBuilder Rest Api V2 Account Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-account-structure/)
+- [123FormBuilder Rest Api V2 Field Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-field-structure/)
+- [123FormBuilder Rest Api V2 Form Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-form-structure/)
+- [123FormBuilder Rest Api V2 Group Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-group-structure/)
+- [123FormBuilder Rest Api V2 Submission Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-submission-structure/)
+- [123FormBuilder Rest Api V2 User Structure](https://apis.io/json-structure/123formbuilder/123formbuilder-rest-api-v2-user-structure/)
 
 #### JSON-LD (1)
 
@@ -144,13 +144,13 @@ The provider's domain terms, defined.
 
 Example requests and responses.
 
-- [123Formbuilder Rest Api V2 Account Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-account-example/)
-- [123Formbuilder Rest Api V2 Field Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-field-example/)
-- [123Formbuilder Rest Api V2 Form Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-form-example/)
-- [123Formbuilder Rest Api V2 Group Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-group-example/)
-- [123Formbuilder Rest Api V2 Submission Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-submission-example/)
-- [123Formbuilder Rest Api V2 Token Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-token-example/)
-- [123Formbuilder Rest Api V2 User Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-user-example/)
+- [123FormBuilder Rest Api V2 Account Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-account-example/)
+- [123FormBuilder Rest Api V2 Field Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-field-example/)
+- [123FormBuilder Rest Api V2 Form Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-form-example/)
+- [123FormBuilder Rest Api V2 Group Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-group-example/)
+- [123FormBuilder Rest Api V2 Submission Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-submission-example/)
+- [123FormBuilder Rest Api V2 Token Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-token-example/)
+- [123FormBuilder Rest Api V2 User Example](https://apis.io/examples/123formbuilder/123formbuilder-rest-api-v2-user-example/)
 
 #### Collections (7)
 
@@ -175,27 +175,27 @@ Spectral rulesets for the provider's contracts.
 
 Authentication, trust centre, and vulnerability disclosure.
 
-- [123Formbuilder Authentication](https://apis.io/security/123formbuilder/123formbuilder-authentication/)
-- [123Formbuilder Domain Security](https://apis.io/security/123formbuilder/123formbuilder-domain-security/)
-- [123Formbuilder Vulnerability Disclosure](https://apis.io/security/123formbuilder/123formbuilder-vulnerability-disclosure/)
+- [123FormBuilder Authentication](https://apis.io/security/123formbuilder/123formbuilder-authentication/)
+- [123FormBuilder Domain Security](https://apis.io/security/123formbuilder/123formbuilder-domain-security/)
+- [123FormBuilder Vulnerability Disclosure](https://apis.io/security/123formbuilder/123formbuilder-vulnerability-disclosure/)
 
 #### Plans and pricing (1)
 
 Published plans, tiers and prices.
 
-- [123Formbuilder Plans Pricing](https://apis.io/plans/123formbuilder/123formbuilder-plans-pricing/)
+- [123FormBuilder Plans Pricing](https://apis.io/plans/123formbuilder/123formbuilder-plans-pricing/)
 
 #### Rate limits (1)
 
 Published request limits.
 
-- [123Formbuilder Rate Limits](https://apis.io/rate-limits/123formbuilder/123formbuilder-rate-limits/)
+- [123FormBuilder Rate Limits](https://apis.io/rate-limits/123formbuilder/123formbuilder-rate-limits/)
 
 #### FinOps (1)
 
 What the API costs to run, by operation.
 
-- [123Formbuilder Finops](https://apis.io/finops/123formbuilder/123formbuilder-finops/)
+- [123FormBuilder Finops](https://apis.io/finops/123formbuilder/123formbuilder-finops/)
 
 ## Where to find this API
 
@@ -213,18 +213,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 52.5** — developing · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 55.9** — strong · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
 | Discoverability | 66.1 |
-| Contract quality | 68.6 |
+| Contract quality | 74.3 |
 | Contract governance | 27.3 |
-| Operational transparency | 21.1 |
+| Operational transparency | 21.4 |
 | Developer ergonomics | 53.6 |
-| Access clarity | 53.9 |
+| Access clarity | 63.8 |
 
-**Agent readiness 30.9** — agent-ready
+**Agent readiness 30.3** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -249,6 +249,10 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Agentic Commerce | — |
 | Pagination Ratio | partial |
 | Operation Distinctiveness | distinct |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
 **Regulatory alignment 32.1** — Payments
 
